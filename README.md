@@ -29,7 +29,7 @@ relicensed here. PR #1352 credited that reuse.
 Each entry follows [PalomarTemplate](https://github.com/PalomarRegistry/PalomarTemplate): `Challenge.lean`
 (the formal-conjectures statement with its definitions copied in, importing only Mathlib, one deliberate
 `sorry`; its header lists every change), `Solution.lean` (proves the same declaration), the proof
-development in a library folder, `comparator.json`, `formalization.yaml` (v0.4; fields marked `OWNER:`
+development in a library folder, `comparator.json`, `formalization.yaml` (v0.4; fields marked `[DRAFT-OWNER]` or `[OWNER-DECIDE]`
 need the maintainer's own words), `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`.
 
 ## Checks (27 Nov 2026)

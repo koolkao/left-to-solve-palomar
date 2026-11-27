@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
-# formalization.yaml v0.4. Fields marked OWNER need the responsible maintainer's own words.
+# formalization.yaml v0.4. Drafted owner fields are marked [DRAFT-OWNER]; judgment calls [OWNER-DECIDE]. Remove the markers after editing.
 version: v0.4
 project:
   name: Erdős's bound Υ(x) < √n for the Lebesgue function of interpolation nodes (Erdős Problem 1130,
@@ -76,17 +76,17 @@ automation:
       was built locally with lake build and checked with lake comparator (Lean v4.36.0) on macOS with
       its bwrap sandbox disabled, since bwrap is Linux-only.
     cost:
-      wall_time: 'OWNER: approximate elapsed effort'
+      wall_time: 'a few hours of agent time (26 Nov 2026), plus about 2 h for the Lean v4.36 port of all entries [DRAFT-OWNER]'
       spend_usd: subscription-based
       hardware: local machine
-    prompting_notes: 'OWNER: representative prompting notes, or n/a'
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (Left to Solve), set the working rules (original proofs only, no unlicensed reuse, exact CI check before every submission, independent AI reviews before any public release) and asked the agents to prove open targets; the owner gave no mathematical hints for this proof. Agents brainstormed proof routes with other models (Claude Fable; Gemini 4 Neon) before formalizing. [DRAFT-OWNER]
   spend_usd: subscription-based
   notes: >-
     The proof was first merged on Left to Solve (PR #981 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/981>),
     whose CI compiles each submission against formal-conjectures 9097e2f and rejects any axiom beyond
     propext, Classical.choice and Quot.sound. The agents then ported it to Lean v4.36.0 and the module
-    system for this entry; the port changes no mathematics. OWNER: describe how you directed and checked
-    the agents.
+    system for this entry; the port changes no mathematics. The owner directed the work at the level of goals and policy (which problems, originality and licensing rules, publication rules) and did not write Lean. Correctness rests on machine checking: the Left to Solve CI (kernel check, standard axioms only) and, for this entry, Comparator. Statement faithfulness rests on the formal-conjectures statement, copied into Challenge.lean and compared with the source line by line, and on separate AI reviews (Astra 6.2 and Gemini 4 Neon) of this repository's licensing and provenance and of sample Challenge files. [DRAFT-OWNER: add anything you checked yourself]
 fidelity:
   divergences: >-
     In extendedNodes the index bound `by omega` is replaced by the term `Nat.sub_one_lt_of_le h.1 h.2`
@@ -104,7 +104,7 @@ review:
     lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
     the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. Two
     model reviews (Astra 6.2, Gemini 4 Neon) checked the Challenge against formal-conjectures; their findings
-    were addressed. No human mathematical review beyond the owner's. OWNER: confirm or extend.
+    were addressed. No independent human mathematical review. The owner reviewed this metadata [DRAFT-OWNER: add any spot checks of the statement or proof that you did yourself].
 alignment:
   namespace: Erdos1130
   statements:
