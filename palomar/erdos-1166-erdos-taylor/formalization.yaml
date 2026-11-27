@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4. Fields marked OWNER need the responsible maintainer's own words.
+version: v0.4
+project:
+  name: 'Erdős–Taylor theorem: the maximal local time of the planar simple random walk is of order (log
+    n)² (Erdős Problem 1166, variant)'
+  description: >-
+    Lean 4 proof that for the simple random walk on ℤ², almost surely the maximal local time Tₙ up to
+    time n satisfies 1/(4π) ≤ liminf Tₙ/(log n)² ≤ limsup Tₙ/(log n)² ≤ 1/π (Erdős and Taylor 1960). The
+    development is elementary: block independence and the fixed-time Markov property, exact return counts
+    by the 45° rotation and Wallis' product, renewal at the first return, last-exit decomposition, Borel–Cantelli
+    along dyadic and geometric times.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.PR
+  msc2020:
+  - 60G50
+  - 60J55
+sources:
+- title: Some problems concerning the structure of random walk paths
+  authors:
+  - P. Erdős
+  - S. J. Taylor
+  type: paper
+  id: doi:10.1007/BF02020631
+  location: Acta Math. Acad. Sci. Hungar. 11 (1960), 137–162, p. 162
+  relationship: independently-proves
+  note: >-
+    The bounds on p. 162 are the result proved here. The lower bound follows the independent-blocks argument
+    of the paper, made elementary; the upper bound uses a union bound over first visits and Green-function
+    estimates.
+  author_endorsement: n/a
+- title: Erdős Problem 1166
+  type: web discussion
+  location: https://www.erdosproblems.com/1166
+  relationship: background
+  author_endorsement: n/a
+- title: formal-conjectures statement Erdos1166.erdos_1166.variants.erdos_taylor
+  type: other
+  id: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/ErdosProblems/1166.lean
+  location: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/ErdosProblems/1166.lean
+  relationship: background
+  note: >-
+    Source of the Lean statement (Apache-2.0). Challenge.lean copies this statement and the definitions
+    it uses, with the changes listed under fidelity.divergences.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+related_formalizations: []
+status:
+  scope: >-
+    Exactly the formal-conjectures statement Erdos1166.erdos_1166.variants.erdos_taylor at commit 9097e2f
+    (maxLocalTime counts the visit at time 0, and the bounds are stated with ε). The conjectured limit
+    1/π (Dembo, Peres, Rosen and Zeitouni 2001) is not claimed. The solution uses no axioms beyond propext,
+    Classical.choice and Quot.sound; the only sorry is the deliberate one in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, wrote the proof, the Lean v4.36.0 port and this metadata;
+      the statement and its definitions are copied from formal-conjectures. The owner chose the problems.
+      The original proof was checked by the Left to Solve CI (Lean v4.33.1, Mathlib 0df444a); the port
+      was built locally with lake build and checked with lake comparator (Lean v4.36.0) on macOS with
+      its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'OWNER: approximate elapsed effort'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'OWNER: representative prompting notes, or n/a'
+  spend_usd: subscription-based
+  notes: >-
+    The proof was first merged on Left to Solve (PR #750 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/750>,
+    PR #909 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/909>, PR #1067 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/1067>,
+    PR #1157 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/1157>), whose CI compiles each
+    submission against formal-conjectures 9097e2f and rejects any axiom beyond propext, Classical.choice
+    and Quot.sound. The agents then ported it to Lean v4.36.0 and the module system for this entry; the
+    port changes no mathematics. OWNER: describe how you directed and checked the agents.
+fidelity:
+  divergences: >-
+    In Mathlib v4.36, MeasureTheory.pdf.IsUniform X s P μ is HasLaw X μ[|s] P (AEMeasurable X P and map
+    X P = μ[|s]); in Mathlib 0df444a it was map X P = μ[|s]. IsSimpleRandomWalkSteps also requires each
+    step to be measurable, so the two readings of the hypothesis are equivalent. Otherwise the definitions
+    are verbatim and the formal-conjectures attributes are omitted. Lean/Mathlib differ from formal-conjectures
+    (v4.36.0 / fc4f59e instead of v4.33.1 / 0df444a).
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only review of Challenge faithfulness)
+  - Gemini 4 Neon (Google model, read-only review of Challenge faithfulness)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
+    the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. Two
+    model reviews (Astra 6.2, Gemini 4 Neon) checked the Challenge against formal-conjectures; their findings
+    were addressed. No human mathematical review beyond the owner's. OWNER: confirm or extend.
+alignment:
+  namespace: Erdos1166
+  statements:
+  - source: Erdős and Taylor 1960, p. 162 (as stated in formal-conjectures)
+    lean: Erdos1166.erdos_1166.variants.erdos_taylor
+    module: Challenge
+    status: proved
+    note: >-
+      Same declaration name and statement as formal-conjectures at 9097e2f.
+acknowledgements: >-
+  Mathlib; formal-conjectures (Google DeepMind, Apache-2.0) for the statement and definitions; Left to
+  Solve (GuillaumeBAUD-coder/open-math-agents) for the CI that first checked the proof.

@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4. Fields marked OWNER need the responsible maintainer's own words.
+version: v0.4
+project:
+  name: Erdős–Rado partition relation 𝔠 → (ω + n, 4)³ for the real line (Erdős Problem 70, variant)
+  description: >-
+    Lean 4 proof of the Erdős–Rado theorem that every red/blue colouring of the 3-element subsets of the
+    reals, ordered as usual, has either a red set of order type ω + n or a blue set of four reals, for
+    every finite n ≥ 2 (the partition relation 𝔠 → (ω + n, 4)³ of Erdős and Rado, 1956, Theorem 31). It
+    is a positive partial answer to Erdős Problem 70. The development includes infinite Ramsey theorems
+    for pairs and triples on ℕ and lemmas on uncountable sets of reals.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.LO
+  - math.CO
+  msc2020:
+  - 03E02
+  - 05D10
+sources:
+- title: A partition calculus in set theory
+  authors:
+  - P. Erdős
+  - R. Rado
+  type: paper
+  id: doi:10.1090/S0002-9904-1956-10036-0
+  location: Bull. Amer. Math. Soc. 62 (1956), 427–489, Theorem 31
+  relationship: independently-proves
+  note: >-
+    Theorem 31 is the result proved here. The Lean proof follows its own route (infinite Ramsey for pairs
+    and triples, splitting of uncountable sets, a pigeonhole on tops), not a line-by-line formalization
+    of the paper.
+  author_endorsement: n/a
+- title: Erdős Problem 70
+  type: web discussion
+  location: https://www.erdosproblems.com/70
+  relationship: background
+  author_endorsement: n/a
+- title: formal-conjectures statement Erdos70.erdos_70.variants.erdos_rado
+  type: other
+  id: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/ErdosProblems/70.lean
+  location: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/ErdosProblems/70.lean
+  relationship: background
+  note: >-
+    Source of the Lean statement (Apache-2.0). Challenge.lean copies this statement and the definitions
+    it uses, with the changes listed under fidelity.divergences.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+related_formalizations:
+- id: https://github.com/LeanPool/lean-pool (NashWilliams/Combinatorics/Ramsey/Infinite.lean; FiniteRamsey/InfiniteRamsey.lean)
+  relationship: independent
+  note: Infinite Ramsey on ℕ; not used here.
+- id: https://github.com/TauCetiProject (SetTheory/Cardinal/Partition/ErdosRado.lean)
+  relationship: independent
+  note: Cardinal Erdős–Rado theorem; ordinal partition relations are not covered there and nothing is
+    used here.
+status:
+  scope: >-
+    Exactly the formal-conjectures statement Erdos70.erdos_70.variants.erdos_rado at commit 9097e2f: for
+    every n ≥ 2, RealCardinalRamsey3 (ω + n) 4. The hypothesis 2 ≤ n is not used by the proof. Problem
+    70 itself (all countable β and all n) is open and not claimed. The solution uses no axioms beyond
+    propext, Classical.choice and Quot.sound; the only sorry is the deliberate one in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    - Claude Fable 5.2 (brainstorming)
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, wrote the proof, the Lean v4.36.0 port and this metadata;
+      the statement and its definitions are copied from formal-conjectures. The owner chose the problems.
+      The original proof was checked by the Left to Solve CI (Lean v4.33.1, Mathlib 0df444a); the port
+      was built locally with lake build and checked with lake comparator (Lean v4.36.0) on macOS with
+      its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'OWNER: approximate elapsed effort'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'OWNER: representative prompting notes, or n/a'
+  spend_usd: subscription-based
+  notes: >-
+    The proof was first merged on Left to Solve (PR #4934 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/4934>),
+    whose CI compiles each submission against formal-conjectures 9097e2f and rejects any axiom beyond
+    propext, Classical.choice and Quot.sound. The agents then ported it to Lean v4.36.0 and the module
+    system for this entry; the port changes no mathematics. The proof route was brainstormed with Claude
+    Fable; every step was then written and checked in Lean. OWNER: describe how you directed and checked
+    the agents.
+fidelity:
+  divergences: >-
+    None in the statement. Challenge.lean copies Set.Triplewise and Erdos70.RealCardinalRamsey3 verbatim
+    (one docstring sentence that referred to a definition not copied was shortened) and omits the formal-conjectures
+    attributes. Lean/Mathlib differ from formal-conjectures (v4.36.0 / fc4f59e instead of v4.33.1 / 0df444a).
+review:
+  status: self-assessed
+  reviewers:
+  - none
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
+    the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. No
+    human mathematical review beyond the owner's. OWNER: confirm or extend.
+alignment:
+  namespace: Erdos70
+  statements:
+  - source: Erdős and Rado 1956, Theorem 31 (as stated in formal-conjectures)
+    lean: Erdos70.erdos_70.variants.erdos_rado
+    module: Challenge
+    status: proved
+    note: >-
+      Same declaration name and statement as formal-conjectures at 9097e2f.
+acknowledgements: >-
+  Mathlib; formal-conjectures (Google DeepMind, Apache-2.0) for the statement and definitions; Left to
+  Solve (GuillaumeBAUD-coder/open-math-agents) for the CI that first checked the proof.

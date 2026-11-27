@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4. Fields marked OWNER need the responsible maintainer's own words.
+version: v0.4
+project:
+  name: 'Weak Kahn–Kalai theorem: monotone families are near-optimal for the edge isoperimetric inequality
+    at some p (MathOverflow 10799, variant)'
+  description: >-
+    Lean 4 proof that for every ε > 0 there is C > 0 such that every monotone increasing family F of subsets
+    of an n-element set (n ≥ 2) with critical probability t (μₜ(F) = 1/2) is (C log(1/p), p)-optimal for
+    the p-biased edge isoperimetric inequality at some p in [n^(-ε) t, t]. The proof uses the Russo–Margulis
+    formula and the Cauchy mean value theorem for -log(-log μₚ(F)) against log p.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.CO
+  - math.PR
+  msc2020:
+  - 05D05
+  - 60C05
+  - 06E30
+sources:
+- title: Thresholds and expectation thresholds
+  authors:
+  - J. Kahn
+  - G. Kalai
+  type: paper
+  id: doi:10.1017/S0963548307008474
+  location: Combin. Probab. Comput. 16 (2007), 495–502; arXiv:math/0603218
+  relationship: independently-proves
+  note: >-
+    formal-conjectures attributes this weak version to Kahn and Kalai and cites arXiv:math/0603218. The
+    Lean proof follows the standard Russo–Margulis plus mean value argument. OWNER: confirm the precise
+    location of the weak version in the paper.
+  author_endorsement: n/a
+- title: Optimal monotone families for the discrete isoperimetric inequality
+  type: web discussion
+  location: https://mathoverflow.net/questions/10799
+  relationship: background
+  contributors:
+  - name: Gil Kalai
+    role: problem-proposer
+  author_endorsement: not-contacted
+- title: formal-conjectures statement Mathoverflow10799.mathoverflow_10799.variants.weak_kahn_kalai
+  type: other
+  id: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/Mathoverflow/10799.lean
+  location: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/Mathoverflow/10799.lean
+  relationship: background
+  note: >-
+    Source of the Lean statement (Apache-2.0). Challenge.lean copies this statement and the definitions
+    it uses, with the changes listed under fidelity.divergences.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+related_formalizations: []
+status:
+  scope: >-
+    Exactly the formal-conjectures statement Mathoverflow10799.mathoverflow_10799.variants.weak_kahn_kalai
+    at commit 9097e2f, with explicit constant C = 4 + 4/ε in the proof. The strong form (Kahn–Kalai Conjecture
+    7) is not claimed. The solution uses no axioms beyond propext, Classical.choice and Quot.sound; the
+    only sorry is the deliberate one in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, wrote the proof, the Lean v4.36.0 port and this metadata;
+      the statement and its definitions are copied from formal-conjectures. The owner chose the problems.
+      The original proof was checked by the Left to Solve CI (Lean v4.33.1, Mathlib 0df444a); the port
+      was built locally with lake build and checked with lake comparator (Lean v4.36.0) on macOS with
+      its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'OWNER: approximate elapsed effort'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'OWNER: representative prompting notes, or n/a'
+  spend_usd: subscription-based
+  notes: >-
+    The proof was first merged on Left to Solve (PR #1352 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/1352>),
+    whose CI compiles each submission against formal-conjectures 9097e2f and rejects any axiom beyond
+    propext, Classical.choice and Quot.sound. The agents then ported it to Lean v4.36.0 and the module
+    system for this entry; the port changes no mathematics. About 75 lines (the definitions mu, M, I and
+    the lemmas sd1, sd2, sd3, mu_nonneg, mu_ins0, mu_ins1, M_insert, I_insert) were reused from another
+    participant's merged Left to Solve proof (Genbox, PR #341, Mathoverflow10799.discrete_isoperimetric_inequality).
+    OWNER: describe how you directed and checked the agents.
+fidelity:
+  divergences: >-
+    None in the statement. Challenge.lean copies the definitions verbatim; it adds the module header and
+    public sections of the Lean module system, imports Mathlib instead of FormalConjecturesUtil, and omits
+    the formal-conjectures attributes. Lean/Mathlib differ from formal-conjectures (v4.36.0 / fc4f59e
+    instead of v4.33.1 / 0df444a).
+review:
+  status: self-assessed
+  reviewers:
+  - none
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
+    the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. No
+    human mathematical review beyond the owner's. OWNER: confirm or extend.
+alignment:
+  namespace: Mathoverflow10799
+  statements:
+  - source: Kahn–Kalai weak version (as stated in formal-conjectures)
+    lean: Mathoverflow10799.mathoverflow_10799.variants.weak_kahn_kalai
+    module: Challenge
+    status: proved
+    note: >-
+      Same declaration name and statement as formal-conjectures at 9097e2f.
+acknowledgements: >-
+  Mathlib; formal-conjectures (Google DeepMind, Apache-2.0) for the statement and definitions; Left to
+  Solve (GuillaumeBAUD-coder/open-math-agents) for the CI that first checked the proof. Genbox (Left to
+  Solve PR #341) for the reused p-biased measure lemmas. OWNER: licence permission from Genbox is needed
+  before publication, because open-math-agents has no licence.

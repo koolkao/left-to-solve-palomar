@@ -1,0 +1,126 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4. Fields marked OWNER need the responsible maintainer's own words.
+version: v0.4
+project:
+  name: Hadamard matrices exist in every order 4k ≤ 664 (Hadamard conjecture, first cases)
+  description: >-
+    Lean 4 proof that a Hadamard matrix of order 4k exists for every k ≤ 166, so the smallest order for
+    which the Hadamard conjecture is open is at least 668. The proof formalizes Sylvester doubling, the
+    Paley I and II constructions over finite fields, the Goethals–Seidel array over finite abelian groups
+    and Spence's bordered array, and checks the published sequence data for the remaining orders by kernel
+    computation (decide +kernel, no native_decide).
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.CO
+  msc2020:
+  - 05B20
+  - 15B34
+sources:
+- title: Existence of Hadamard matrices of all orders 4k ≤ 664 (known constructions and published sequence
+    tables)
+  type: other
+  relationship: independently-proves
+  note: >-
+    A known result, assembled from classical constructions (Sylvester; Paley 1933; Goethals and Seidel
+    1967; Spence) and from published sequence data; see Kharaghani and Tayfeh-Rezaie (2005) for the last
+    order below 668. The sequence data were taken as numbers from the tables compiled in SageMath (GPL-2.0-or-later
+    code); no SageMath code is included. The data come from: Williamson quadruples (Hall 1983; London
+    2013), Đoković's skew supplementary difference sets (1992–2023), T-sequences from base and Turyn-type
+    sequences (Cohen et al. 1989; Kharaghani and Tayfeh-Rezaie 2005; Best, Đoković, Kharaghani and Ramp
+    2013; Sawade 1985; Schneider), Cooper–Wallis products, and Spence's relative difference sets (Spence
+    1975), as listed in the proof file. OWNER: add full citations.
+  author_endorsement: n/a
+- title: A Hadamard matrix of order 428
+  authors:
+  - H. Kharaghani
+  - B. Tayfeh-Rezaie
+  type: paper
+  id: doi:10.1002/jcd.20043
+  location: J. Combin. Des. 13 (2005), 435–440
+  relationship: background
+  note: >-
+    Settled order 428, after which 668 became the smallest order 4k for which no Hadamard matrix is known;
+    the formalization proves 668 ≤ hadamardConstant.
+  author_endorsement: n/a
+- title: formal-conjectures statement Hadamard.HadamardConjecture.variants.first_cases
+  type: other
+  id: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/Wikipedia/Hadamard.lean
+  location: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/Wikipedia/Hadamard.lean
+  relationship: background
+  note: >-
+    Source of the Lean statement (Apache-2.0). Challenge.lean copies this statement and the definitions
+    it uses, with the changes listed under fidelity.divergences.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+related_formalizations:
+- id: Mathlib Matrix.IsHadamard (Mathlib/LinearAlgebra/Matrix/Hadamard.lean)
+  relationship: independent
+  note: Mathlib's Hadamard matrices with Sylvester/Kronecker; not used (the statement uses formal-conjectures'
+    IsHadamard).
+- id: https://github.com/l534zhan/my_project
+  relationship: independent
+  note: Lean 3 Paley I/II formalization by Lu-Ming Zhang (2022, no licence); not used or copied.
+status:
+  scope: >-
+    Exactly the formal-conjectures statement Hadamard.HadamardConjecture.variants.first_cases at commit
+    9097e2f: 668 ≤ hadamardConstant. The Hadamard conjecture itself, and order 668, are not claimed. The
+    solution uses no axioms beyond propext, Classical.choice and Quot.sound; the only sorry is the deliberate
+    one in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, wrote the proof, the Lean v4.36.0 port and this metadata;
+      the statement and its definitions are copied from formal-conjectures. The owner chose the problems.
+      The original proof was checked by the Left to Solve CI (Lean v4.33.1, Mathlib 0df444a); the port
+      was built locally with lake build and checked with lake comparator (Lean v4.36.0) on macOS with
+      its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'OWNER: approximate elapsed effort'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'OWNER: representative prompting notes, or n/a'
+  spend_usd: subscription-based
+  notes: >-
+    The proof was first merged on Left to Solve (PR #3464 <https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/3464>),
+    whose CI compiles each submission against formal-conjectures 9097e2f and rejects any axiom beyond
+    propext, Classical.choice and Quot.sound. The agents then ported it to Lean v4.36.0 and the module
+    system for this entry; the port changes no mathematics. OWNER: describe how you directed and checked
+    the agents.
+fidelity:
+  divergences: >-
+    None in the statement. Challenge.lean copies the definitions verbatim; it adds the module header and
+    public sections of the Lean module system, imports Mathlib instead of FormalConjecturesUtil, and omits
+    the formal-conjectures attributes. Lean/Mathlib differ from formal-conjectures (v4.36.0 / fc4f59e
+    instead of v4.33.1 / 0df444a).
+review:
+  status: self-assessed
+  reviewers:
+  - none
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
+    the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. No
+    human mathematical review beyond the owner's. OWNER: confirm or extend.
+alignment:
+  namespace: Hadamard
+  statements:
+  - source: Hadamard matrices of orders 4k ≤ 664 (as stated in formal-conjectures)
+    lean: Hadamard.HadamardConjecture.variants.first_cases
+    module: Challenge
+    status: proved
+    note: >-
+      Same declaration name and statement as formal-conjectures at 9097e2f.
+acknowledgements: >-
+  Mathlib; formal-conjectures (Google DeepMind, Apache-2.0) for the statement and definitions; Left to
+  Solve (GuillaumeBAUD-coder/open-math-agents) for the CI that first checked the proof.

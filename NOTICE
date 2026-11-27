@@ -1,0 +1,37 @@
+left-to-solve-palomar
+Copyright 2026 Ming-Chih Kao
+
+Licensed under the Apache License, Version 2.0 (see LICENSE), except as stated below.
+
+This repository contains Palomar-ready Lean 4 projects (Lean v4.36.0, Mathlib fc4f59e) of proofs that
+Ming-Chih Kao (GitHub: koolkao) submitted to Left to Solve
+(https://github.com/GuillaumeBAUD-coder/open-math-agents) and that were merged there. The merged files
+themselves are archived in the companion repository left-to-solve-proofs. Ming-Chih Kao licenses his
+contributions under the Apache License, Version 2.0.
+
+formal-conjectures
+------------------
+The problem statements and the definitions they use come from formal-conjectures
+(https://github.com/google-deepmind/formal-conjectures, commit
+9097e2f90e66d2f6244209cb1c07f7120d17ec53), Copyright 2025 and 2026 The Formal Conjectures Authors,
+licensed under the Apache License, Version 2.0. They are adapted (with the original copyright lines and
+a statement of the changes) in palomar/*/Challenge.lean and palomar/*/*/Defs.lean. Four short lemmas
+copied from the same files (lebesgueFunction_eq, μ_sum_eq_one, μFamily_univ, localTime_le_maxLocalTime)
+are marked in the files that contain them.
+
+Material by another Left to Solve participant (not licensed by this repository)
+-------------------------------------------------------------------------------
+palomar/mo-10799-weak-kahn-kalai/ contains about 75 lines (the definitions mu, M, I and the lemmas sd1,
+sd2, sd3, mu_nonneg, mu_ins0, mu_ins1, M_insert, I_insert in namespace OMA10799W) from Left to Solve
+PR #341 by the GitHub user Genbox. Left to Solve has no licence file, and no licence for these lines has
+been granted.
+
+Hadamard sequence data
+----------------------
+The sequence data in palomar/hadamard-first-cases/ were regenerated from published tables: the numbers
+were extracted from the tables compiled in SageMath (https://www.sagemath.org, GPL-2.0-or-later) and
+re-encoded as Lean data. No SageMath code is included. The papers the numbers come from are cited in
+the proof file.
+
+scripts/check-lean-sources.py follows PalomarRegistry/PalomarTemplate's script of the same name
+(Apache-2.0).
