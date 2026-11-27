@@ -55,8 +55,7 @@ Each entry follows [PalomarTemplate](https://github.com/PalomarRegistry/PalomarT
 (importing only Mathlib, with deliberate `sorry`s; for the Left to Solve entries, the formal-conjectures
 statement with its definitions copied in, and its header lists every change), `Solution.lean` (proves the
 same declarations), the proof
-development in a library folder, `comparator.json`, `formalization.yaml` (v0.4; fields marked `[DRAFT-OWNER]` or `[OWNER-DECIDE]`
-need the maintainer's own words), `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`.
+development in a library folder, `comparator.json`, `formalization.yaml` (v0.4), `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`.
 
 ## Checks (27 Nov 2026)
 
@@ -92,7 +91,8 @@ ports, the metadata and this documentation were written by Claude Code agents (A
 Other models were consulted for brainstorming (recorded in the relevant `formalization.yaml`) and for
 read-only reviews of the licensing text and of Challenge files (OpenAI Astra 6.2, Google Gemini 4 Neon). For
 the six entries added on 27 Nov 2026 the owner gave goal-level direction only and no mathematical hints, and
-there has been no independent human review; the owner has not yet reviewed their metadata (`[OWNER-DECIDE]`).
+there has been no independent human mathematical review. The owner reviewed and approved the metadata of every
+entry (the account of authorship, AI use and review status) on 27 Nov 2026; that was not a mathematical review.
 
 ## Licence
 

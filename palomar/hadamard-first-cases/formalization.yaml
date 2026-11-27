@@ -275,7 +275,7 @@ review:
   - none
   notes: >-
     lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
-    the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. No independent human mathematical review. The owner reviewed this metadata.
+    the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. No independent human mathematical review. The owner reviewed and approved this metadata (the account of authorship, AI use and review status) on 27 Nov 2026; that was not a mathematical review.
 alignment:
   namespace: Hadamard
   statements:

@@ -103,7 +103,7 @@ review:
     lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without
     the bwrap sandbox). The Challenge was compared line by line with the formal-conjectures source. Two
     model reviews (Astra 6.2, Gemini 4 Neon) checked the Challenge against formal-conjectures; their findings
-    were addressed. No independent human mathematical review. The owner reviewed this metadata.
+    were addressed. No independent human mathematical review. The owner reviewed and approved this metadata (the account of authorship, AI use and review status) on 27 Nov 2026; that was not a mathematical review.
 alignment:
   namespace: Erdos1166
   statements:
