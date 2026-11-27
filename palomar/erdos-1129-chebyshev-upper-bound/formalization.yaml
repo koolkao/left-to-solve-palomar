@@ -28,7 +28,10 @@ sources:
   location: Acta Math. Acad. Sci. Hungar. 12 (1961), 235–244, p. 236
   relationship: independently-proves
   note: >-
-    The bound for the Chebyshev nodes stated on p. 236 is the result proved here.
+    The bound for the Chebyshev nodes stated on p. 236 is the result proved here. independently-proves:
+    Erdős states the bound; the Lean proof uses its own estimate (|ℓₖ(cos t)| written through two half-angle
+    cotangents, each bounded by min(1, 1/(π d)) and summed), giving the explicit constant 3. OWNER: confirm
+    against Er61c that its argument differs.
   author_endorsement: n/a
 - title: Lebesgue functions and Lebesgue constants in polynomial interpolation
   authors:

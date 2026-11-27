@@ -27,10 +27,11 @@ sources:
   - R. Vajda
   type: paper
   location: Stud. Univ. Babeş-Bolyai Math. 60 (2015), 151–171, Theorem 2.5
-  relationship: independently-proves
+  relationship: formalizes
   note: >-
-    Theorem 2.5 is the result proved here; the Lean proof follows the idea of its proof (existence of
-    a minimiser, affine rescaling).
+    Theorem 2.5 is the result proved here. formalizes: the Lean proof follows the argument of its proof
+    (a minimiser exists by continuity and compactness, it rescales to a canonical minimiser, and slight
+    shrinkings x*/τ stay optimal because L(±1) = 1 < Λ* for n ≥ 3).
   author_endorsement: n/a
 - title: Erdős Problem 1129
   type: web discussion

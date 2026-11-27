@@ -31,9 +31,9 @@ sources:
   location: Bull. Amer. Math. Soc. 62 (1956), 427–489, Theorem 31
   relationship: independently-proves
   note: >-
-    Theorem 31 is the result proved here. The Lean proof follows its own route (infinite Ramsey for pairs
-    and triples, splitting of uncountable sets, a pigeonhole on tops), not a line-by-line formalization
-    of the paper.
+    Theorem 31 is the result proved here. independently-proves: the Lean proof follows its own route (infinite
+    Ramsey for pairs and triples on ℕ, splitting of uncountable sets of reals, a pigeonhole on tops),
+    not Erdős and Rado's argument.
   author_endorsement: n/a
 - title: Erdős Problem 70
   type: web discussion

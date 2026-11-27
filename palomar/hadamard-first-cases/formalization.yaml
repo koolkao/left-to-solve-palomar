@@ -24,11 +24,13 @@ sources:
 - title: Existence of Hadamard matrices of all orders 4k ≤ 664 (known constructions and published sequence
     tables)
   type: other
-  relationship: independently-proves
+  relationship: formalizes
   note: >-
-    A known result, assembled from classical constructions (Sylvester; Paley 1933; Goethals and Seidel
-    1967; Spence) and from published sequence data; see Kharaghani and Tayfeh-Rezaie (2005) for the last
-    order below 668. The sequence data were taken as numbers from the tables compiled in SageMath (GPL-2.0-or-later
+    formalizes: the Lean proof formalizes the constructions from the literature (Sylvester doubling, Paley
+    I and II, the Goethals–Seidel array, Spence's bordered array) and checks the published data. A known
+    result, assembled from classical constructions (Sylvester; Paley 1933; Goethals and Seidel 1967; Spence)
+    and from published sequence data; see Kharaghani and Tayfeh-Rezaie (2005) for the last order below
+    668. The sequence data were taken as numbers from the tables compiled in SageMath (GPL-2.0-or-later
     code); no SageMath code is included. The data come from: Williamson quadruples (Hall 1983; London
     2013), Đoković's skew supplementary difference sets (1992–2023), T-sequences from base and Turyn-type
     sequences (Cohen et al. 1989; Kharaghani and Tayfeh-Rezaie 2005; Best, Đoković, Kharaghani and Ramp

@@ -27,9 +27,11 @@ sources:
   type: paper
   id: doi:10.1090/S0002-9904-1947-08938-2
   location: Bull. Amer. Math. Soc. 53 (1947), 1169–1176, Theorem 2
-  relationship: independently-proves
+  relationship: formalizes
   note: >-
-    Theorem 2 is the result proved here (for distinct nodes).
+    Theorem 2 is the result proved here (for distinct nodes). formalizes: the Lean proof follows Erdős's
+    argument (S = Σ ℓₖ² has S − 1 of degree 2n − 2 with positive leading coefficient, a divided difference
+    over interleaved points, then Cauchy–Schwarz on a gap where S < 1).
   author_endorsement: n/a
 - title: Erdős Problem 1130
   type: web discussion

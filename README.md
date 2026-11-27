@@ -1,6 +1,6 @@
 # Left to Solve proofs for Palomar
 
-Eight [Palomar](https://palomar-registry.org/)-ready Lean 4 projects, one per result, for statements of
+Seven [Palomar](https://palomar-registry.org/)-ready Lean 4 projects, one per result, for statements of
 [formal-conjectures](https://github.com/google-deepmind/formal-conjectures) (commit `9097e2f`) whose
 proofs Ming-Chih Kao (GitHub `koolkao`, Stanford University) first merged on
 [Left to Solve](https://github.com/GuillaumeBAUD-coder/open-math-agents). The merged files themselves,
@@ -10,9 +10,9 @@ Mathlib `fc4f59e577feb1a4956671bc04ac18aaaf8cd842` and the module system. The tw
 separate because Palomar checks every `.lean` file of a submitted repository for a `module` header,
 which the archived v4.33.1 files do not have.
 
-**Before publishing:** `palomar/mo-10799-weak-kahn-kalai/` contains about 75 lines from Genbox's Left to
-Solve PR #341, for which no licence has been granted (see `NOTICE`). Obtain Genbox's permission or remove
-that entry first.
+The MathOverflow 10799 proof (Left to Solve PR #1352, weak Kahn–Kalai) is withheld for now: it
+contains about 75 lines from Genbox's Left to Solve PR #341, which has no licence, so it cannot be
+relicensed here. PR #1352 credited that reuse.
 
 ## Entries
 
@@ -25,7 +25,6 @@ that entry first.
 | `erdos-1129-free-nodes-not-unique` | `Erdos1129.erdos_1129.variants.free_nodes_not_unique` | #1047 |
 | `erdos-1130-erdos-sqrt` | `Erdos1130.erdos_1130.variants.erdos_sqrt` | #981 |
 | `erdos-1044-fixed-degree-of-le-two` | `Erdos1044.erdos_1044.variants.fixed_degree_of_le_two` | #3188 |
-| `mo-10799-weak-kahn-kalai` | `Mathoverflow10799.mathoverflow_10799.variants.weak_kahn_kalai` | #1352 (see `NOTICE`) |
 
 Each entry follows [PalomarTemplate](https://github.com/PalomarRegistry/PalomarTemplate): `Challenge.lean`
 (the formal-conjectures statement with its definitions copied in, importing only Mathlib, one deliberate

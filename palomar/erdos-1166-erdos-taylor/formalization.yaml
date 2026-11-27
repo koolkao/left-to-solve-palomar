@@ -29,11 +29,12 @@ sources:
   type: paper
   id: doi:10.1007/BF02020631
   location: Acta Math. Acad. Sci. Hungar. 11 (1960), 137–162, p. 162
-  relationship: independently-proves
+  relationship: formalizes
   note: >-
-    The bounds on p. 162 are the result proved here. The lower bound follows the independent-blocks argument
-    of the paper, made elementary; the upper bound uses a union bound over first visits and Green-function
-    estimates.
+    The bounds on p. 162 are the result proved here. formalizes: the Lean proof follows Erdős and Taylor's
+    argument, made elementary: return probabilities and renewal for the Green function, a union bound
+    over first visits with Borel–Cantelli for the upper bound, and the independent-blocks argument for
+    the lower bound.
   author_endorsement: n/a
 - title: Erdős Problem 1166
   type: web discussion

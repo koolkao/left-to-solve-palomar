@@ -29,8 +29,10 @@ sources:
   - name: Quanyu Tang
     role: solver of the problem; proved the cases n = 1 and n = 2
   note: >-
-    erdosproblems.com reports that Tang proved the fixed-degree statement for n = 1 and n = 2. OWNER:
-    add Tang's written source if one exists.
+    erdosproblems.com reports that Tang proved the fixed-degree statement for n = 1 and n = 2. independently-proves
+    is provisional: Tang's written argument has not been located, so the Lean proof could not be compared
+    with it. OWNER: add Tang's source if one exists, and change to formalizes if the Lean proof follows
+    it.
   author_endorsement: not-contacted
 - title: Metric properties of polynomials
   authors:
