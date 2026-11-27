@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "FriedanQuantum.friedan_question",
+    "FriedanQuantum.alphaZ_psd",
+    "FriedanQuantum.kuboAndo",
+    "FriedanQuantum.hamiltonians_multi",
+    "FriedanQuantum.logEuclidean_multi",
+    "FriedanQuantum.product_multi"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

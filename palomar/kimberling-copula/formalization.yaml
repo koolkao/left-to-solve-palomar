@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Kimberling's inequality C(a, a) − a² ≥ C(u, v) − uv for Archimedean copulas with completely monotone
+    generators (MathOverflow 195959)
+  description: >-
+    Lean 4 proof that for f continuous on [0, ∞), f(0) = 1, f(x) → 0 as x → ∞ and f completely monotone on
+    (0, ∞), the Archimedean copula C(u, v) = f(g(u) + g(v)) (g the inverse of f; C = 0 if u = 0 or v = 0)
+    satisfies C(a, a) − a² ≥ C(u, v) − uv with a = (u + v)/2 for all u, v ∈ [0, 1]. This answers Clark
+    Kimberling's MathOverflow question 195959 (2015), previously settled only for Clayton generators. By
+    Bernstein's theorem each shift f(· + ε) is a Laplace transform; under the normalized measure C(u, v) − uv
+    is a covariance and C(a, a) − a² a variance of exponentials, which a single-crossing (Karlin–Novikoff)
+    argument compares; ε → 0 gives the inequality.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.PR"
+  - "math.CA"
+  msc2020:
+  - "62H05"
+  - "60E15"
+  - "26A48"
+sources:
+- title: Proof of Kimberling's inequality for Archimedean copulas with completely monotone generators (MathOverflow
+    195959), first presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/kimberling-copula-inequality/tree/18d5fd4ab3dedd0645b425f96ddac6d21d18a599
+  location: https://github.com/koolkao/kimberling-copula-inequality (NOTE.md Theorem 1, Kimberling/Basic.lean),
+    commit 18d5fd4ab3dedd0645b425f96ddac6d21d18a599, 26 Nov 2026
+  relationship: other
+  note: >-
+    The proof (NOTE.md, Theorem 1) and its Lean formalization were first published together in this public
+    repository. As far as the author searched (Kimberling 1973/1974, Nelsen 2006, Durante–Sempi, Müller–Scarsini
+    2005, Marshall–Olkin 1988, forward citations), no earlier proof in this generality is known; the
+    ingredients (Bernstein's theorem, the frailty representation, the Karlin–Novikoff single-crossing
+    criterion) are classical.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: An inequality for copulas
+  authors:
+  - C. Kimberling (MathOverflow user)
+  type: web discussion
+  id: https://mathoverflow.net/questions/195959
+  location: https://mathoverflow.net/questions/195959 (2015)
+  relationship: background
+  note: >-
+    The question answered here; the two MathOverflow answers prove it only for the Clayton generators
+    (1 + x)^(−1/t), t ≥ 1. The Challenge docstring paraphrases it (CC BY-SA 3.0).
+  license: CC-BY-SA-3.0
+  author_endorsement: not-contacted
+- title: Left to Solve statement mo-195959
+  authors:
+  - Ming-Chih Kao
+  type: other
+  id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/1260
+  location: statements/mo-195959.lean of open-math-agents PR #1260 (open on 27 Nov 2026)
+  relationship: background
+  note: >-
+    The owner's formal statement of the question; Challenge.lean uses its text with the namespace
+    OMA.S_mo_195959 renamed MO195959 and the theorem main renamed kimberling_inequality.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: TauCeti (Bernstein's theorem for completely monotone functions)
+  authors:
+  - The Tau Ceti contributors
+  type: other
+  id: https://github.com/TauCetiProject/TauCeti/tree/ac8801f612041ee3dcb3fa3f950f01318206737c
+  location: TauCeti/Analysis/CompletelyMonotone/ and dependencies, commit ac8801f612041ee3dcb3fa3f950f01318206737c
+  relationship: background
+  note: >-
+    Library result used by the proof: TauCeti.exists_representsLaplace_of_isCompletelyMonotone and its
+    dependency closure are vendored (Apache-2.0, copyright kept) in KimberlingCopula/TauCeti.lean.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+related_formalizations:
+- id: https://github.com/koolkao/kimberling-copula-inequality/tree/18d5fd4ab3dedd0645b425f96ddac6d21d18a599
+  relationship: adapts
+  note: >-
+    The original public Lean development (same author, Lean v4.37.0-rc1, TauCeti ac8801f as a dependency),
+    which proves the same statement (Kimberling.main) with TauCeti's full Hausdorff–Bernstein–Widder theorem.
+    This entry uses the owner's later variant prepared for Left to Solve: lines 40–318 of Kimberling/Basic.lean
+    unchanged, plus a shift-and-limit argument that needs only Bernstein's theorem on [0, ∞), whose TauCeti
+    closure (about 2,000 lines) is vendored; ported to Lean v4.36.0 and the module system.
+- id: https://github.com/TauCetiProject/TauCeti/tree/ac8801f612041ee3dcb3fa3f950f01318206737c
+  relationship: builds-on
+  note: Vendored Bernstein theorem on [0, ∞) (KimberlingCopula/TauCeti.lean).
+status:
+  scope: >-
+    Theorem 1 of the source note, exactly the Left to Solve statement mo-195959: for every f continuous on
+    [0, ∞) with f(0) = 1, f → 0 at ∞ and completely monotone on (0, ∞), and all u, v ∈ [0, 1],
+    archC f u v − uv ≤ archC f a a − a² with a = (u + v)/2. Theorem 2 of the note (the strengthening to
+    log-convex −f′, Schur-concavity) and the counterexamples of its §3b are on paper only and not claimed. The
+    solution uses no axioms beyond propext, Classical.choice and Quot.sound; the only sorry is the deliberate
+    one in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, found the proof, wrote the note, the Lean proof, the
+      TauCeti extraction, this Palomar port and this metadata. The source repository was built with lake build
+      on Lean v4.37.0-rc1 with TauCeti; the Left to Solve variant was checked with the Left to Solve checker
+      locally (Lean v4.33.1); this entry was built with lake build and checked with lake comparator (Lean
+      kernel, NanoDa, con-ron; about 4–5 min, peak 6.1 GB) on macOS with its bwrap sandbox disabled, since bwrap
+      is Linux-only.
+    cost:
+      wall_time: 'about one day of agent time (26 Nov 2026), plus about 1 h for this Palomar entry'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (unanswered MathOverflow questions), set
+      the working rules (original proofs, reuse of open-source libraries with credit, machine-checked proofs
+      with the standard axioms only, independent AI reviews before any public release) and asked the agents to
+      answer the question; the owner gave no mathematical hints. The source note records that the argument for
+      its Theorem 2 and two counterexamples in its §3b came from AI reviews (not used in this formalization).
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy and did not write Lean or mathematics.
+    Correctness rests on machine checking (lake build with the standard axioms only; Comparator for this
+    entry). Statement faithfulness rests on the Challenge, whose two definitions (complete monotonicity via
+    iteratedDerivWithin, the Archimedean copula via Function.invFunOn) and whose docstring explain the
+    reading of the question, and on separate AI reviews (Astra 6.2, Gemini 4 Neon) of this Challenge.
+fidelity:
+  divergences: >-
+    The question's "f from [0, ∞] onto [0, 1]" is read as f(0) = 1, f continuous on [0, ∞) and f(x) → 0
+    as x → ∞ (f(∞) = 0), the standard inverse of a strict Archimedean generator; the docstring explains why
+    the swapped assignment is excluded and that no generality is lost. Complete monotonicity is C^∞ on (0, ∞)
+    with (−1)^k f^(k) ≥ 0 for all k ≥ 0 (Widder). g(0) = ∞ is encoded by archC = 0 when u = 0 or v = 0.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only review of Challenge faithfulness)
+  - Gemini 4 Neon (Google model, read-only review of Challenge faithfulness)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Two model reviews (Astra 6.2, Gemini 4 Neon) checked the Challenge against the MathOverflow
+    question; their findings were addressed. The source note was reviewed by other models before publication.
+    No independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+alignment:
+  namespace: MO195959
+  statements:
+  - source: MathOverflow 195959 (Kimberling's question); NOTE.md Theorem 1
+    lean: MO195959.kimberling_inequality
+    module: Challenge
+    status: proved
+    note: Same statement as the Left to Solve statement mo-195959 (PR #1260), renamed.
+acknowledgements: >-
+  Mathlib; TauCeti (The Tau Ceti contributors, Apache-2.0) for Bernstein's theorem; Clark Kimberling for the
+  question.

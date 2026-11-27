@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Gillibert's Equal Halves conjecture is false (a non-Cayley vertex-transitive graph on 28 vertices)
+  description: >-
+    Lean 4 disproof of the Equal Halves conjecture of L. Gillibert (2026): every finite connected
+    vertex-transitive graph of even order would have a partition V = A ⊔ B into nonempty sets with G[A] and
+    G[B] connected and isomorphic (induced subgraphs). The counterexample is graph 2659 of the Holt–Royle
+    census of vertex-transitive graphs on 28 vertices (9-regular, automorphism group of order 504, not a
+    Cayley graph). The kernel checks that for no vertex set A are G[A] and G[Aᶜ] isomorphic: an isomorphism
+    would give an involution preserving same-side degree, triangle and distance-two counts, and 15 tests on
+    these statistics, evaluated on all 2-colourings up to the stabiliser of a vertex, rule this out.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.CO"
+  msc2020:
+  - "05C25"
+  - "05C60"
+  - "05C70"
+sources:
+- title: Counterexamples to Gillibert's Equal Halves conjecture (non-Cayley vertex-transitive graphs on 28 vertices),
+    first presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/gillibert-equal-halves-counterexample/tree/72a841163f6258ef0a3e4ca608bc85eaf8892543
+  location: https://github.com/koolkao/gillibert-equal-halves-counterexample (README.md, lean/GillibertDisproof.lean),
+    commit 72a841163f6258ef0a3e4ca608bc85eaf8892543 (v1.1), 27 Nov 2026
+  relationship: other
+  note: >-
+    The counterexamples (eight census graphs, two independent exhaustive computer checks) and the Lean
+    certificate for census graph 2659 were first published together in this public repository; this Palomar
+    entry ports the certificate to Lean v4.36.0 and the module system (EqualHalves/Proof.lean). As far as the
+    author searched (the conjecture's source repository and the discussion of Left to Solve PR #337), no counterexample was
+    known before.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: The Equal Halves Conjecture
+  authors:
+  - L. Gillibert
+  - GPT 6 Astra
+  type: other
+  id: https://github.com/Gillibert/ConjecturesGillibert/blob/main/equal_halves_conjecture.tex
+  location: https://github.com/Gillibert/ConjecturesGillibert (equal_halves_conjecture.tex, note dated 17 Nov 2026)
+  relationship: background
+  note: >-
+    The conjecture refuted here (byline as in the note). The note proves the conclusion when G has a
+    fixed-point-free involutive automorphism, hence for connected Cayley graphs of even order; the witness has
+    no such automorphism.
+  license: unknown
+  author_endorsement: not-contacted
+- title: Left to Solve statement gillibert-equal-halves (OMA.S_gillibert_equal_halves.main)
+  authors:
+  - L. Gillibert
+  type: other
+  id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/337
+  location: https://github.com/GuillaumeBAUD-coder/open-math-agents/blob/e99f9f1a0acd655514b902c3f36cd7f934cab4fb/statements/gillibert-equal-halves.lean
+    (PR #337 head e99f9f1, merged 27 Nov 2026 as 07d043170ecc72ad38e1d206622582585025b133 with the file unchanged)
+  relationship: background
+  note: >-
+    Gillibert's formal statement. Challenge.lean does not copy the file (it has no licence); not_equal_halves
+    states the negation of the same proposition, with the file's definition IsVertexTransitive unfolded.
+  license: unknown
+  author_endorsement: not-contacted
+- title: A census of small transitive groups and vertex-transitive graphs
+  authors:
+  - D. Holt
+  - G. Royle
+  type: paper
+  id: doi:10.1016/j.jsc.2019.06.006
+  location: J. Symbolic Comput. 101 (2020), 51–60; data doi:10.5281/zenodo.4010122 (alltrans28_k=09.gz, line 1186)
+  relationship: background
+  note: >-
+    Source of the witness graph (census data CC BY 4.0). The adjacency lists in EqualHalves/Proof.lean encode
+    that census graph; the formalization proves its connectivity and vertex-transitivity itself.
+  license: CC-BY-4.0
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/gillibert-equal-halves-counterexample/tree/72a841163f6258ef0a3e4ca608bc85eaf8892543
+  relationship: adapts
+  note: >-
+    The original public Lean certificate (same author, Lean v4.33.1, Mathlib 0df444a, without the module
+    system), stated against the fetched PR #337 statement. This entry ports it to Lean v4.36.0 and the module
+    system, replaces `type_of% @OMA.S_gillibert_equal_halves.main` by the proposition written out, adds the
+    existential form exists_counterexample_28, and makes five `congr 1; …` steps robust to `congr 1` closing
+    the goal on v4.36 (marked `Port`). The kernel computation is unchanged.
+status:
+  scope: >-
+    The conjecture as stated (finite, connected, vertex-transitive, even order; induced halves, nonempty and
+    connected) is refuted by one graph on 28 vertices (not_equal_halves), and that graph has no vertex set A
+    with G[A] ≅ G[Aᶜ] at all (exists_counterexample_28). The other seven counterexamples of the source
+    repository, their exhaustive computer checks, and the facts that the graphs are not Cayley graphs and
+    that the automorphism group has order 504 are not formalized. The solution uses no axioms beyond
+    propext, Classical.choice and Quot.sound (ordinary `decide +kernel`, no native_decide); the only sorries
+    are the deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, searched the Holt–Royle census with two independent programs
+      (C and Python/networkx), found the counterexamples, wrote the Lean certificate, this Palomar port and this
+      metadata. The certificate was checked with the Left to Solve checker locally (Lean v4.33.1); this entry
+      was built with lake build (about 1 min, 5 GB) and checked with lake comparator (Lean kernel, NanoDa,
+      con-ron; about 4–5 min, peak 8.4 GB) on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'about one day of agent time (26–27 Nov 2026), plus about 1 h for this Palomar entry'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (open conjectures listed on Left to
+      Solve), set the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the
+      standard axioms only, independent AI reviews before any public release) and asked the agents to settle
+      the conjecture; the owner gave no mathematical hints.
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy (which problems, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking
+    (lake build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the
+    Challenge, which uses only Mathlib vocabulary (SimpleGraph, Connected, induce, ≃g) and restates the
+    conjecture, and on separate AI reviews (Astra 6.2, Gemini 4 Neon) of the source repository and of this
+    Challenge.
+fidelity:
+  divergences: >-
+    Vertex-transitivity is written out as ∀ u v, ∃ φ : G ≃g G, φ u = v (the definition of the PR #337 file,
+    unfolded). The partition is a set A and its complement; the vertex type ranges over Type (universe 0),
+    as in PR #337, which is no restriction for a disproof. The halves are induced subgraphs, the reading of
+    both the note and PR #337 (with non-induced halves every census counterexample would split, along a
+    Hamiltonian path).
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee review of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee review of the source repository and of this Challenge)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Model reviews of the source repository (its reviews/ and REVIEW-RESPONSES.md) and two of
+    this Challenge checked the statement against the note and PR #337; their findings were addressed. No
+    independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+alignment:
+  namespace: GillibertEqualHalves
+  statements:
+  - source: Gillibert 2026, Equal Halves Conjecture (as formalized in Left to Solve PR #337), negated
+    lean: GillibertEqualHalves.not_equal_halves
+    module: Challenge
+    status: proved
+    note: Same proposition as ¬ OMA.S_gillibert_equal_halves.main with IsVertexTransitive unfolded.
+  - source: the witness (census graph 2659 on 28 vertices)
+    lean: GillibertEqualHalves.exists_counterexample_28
+    module: Challenge
+    status: proved
+    note: Existential form; stronger than needed (no isomorphic induced halves at all).
+acknowledgements: >-
+  Mathlib; D. Holt and G. Royle for the census of vertex-transitive graphs (CC BY 4.0); L. Gillibert for the
+  conjecture and its formal statement.

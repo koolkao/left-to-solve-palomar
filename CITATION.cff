@@ -1,13 +1,13 @@
 cff-version: 1.2.0
 message: "If you use these formal proofs, please cite them as below."
-title: "Left to Solve proofs for Palomar: Lean 4 proofs of seven formal-conjectures statements"
+title: "Lean 4 proofs for Palomar: seven formal-conjectures statements (Left to Solve) and six further results"
 type: software
 authors:
   - family-names: Kao
     given-names: Ming-Chih
     affiliation: Stanford University
 license: Apache-2.0
-version: "1.0.0"
+version: "1.1.0"
 date-released: "2026-11-27"
 keywords:
   - Lean 4
@@ -15,6 +15,8 @@ keywords:
   - formal-conjectures
   - Palomar
   - Erdős problems
+  - MathOverflow
+  - probability inequalities
 abstract: >-
   Palomar-ready Lean 4 projects (Lean v4.36.0, Mathlib fc4f59e) for seven statements of
   google-deepmind/formal-conjectures whose proofs were first merged on Left to Solve: the Erdős–Taylor
@@ -22,4 +24,9 @@ abstract: >-
   relation 𝔠 → (ω + n, 4)³, two results on Lebesgue constants (Erdős Problem 1129) and Erdős's bound
   Υ < √n (Problem 1130), and Erdős Problem 1044 in degrees 1 and 2. The proofs were written by Claude Code agents directed by the author, who
   reviewed the work and is responsible for it. The merged originals are archived in the companion
-  repository left-to-solve-proofs.
+  repository left-to-solve-proofs. Version 1.1.0 adds six entries ported from the author's own
+  repositories: five results first published there (a negative answer to MathOverflow 505921 (tanh Y tanh Z and tanh X are never
+  stochastically ordered), Friedan's generalized entropy inequality and its quantum form (MathOverflow
+  138395), a counterexample to Gillibert's Equal Halves conjecture, and Kimberling's Archimedean-copula
+  inequality (MathOverflow 195959)), and a formalization of Ling's proof of Feige's inequality for every
+  δ > 0 and of the lower bound of Samuels' conjecture.

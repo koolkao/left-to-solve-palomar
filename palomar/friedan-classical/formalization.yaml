@@ -1,0 +1,182 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Friedan's generalized entropy inequality α H(X) + (1 − α) H(Y) ≥ K² H(Z) for all n and α (MathOverflow
+    138395), for m distributions, and its two-point Rényi version
+  description: >-
+    Lean 4 proof of the inequality asked about by Daniel Friedan on MathOverflow 138395: for probability vectors
+    X, Y on n points, 0 ≤ α ≤ 1, zᵢ = Xᵢ^α Yᵢ^{1−α}, K = Σ zᵢ > 0 and Z = z/K, the Shannon entropies satisfy
+    K² H(Z) ≤ α H(X) + (1 − α) H(Y). Also proved: Theorem M, the same inequality for m distributions with
+    weights summing to 1 (zᵢ = ∏ⱼ Xⱼ(i)^{aⱼ}), and Theorem R2, the Rényi-entropy version on two points for every
+    order 0 < γ ≤ 2 log 2, γ ≠ 1, and every m. The two-distribution proof is a descent on the size of the
+    support with concavity arguments for four or more, three and two atoms; Theorem M follows by an index
+    lemma for the Hessian of (Σ eˣⁱ)² H(softmax x) and a maximum principle on faces of the weight simplex.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.PR"
+  - "cs.IT"
+  msc2020:
+  - "94A17"
+  - "26D15"
+  - "60E15"
+sources:
+- title: Friedan's generalized entropy inequality for all n and α ∈ [0, 1], for m distributions (Theorem M), and
+    the two-point Rényi version (Theorem R2), first presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/friedan-entropy-inequality/tree/0f4ba65dc126f59e7158fbcbc01548baa78cf21d
+  location: https://github.com/koolkao/friedan-entropy-inequality (NOTE.md, MULTI.md, FriedanEntropy/,
+    FriedanMulti/), commit 0f4ba65dc126f59e7158fbcbc01548baa78cf21d (v1.3.0), 27 Nov 2026
+  relationship: other
+  note: >-
+    The results, their paper proofs (NOTE.md, MULTI.md) and the Lean proofs were first published together in
+    this public repository. The case α = 1/2 of the two-distribution inequality was proved earlier by fedja
+    (below); as far as the authors searched (26–27 Nov 2026), no earlier proof exists for any other interior
+    weight, nor for Theorem M or Theorem R2. This Palomar entry ports the repository's root Lean project
+    (Lean v4.33.1) to Lean v4.36.0 and the module system.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: An Entropy Inequality (generalized)
+  authors:
+  - Daniel Friedan
+  type: web discussion
+  id: https://mathoverflow.net/q/138395
+  location: https://mathoverflow.net/q/138395 (2013)
+  relationship: background
+  note: >-
+    The question (the inequality was "supported by a modest amount of numerical experimentation"); its two
+    answers contain no proof. The Challenge docstring quotes it (CC BY-SA 3.0).
+  license: CC-BY-SA-3.0
+  author_endorsement: not-contacted
+- title: An Entropy Inequality (MathOverflow 138275), answer 139166
+  authors:
+  - fedja (F. Nazarov)
+  contributors:
+  - name: Eric Naslund
+    role: problem-proposer
+  type: web discussion
+  id: https://mathoverflow.net/a/139166
+  location: https://mathoverflow.net/q/138275 (2013)
+  relationship: background
+  note: >-
+    Proof of the case α = 1/2, H(X) + H(Y) ≥ 2K² H(Z). The formalization does not use fedja's argument (his
+    coordinatewise reduction fails numerically at other interior weights; NOTE.md).
+  license: CC-BY-SA-3.0
+  author_endorsement: not-contacted
+- title: Dirichlet duality and the nonlinear Dirichlet problem
+  authors:
+  - F. R. Harvey
+  - H. B. Lawson Jr.
+  type: paper
+  id: doi:10.1002/cpa.20265
+  location: Comm. Pure Appl. Math. 62 (2009), 396–443, Def. 2.1–Prop. 2.4
+  relationship: background
+  note: >-
+    The maximum principle for subaffine functions, the standard technique behind the face-by-face reduction of
+    Theorem M; the formalization proves the instance it needs (perturbation by ε|a|²).
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/friedan-entropy-inequality/tree/0f4ba65dc126f59e7158fbcbc01548baa78cf21d
+  relationship: adapts
+  note: >-
+    The original public Lean development (same author; root project, Lean v4.33.1, Mathlib 0df444a, without the
+    module system). This entry copies FriedanEntropy/{Statement,Proof}.lean and FriedanMulti/*.lean (Theorem M
+    and the R2 files) into the module system; Induction.lean and Main.lean are taken from the same repository's
+    own Lean v4.36 port (quantum-lean/FriedanMulti/), which spells out two continuity proofs. No other change was
+    needed. The repository's scripts/Check*.lean restatements are not copied; Challenge.lean plays their role.
+- id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/1491
+  relationship: other
+  note: >-
+    The Left to Solve statement mo-138395 (PR #1491, by the same author, open as of 27 Nov 2026), which
+    FriedanEntropy/Statement.lean contains as a definition; friedan_two is the same proposition with the
+    entropy abbreviation unfolded.
+status:
+  scope: >-
+    Three statements: Friedan's inequality for all n and α ∈ [0, 1] (friedan_two), Theorem M for m distributions
+    (friedan_multi) and Theorem R2, the two-point Rényi version for 0 < γ ≤ 2 log 2, γ ≠ 1, and all m
+    (friedan_renyi_two_point). Not claimed: the quantum (non-commuting) version, which is a separate entry
+    (palomar/friedan-quantum); Proposition R1 (failure of the Rényi analogue for γ > 1 in high dimension) and
+    the two-point failure above 2 log 2, which are paper proofs. K > 0 is assumed, as the question requires.
+    The solution uses no axioms beyond propext, Classical.choice and Quot.sound; the only sorries are the
+    deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, found the proofs, wrote the paper proofs, the Lean proofs, this
+      Palomar port and this metadata. The source project was built with lake build on Lean v4.33.1 / Mathlib
+      0df444a; this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa,
+      con-ron) on Lean v4.36.0 / Mathlib fc4f59e, on macOS with its bwrap sandbox disabled, since bwrap is
+      Linux-only.
+    cost:
+      wall_time: 'about two days of agent time (26–27 Nov 2026), plus about 1 h for this Palomar entry'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (open MathOverflow questions, via Left to
+      Solve), set the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the
+      standard axioms only, independent AI reviews before any public release) and asked the agents to prove the
+      inequality; the owner gave no mathematical hints. Agents brainstormed proof routes with other models: the
+      two-point argument (Part III of the two-distribution proof) adapts one proposed by Gemini 4 Neon; Gemini 4
+      Neon observed that Part III carries over to two-point Rényi entropy, which shaped Theorem R2; the analytic
+      proof of the one-variable inequality E > 0 of Theorem R2 is due to an Astra 6.2 referee report, and the
+      sinh-sum route used in Lean was suggested by Claude Fable 5.2 (source repository README, Credits).
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking
+    (lake build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the
+    Challenge, which uses only Mathlib vocabulary (Real.negMulLog, Real.rpow, Real.log) and quotes the
+    question, and on separate AI reviews (Astra 6.2, Gemini 4 Neon) of the source repository (its reviews/ and
+    REVIEW-RESPONSES.md) and of this Challenge.
+fidelity:
+  divergences: >-
+    Probability vectors are written out (nonnegative entries summing to 1) on Fin n; H uses the natural
+    logarithm and 0 log 0 = 0 (Real.negMulLog); powers are Real.rpow with 0^0 = 1, which matters only at weight
+    0, where both sides are equal; K > 0 is assumed because the question says Z is a probability vector (K = 0
+    only for disjoint supports). Theorem M and R2 are the authors' extensions, not part of the question.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee reviews of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee reviews of the source repository and of this Challenge)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). The source repository's paper proofs and Lean statements were reviewed by Astra 6.2 and
+    Gemini 4 Neon (and drafts also by Claude Fable 5.2), release by release (reviews/, REVIEW-RESPONSES.md);
+    two further reviews checked this Challenge against the question and MULTI.md (27 Nov 2026; Gemini 4 Neon: faithful; Astra 6.2: types faithful, docstring fixes needed). The fixes were made: Theorem R2 is labelled as its positive part (the failure above 2 log 2 is a paper proof and is not claimed), the K = 0 remark and the Rényi order range were corrected, and the priority wording was qualified ("as far as the authors searched"). No
+    independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+alignment:
+  namespace: Friedan138395
+  statements:
+  - source: MathOverflow 138395 (Friedan's inequality); NOTE.md, Theorem 1
+    lean: Friedan138395.friedan_two
+    module: Challenge
+    status: proved
+    note: The Left to Solve statement mo-138395 (OMA.S_mo_138395.MainStatement) with entropy unfolded.
+  - source: MULTI.md, Theorem M (m distributions)
+    lean: Friedan138395.friedan_multi
+    module: Challenge
+    status: proved
+    note: Same proposition as the source repository's FriedanMulti.TheoremM with entropy unfolded.
+  - source: MULTI.md §5, Theorem R2 (two-point Rényi, 0 < γ ≤ 2 log 2, γ ≠ 1, all m)
+    lean: Friedan138395.friedan_renyi_two_point
+    module: Challenge
+    status: proved
+    note: Same proposition as the source repository's FriedanMulti.TheoremR2 with renyi unfolded.
+acknowledgements: >-
+  Mathlib; Daniel Friedan for the question; fedja, Eric Naslund and Amir Parvardi for the α = 1/2 case and the
+  question behind it.

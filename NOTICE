@@ -5,9 +5,12 @@ Licensed under the Apache License, Version 2.0 (see LICENSE), except as stated b
 
 This repository contains Palomar-ready Lean 4 projects (Lean v4.36.0, Mathlib fc4f59e) of proofs that
 Ming-Chih Kao (GitHub: koolkao) submitted to Left to Solve
-(https://github.com/GuillaumeBAUD-coder/open-math-agents) and that were merged there. The merged files
-themselves are archived in the companion repository left-to-solve-proofs. Ming-Chih Kao licenses his
-contributions under the Apache License, Version 2.0.
+(https://github.com/GuillaumeBAUD-coder/open-math-agents) and that were merged there, and of results first
+published in his own public repositories (github.com/koolkao/mo505921-tanh-dominance,
+friedan-entropy-inequality, feige-lean, gillibert-equal-halves-counterexample,
+kimberling-copula-inequality). The merged Left to Solve files themselves are archived in the companion
+repository left-to-solve-proofs. Ming-Chih Kao licenses his contributions under the Apache License,
+Version 2.0.
 
 formal-conjectures
 ------------------
@@ -24,6 +27,45 @@ The sequence data in palomar/hadamard-first-cases/ were regenerated from publish
 were extracted from the tables compiled in SageMath (https://www.sagemath.org, GPL-2.0-or-later) and
 re-encoded as Lean data. No SageMath code is included. The papers the numbers come from are cited in
 the proof file.
+
+MathOverflow questions
+----------------------
+The Challenge files quote or paraphrase MathOverflow questions, which are licensed under Creative Commons
+Attribution-ShareAlike: palomar/mo505921-tanh-dominance (question 505921 by tituf, CC BY-SA 4.0),
+palomar/friedan-classical and palomar/friedan-quantum (question 138395 by Daniel Friedan, CC BY-SA 3.0),
+palomar/kimberling-copula (question 195959 by Clark Kimberling, CC BY-SA 3.0). The quotations remain under
+those licences.
+
+LeanPool (palomar/feige-general-delta)
+--------------------------------------
+palomar/feige-general-delta/Feige/Vendor/LeanPool/ contains 13 files vendored from LeanPool
+(https://github.com/LeanPool/lean-pool, LeanPool/Feige/, commit 9decab6341e6b0fd82bd7f9763a5dd7a9ce8778d),
+Copyright (c) 2026 Zhengqing Zhou and contributors, licensed under the Apache License, Version 2.0. Their
+headers are kept and the LeanPool licence is copied next to them.
+
+atlas-lean and physlib (palomar/friedan-quantum)
+------------------------------------------------
+palomar/friedan-quantum/FriedanQ/Vendor/KyFan.lean is a modified copy of
+MathlibExt/Analysis/InnerProductSpace/KyFan.lean from facebookresearch/atlas-lean (commit
+44517525f25d2f7ce7a99e1bce7567d9583c9c4f), Copyright (c) Meta Platforms, Inc. and affiliates, licensed under
+the Apache License, Version 2.0; the changes are listed in its header, and the upstream licence file
+(FriedanQ/Vendor/LICENSE-atlas-lean) is copied verbatim, including its first line: "Codebase is not intended
+for use to train, fine-tune, distill, evaluate, or otherwise develop ML models". The proof depends on physlib
+(https://github.com/leanprover-community/physlib, commit edc607c2e6cbcc2f9c40c750e5c10a8490d32470,
+Apache-2.0) as a pinned Lake dependency; its licence is copied as FriedanQ/Vendor/LICENSE-physlib.
+
+TauCeti (palomar/kimberling-copula)
+-----------------------------------
+palomar/kimberling-copula/KimberlingCopula/TauCeti.lean contains Bernstein's theorem on [0, ∞) and its
+dependency closure from TauCeti (https://github.com/TauCetiProject/TauCeti, commit ac8801f6), Copyright (c)
+2026 The Tau Ceti contributors, licensed under the Apache License, Version 2.0, adapted to Mathlib fc4f59e
+(see the header of the file).
+
+Holt–Royle census (palomar/gillibert-equal-halves)
+--------------------------------------------------
+The adjacency lists in palomar/gillibert-equal-halves/EqualHalves/Proof.lean encode graphs of the census of
+vertex-transitive graphs by D. Holt and G. Royle (doi:10.5281/zenodo.4010122), licensed under Creative
+Commons Attribution 4.0.
 
 scripts/check-lean-sources.py follows PalomarRegistry/PalomarTemplate's script of the same name
 (Apache-2.0).

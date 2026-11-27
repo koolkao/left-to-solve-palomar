@@ -1,0 +1,245 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Friedan's entropy inequality for non-commuting Hamiltonians (the quantum question of MathOverflow 138395),
+    for m Hamiltonians and for other matrix geometric means
+  description: >-
+    Lean 4 proof that Friedan's entropy inequality holds without the assumption that the Hamiltonians commute,
+    answering the quantum question of MathOverflow 138395: for Hermitian n × n matrices H₀, H₁ and 0 ≤ a ≤ 1,
+    with Gibbs states ρ_H = e^{−H}/Z(H), von Neumann entropies S(H), H_a = (1 − a)H₀ + aH₁ and
+    K = Z(H_a)/(Z(H₀)^{1−a} Z(H₁)^a), K² S(H_a) ≤ (1 − a) S(H₀) + a S(H₁). Also proved: the same for m
+    Hamiltonians, and a S(ρ) + (1 − a) S(σ) ≥ K² S(M/K), K = tr M, for the log-Euclidean mean of m faithful
+    states, the α-z means (positive semidefinite states, any z > 0), the Kubo–Ando mean and the multivariate
+    product means. The proof bounds the spectrum of the mean by weak log-majorization (Ky Fan, Horn,
+    Ando–Hiai), shows that g(x) = (Σ eˣⁱ)² H(softmax x) is increasing and Schur-convex, and reduces to the
+    classical inequality at the aligned commuting pair.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math-ph"
+  - "quant-ph"
+  msc2020:
+  - "81P17"
+  - "15A42"
+  - "47A64"
+  - "94A17"
+sources:
+- title: Friedan's entropy inequality for non-commuting Hamiltonians and for weighted geometric means of density
+    matrices (Theorem 2 and quantum Theorem M), first presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/friedan-entropy-inequality/tree/0f4ba65dc126f59e7158fbcbc01548baa78cf21d
+  location: https://github.com/koolkao/friedan-entropy-inequality (QUANTUM.md, quantum-lean/), commit
+    0f4ba65dc126f59e7158fbcbc01548baa78cf21d (v1.3.0), 27 Nov 2026
+  relationship: other
+  note: >-
+    The results, their paper proofs (QUANTUM.md) and the Lean proofs were first published together in this
+    public repository. As far as the authors searched (27 Nov 2026) there is no earlier proof, counterexample or
+    partial result for the non-commuting inequality, and no earlier statement that K² S(M/K) is monotone under
+    weak log-majorization. The weak log-majorizations used are classical (below). This Palomar entry puts the
+    repository's quantum-lean/ project (Lean v4.36.0) into the module system.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: An Entropy Inequality (generalized)
+  authors:
+  - Daniel Friedan
+  type: web discussion
+  id: https://mathoverflow.net/q/138395
+  location: https://mathoverflow.net/q/138395 (2013), last paragraphs (the quantum question)
+  relationship: background
+  note: >-
+    The question answered by friedan_question; Challenge.lean quotes it (CC BY-SA 3.0). Its answers do not
+    address the quantum question.
+  license: CC-BY-SA-3.0
+  author_endorsement: not-contacted
+- title: On a theorem of Weyl concerning eigenvalues of linear transformations I
+  authors:
+  - K. Fan
+  type: paper
+  id: doi:10.1073/pnas.35.11.652
+  location: Proc. Natl. Acad. Sci. USA 35 (1949), 652–655
+  relationship: background
+  note: Ky Fan's maximum principle (log-Euclidean step); formalized in the vendored atlas-lean file.
+  author_endorsement: n/a
+- title: On the singular values of a product of completely continuous operators
+  authors:
+  - A. Horn
+  type: paper
+  id: doi:10.1073/pnas.36.7.374
+  location: Proc. Natl. Acad. Sci. USA 36 (1950), 374–375
+  relationship: background
+  note: Horn's inequality (α-z and product means); used through physlib's formalization.
+  author_endorsement: n/a
+- title: Log majorization and complementary Golden–Thompson type inequalities
+  authors:
+  - T. Ando
+  - F. Hiai
+  type: paper
+  id: doi:10.1016/0024-3795(94)90484-7
+  location: Linear Algebra Appl. 197–198 (1994), 113–131
+  relationship: background
+  note: The antisymmetric-power (compound matrix) technique, used for the Kubo–Ando mean.
+  author_endorsement: n/a
+- title: α-z-Rényi relative entropies
+  authors:
+  - K. M. R. Audenaert
+  - N. Datta
+  type: paper
+  id: doi:10.1063/1.4906367
+  location: J. Math. Phys. 56 (2015), 022202, eqs. (2)–(6)
+  relationship: background
+  note: Definition of the α-z family of means.
+  author_endorsement: n/a
+- title: Means of positive linear operators
+  authors:
+  - F. Kubo
+  - T. Ando
+  type: paper
+  id: doi:10.1007/BF01371042
+  location: Math. Ann. 246 (1980), 205–224
+  relationship: background
+  note: Definition of the Kubo–Ando weighted geometric mean.
+  author_endorsement: n/a
+- title: atlas-lean, MathlibExt/Analysis/InnerProductSpace/KyFan.lean
+  authors:
+  - Meta Platforms, Inc. and affiliates
+  type: other
+  id: https://github.com/facebookresearch/atlas-lean/blob/44517525f25d2f7ce7a99e1bce7567d9583c9c4f/MathlibExt/Analysis/InnerProductSpace/KyFan.lean
+  location: facebookresearch/atlas-lean, commit 44517525f25d2f7ce7a99e1bce7567d9583c9c4f
+  relationship: other
+  note: >-
+    Vendored, modified, as FriedanQ/Vendor/KyFan.lean (Ky Fan's eigenvalue inequality), used by the proof only.
+    Its LICENSE (Apache-2.0, verbatim copy in FriedanQ/Vendor/LICENSE-atlas-lean) begins with the notice
+    "Codebase is not intended for use to train, fine-tune, distill, evaluate, or otherwise develop ML models".
+  license: Apache-2.0
+  author_endorsement: not-contacted
+- title: physlib (leanprover-community/physlib)
+  type: other
+  id: https://github.com/leanprover-community/physlib/tree/edc607c2e6cbcc2f9c40c750e5c10a8490d32470
+  location: leanprover-community/physlib, commit edc607c2e6cbcc2f9c40c750e5c10a8490d32470
+  relationship: other
+  note: >-
+    Pinned Lake dependency of the proof only (not of Challenge.lean): Horn's inequality
+    horn_weak_log_majorization and the singular-value lemmas of QuantumInfo/ForMathlib/Majorization.lean,
+    compound matrices, Matrix.IsHermitian.cfc_eigenvalues, Matrix.cfc_conj_isometry.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+related_formalizations:
+- id: https://github.com/koolkao/friedan-entropy-inequality/tree/0f4ba65dc126f59e7158fbcbc01548baa78cf21d
+  relationship: adapts
+  note: >-
+    The original public Lean development (same author; quantum-lean/, Lean v4.36.0, Mathlib fc4f59e, physlib
+    edc607c, without the module system). This entry copies FriedanQ/, FriedanMulti/ and FriedanQM/ into the
+    module system unchanged apart from the header (the vendored Ky Fan file gets back its upstream module
+    syntax); the statement checks FriedanQ/Check.lean and FriedanQM/Check.lean become Solution.lean, with new
+    names and the same statements.
+status:
+  scope: >-
+    Six statements: Friedan's quantum question as posed (friedan_question), its version for m Hamiltonians
+    (hamiltonians_multi), and the density-matrix inequality for the log-Euclidean mean of m faithful states
+    (logEuclidean_multi), the α-z means of two positive semidefinite states for every z > 0 (alphaZ_psd; Petz
+    and, after swapping the states, sandwiched are special cases), the Kubo–Ando mean of two faithful states
+    (kuboAndo) and the multivariate product means of m + 1 faithful states (product_multi). Not claimed: the
+    log-Euclidean and Kubo–Ando means of non-faithful states (Corollary B of QUANTUM.md) and the Karcher mean,
+    which are paper proofs; K > 0 is not stated (it holds for the means of faithful states). The solution uses
+    no axioms beyond propext, Classical.choice and Quot.sound (some physlib files contain sorry in
+    declarations this entry does not use; #print axioms shows none); the only sorries in this entry are the
+    deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, found the proofs, wrote the paper proofs, the Lean proofs, this
+      Palomar port and this metadata; they searched for and reused physlib and atlas-lean. The source project was
+      built with lake build on Lean v4.36.0; this entry was built with lake build and checked with lake
+      comparator (Lean kernel, NanoDa, con-ron) on macOS with its bwrap sandbox disabled, since bwrap is
+      Linux-only.
+    cost:
+      wall_time: 'about one day of agent time (27 Nov 2026), plus about 1 h for this Palomar entry'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (open MathOverflow questions), set the
+      working rules (original proofs, reuse of open-source infrastructure with credit, no unlicensed reuse,
+      machine-checked proofs with the standard axioms only, independent AI reviews before any public release)
+      and asked the agents to answer the question; the owner gave no mathematical hints. The paper proof was
+      refereed by Claude Fable, Astra 6.2 and Gemini 4 Neon; Gemini 4 Neon and Astra 6.2 as referees contributed
+      remarks of QUANTUM.md §10.4 (source repository README, Credits).
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking
+    (lake build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the
+    Challenge, which uses only Mathlib vocabulary (cfc, Matrix.trace, PosDef, PosSemidef, conjTranspose,
+    Real.exp, Real.log, Real.rpow) and quotes the question, and on separate AI reviews (Astra 6.2, Gemini 4 Neon)
+    of the source repository (reviews/v1.2, reviews/v1.3, REVIEW-RESPONSES.md) and of this Challenge.
+fidelity:
+  divergences: >-
+    Matrices are complex n × n (Fin n); matrix exponential, logarithm and real powers are Mathlib's continuous
+    functional calculus cfc on Hermitian matrices (on a non-Hermitian argument cfc is 0, but every argument here
+    is Hermitian); S(A) = −re tr(A log A) with Real.log 0 = 0, i.e. 0 log 0 = 0; M/K is written K⁻¹ • M. In
+    friedan_question the weight a multiplies H₁, as in Friedan's H_α = (1 − α)H₀ + αH₁; n ≥ 1 is assumed
+    ([NeZero n]). The density-matrix theorems take a on ρ and 1 − a on σ, as in QUANTUM.md.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee reviews of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee reviews of the source repository and of this Challenge)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). The source repository's quantum results were refereed by Claude Fable, Astra 6.2 and Gemini 4
+    Neon (drafts) and by Astra 6.2 and Gemini 4 Neon (releases v1.2, v1.3); two further reviews checked this
+    Challenge against the question and QUANTUM.md (27 Nov 2026; Gemini 4 Neon: faithful; Astra 6.2: the six
+    statements faithful, scope and docstring fixes needed). The fixes were made: the module docstring now states
+    the scope (no K > 0 conclusion; Proposition A, Theorem QM, Corollary B for the log-Euclidean and Kubo–Ando
+    means and the Karcher mean are not stated), the matrix-function conventions on singular matrices, the a ∈ {0, 1}
+    and K = 0 conventions of alphaZ_psd and the sandwiched range 0 < a ≤ 1, and the priority wording is qualified. No independent human
+    mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+alignment:
+  namespace: FriedanQuantum
+  statements:
+  - source: MathOverflow 138395, the quantum question (QUANTUM.md, Theorem 2, log-Euclidean mean)
+    lean: FriedanQuantum.friedan_question
+    module: Challenge
+    status: proved
+    note: Same statement as the source repository's FriedanQ.friedan_question_check.
+  - source: QUANTUM.md, Theorem 2 (α-z means, positive semidefinite states)
+    lean: FriedanQuantum.alphaZ_psd
+    module: Challenge
+    status: proved
+    note: Same statement as FriedanQ.alphaZ_psd_check.
+  - source: QUANTUM.md, Theorem 2 (Kubo–Ando mean)
+    lean: FriedanQuantum.kuboAndo
+    module: Challenge
+    status: proved
+    note: Same statement as FriedanQ.kuboAndo_check.
+  - source: QUANTUM.md §10, quantum Theorem M (Friedan's form with m Hamiltonians)
+    lean: FriedanQuantum.hamiltonians_multi
+    module: Challenge
+    status: proved
+    note: Same statement as FriedanQMCheck.hamiltonians_check.
+  - source: QUANTUM.md §10, quantum Theorem M (log-Euclidean mean of m states)
+    lean: FriedanQuantum.logEuclidean_multi
+    module: Challenge
+    status: proved
+    note: Same statement as FriedanQMCheck.logEuclidean_check.
+  - source: QUANTUM.md §10, quantum Theorem M (multivariate product means)
+    lean: FriedanQuantum.product_multi
+    module: Challenge
+    status: proved
+    note: Same statement as FriedanQMCheck.product_check.
+acknowledgements: >-
+  Mathlib (continuous functional calculus, Löwner–Heinz); physlib (Horn's inequality, compound matrices);
+  atlas-lean (Meta Platforms, Ky Fan's inequality, vendored with its licence); Daniel Friedan for the question.

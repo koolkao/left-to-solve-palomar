@@ -1,0 +1,170 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Feige's inequality for every δ > 0 (sharp constant min(δ/(1+δ), e⁻¹)) and the lower bound in Samuels'
+    conjecture, following Ling's proof
+  description: >-
+    Lean 4 proofs of (1) Feige's conjecture in its general form: for independent, nonnegative, integrable
+    X₁, …, Xₙ with E[Xᵢ] ≤ μ (μ > 0) and every δ > 0, P(∑ Xᵢ − E[∑ Xᵢ] < δμ) ≥ min(δ/(1+δ), e⁻¹); and
+    (2) the lower-bound half of Samuels' conjecture (Ling's Theorem 1.1): for ordered means
+    0 ≤ m₁ ≤ … ≤ mₙ, λ > ∑ mᵢ and independent nonnegative Xᵢ with E[Xᵢ] = mᵢ,
+    P(∑ Xᵢ < λ) ≥ minᵢ ∏_{j ≥ i} (1 − mⱼ/(λ − ∑_{k<i} mₖ)). The proofs follow Z. Ling, On Samuels'
+    Conjecture (arXiv:2608.18392): a two-point mixture decomposition (vendored from LeanPool), Bernoullification
+    and a Bellman-type induction on weighted Bernoulli sums. The sharpness and attainment half of Ling's
+    Theorem 1.1 is not formalized.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.PR"
+  msc2020:
+  - "60E15"
+  - "60G50"
+sources:
+- title: On Samuels' Conjecture
+  authors:
+  - Zhi Ling
+  type: paper
+  id: arXiv:2608.18392
+  location: arXiv preprint arXiv:2608.18392 (v2, 2026), Theorem 1.1 and Corollary 1.3
+  relationship: formalizes
+  note: >-
+    formalizes: the Lean proofs follow Ling's argument (Prop. 2.3 and Lemma 2.4, the two-point mixture
+    reduction; §2.2, Bernoullification; Claims 3.1–3.4 and Theorem 2.1 on weighted Bernoulli sums; Prop. 5.1
+    and 5.2). samuels_lower is the lower-bound half of Theorem 1.1. For feige_general_delta (the equal-means
+    case, Corollary 1.3 with general μ by scaling) the formal route is shorter than the paper's: Claim 3.2 and a
+    real-variable form of the minimisation lemma suffice, and Claims 3.3, 3.4, the truncation and the
+    boundary limit of §3.2 are not used. Prop. 5.2 is proved by a different elementary argument (Taylor bounds
+    and a no-interior-minimum lemma, see the source repository's NOTES.md). The paper is an unrefereed preprint;
+    the formalization does not rely on its correctness.
+  author_endorsement: not-contacted
+- title: On sums of independent random variables with unbounded variance and estimating the average degree in a graph
+  authors:
+  - U. Feige
+  type: paper
+  id: doi:10.1137/S0097539704447304
+  location: SIAM J. Comput. 35(4) (2006), 964–984, Theorem 1 and Conjecture 1
+  relationship: background
+  note: >-
+    Feige proved the inequality with 1/13 in place of e⁻¹ and conjectured the constant e⁻¹ (equivalently,
+    Conjecture 1: one of his two examples is extremal). feige_general_delta is the conjectured inequality;
+    the formalization does not follow Feige's proof.
+  author_endorsement: not-contacted
+- title: On a Chebyshev-type inequality for sums of independent random variables
+  authors:
+  - S. M. Samuels
+  type: paper
+  id: doi:10.1214/aoms/1177699614
+  location: Ann. Math. Statist. 37(1) (1966), 248–259
+  relationship: background
+  note: Samuels' conjecture, whose lower-bound half (in Ling's formulation) is samuels_lower.
+  author_endorsement: n/a
+- title: Sums of independent random variables with unbounded variance (Open Problem Garden)
+  type: web discussion
+  location: https://www.openproblemgarden.org/op/sums_of_independent_random_variables_with_unbounded_variance
+  relationship: background
+  note: The problem statement whose Lean form (Left to Solve statement PR #590) is feige_general_delta.
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/feige-lean/tree/7da24abf1619706bf4f705bb24aa4d00bc63b49f
+  relationship: adapts
+  note: >-
+    The original public Lean development (same author, v1.1.0, Lean v4.36.0, Mathlib fc4f59e, Zenodo
+    doi:10.5281/zenodo.24573988), whose own files are not in the module system. This entry copies its Feige/
+    tree, adding module headers, public imports and public sections, and one explicit-argument fix in
+    Feige/Calculus/Prop51.lean (marked Port); the proofs are otherwise unchanged. Feige/MainUniv.lean is new:
+    main for Ω in any universe.
+- id: https://github.com/LeanPool/lean-pool/tree/9decab6341e6b0fd82bd7f9763a5dd7a9ce8778d/LeanPool/Feige
+  relationship: builds-on
+  note: >-
+    LeanPool's formalization of the δ = 1 case of Feige's inequality (Zhengqing Zhou and contributors,
+    Apache-2.0). Thirteen of its files (the two-point mixture decomposition) are vendored in
+    Feige/Vendor/LeanPool/ with their attribution headers and licence; the general-δ statement, the
+    Bernoulli-sum induction and the Samuels bound are new.
+status:
+  scope: >-
+    feige_general_delta: Feige's conjecture with the sharp constant min(δ/(1+δ), e⁻¹), for every n, δ > 0 and
+    μ > 0. samuels_lower: the lower-bound half of Ling's Theorem 1.1 for n ≥ 1. Not formalized: the sharpness
+    and attainment of either bound (Ling §2.3; Feige's examples), the finite-n constant c_{n,δ} of Ling's
+    Corollary 1.3 as an infimum, and the upper-tail form (Remark 1.2). The solution uses no axioms beyond
+    propext, Classical.choice and Quot.sound; the only sorries are the deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, wrote the Lean proofs (vendoring LeanPool's two-point
+      mixture files), this Palomar port and this metadata. The source repository was built with lake build on
+      Lean v4.36.0 / Mathlib fc4f59e (and a single-file version passed the Left to Solve CI on Lean v4.33.1);
+      this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa, con-ron) on
+      macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'about one day of agent time (26 Nov 2026), plus about 1 h for this Palomar entry'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem (Feige's conjecture, via Ling's preprint), set
+      the working rules (search for and reuse licensed open-source code with credit, machine-checked proofs
+      with the standard axioms only, independent AI reviews before any public release) and asked the agents to
+      formalize it; the owner gave no mathematical hints. Agents consulted other models on proof strategy
+      (Claude Fable; Gemini 4 Neon) before formalizing.
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy and did not write Lean or mathematics.
+    Correctness rests on machine checking (lake build with the standard axioms only; Comparator for this
+    entry). Statement faithfulness rests on the Challenge, which uses only Mathlib vocabulary (iIndepFun,
+    Integrable, 𝔼, ℙ, Finset.inf') and states the bound qᵢ inline, and on separate AI reviews (Astra 6.2,
+    Gemini 4 Neon) of the source repository and of this Challenge.
+fidelity:
+  divergences: >-
+    Integrability of each Xᵢ is an explicit hypothesis (a finite mean is implicit in the sources; in Lean the
+    integral of a non-integrable function is 0). Feige's Theorem 1 normalises E[Xᵢ] ≤ 1 and writes
+    P[X < E X + δ]; feige_general_delta allows any bound μ > 0 on the means and writes the event as
+    ∑ Xᵢ − E[∑ Xᵢ] < δμ (equivalent by scaling). Nonnegativity is pointwise (no loss of generality: replace Xᵢ by max Xᵢ 0). feige_general_delta states
+    the bound uniform in n (the Open Problem Garden form, inf over n of Ling's c_{n,δ}), not the fixed-n value
+    min(δ/(1+δ), (1 − 1/(n+δ))ⁿ) of Ling's Corollary 1.3 / Feige's Conjecture 1; n = 0 is allowed (trivial). samuels_lower uses Ling's increasing order of the means (Feige quotes Samuels with
+    decreasing means and a different but equivalent description of the extremal laws), indexes by Fin n, and
+    writes the minimum as Finset.inf' over Fin n.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only review of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only review of the source repository and of this Challenge)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Two model reviews of the source repository before its release and two of this Challenge
+    checked the statements against Feige 2006 and Ling's Theorem 1.1. Both Challenge reviews returned FIX
+    NEEDED for minor points (Ω : Type fixed universe 0; the docstring should say that the n-uniform bound is
+    stated and how unequal means reduce to equal ones); these were fixed, and both found the index
+    conventions, the bound qᵢ, the events and the junk-value guards faithful. No
+    independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+alignment:
+  namespace: FeigeSamuels
+  statements:
+  - source: Feige's Conjecture 1 with constant e⁻¹ (Feige 2006, Theorem 1 with 1/13 replaced by 1/e); Ling,
+      Corollary 1.3 (6)
+    lean: FeigeSamuels.feige_general_delta
+    module: Challenge
+    status: proved
+    note: >-
+      The source repository's
+      OMA.S_opg_sums_of_independent_random_variables_with_unbounded_variance.main (the Left to Solve statement
+      of PR #590), with Ω in an arbitrary universe instead of Type and the hypotheses as named binders (after
+      review); proved by main_univ in Feige/MainUniv.lean, whose proof is that of main, copied.
+  - source: Ling, Theorem 1.1, lower bound (Samuels' conjecture)
+    lean: FeigeSamuels.samuels_lower
+    module: Challenge
+    status: proved
+    note: Same statement as the source repository's Samuels.samuels_lower, with Samuels.qS written out.
+acknowledgements: >-
+  Mathlib; LeanPool/lean-pool (Zhengqing Zhou and contributors, Apache-2.0) for the vendored two-point mixture
+  decomposition; Zhi Ling for the proof formalized here.
