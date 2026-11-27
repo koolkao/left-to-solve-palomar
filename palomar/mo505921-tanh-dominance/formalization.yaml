@@ -1,0 +1,172 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: tanh Y · tanh Z and tanh X are never stochastically ordered for mean = variance Gaussians (a negative
+    answer to MathOverflow 505921)
+  description: >-
+    Lean 4 proof that for all gX, gY, gZ > 0, with X ~ N(gX, gX), Y ~ N(gY, gY), Z ~ N(gZ, gZ) and Y, Z
+    independent, neither tanh Y · tanh Z nor tanh X stochastically dominates the other: the c.d.f.s of
+    U = tanh X and V = tanh Y · tanh Z cross on (−1, 1). So the answer to MathOverflow question 505921
+    (is there gX > 0 with tanh Y tanh Z ⪰_st tanh X?) is no for every gY, gZ > 0. Both laws satisfy the
+    belief-propagation consistency (LLR symmetry) condition; two consistent laws that are stochastically
+    ordered are equal; and the two laws differ near 0 (small-ball masses O(ε) for U, at least of order
+    ε log(1/ε) for V).
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.PR"
+  - "cs.IT"
+  msc2020:
+  - "60E15"
+  - "60E05"
+  - "94A24"
+sources:
+- title: Complete negative answer to MathOverflow 505921 (tanh Y · tanh Z and tanh X are never stochastically
+    ordered), first presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/mo505921-tanh-dominance/tree/25c3c9124f47df41a312f283451699a36b73a2df
+  location: https://github.com/koolkao/mo505921-tanh-dominance (NOTE.md, MO505921.lean, Check.lean), commit
+    25c3c9124f47df41a312f283451699a36b73a2df, 27 Nov 2026
+  relationship: other
+  note: >-
+    The result, its paper proof (NOTE.md) and the Lean proof were first published together in this public
+    repository; this Palomar entry ports its Lean files to the module system (TanhDominance/Proof.lean,
+    TanhDominance/Check.lean) and adds TanhDominance/Ioo.lean, which restricts the c.d.f. comparison to
+    t ∈ (−1, 1) as in the question. As far as the authors searched, the complete answer is new; the tools
+    (consistency, its preservation at check nodes, rigidity of the usual stochastic order, the small-ball
+    estimate) are standard or elementary.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: Stochastic dominance tanh Y tanh Z ⪰ tanh X
+  authors:
+  - tituf (MathOverflow user 58793)
+  type: web discussion
+  id: https://mathoverflow.net/questions/505921
+  location: https://mathoverflow.net/questions/505921 (asked 14 Dec 2025)
+  relationship: background
+  note: >-
+    The question answered here. The Challenge docstring quotes it (CC BY-SA 4.0).
+  license: CC-BY-SA-4.0
+  author_endorsement: not-contacted
+- title: Modern Coding Theory
+  authors:
+  - T. Richardson
+  - R. Urbanke
+  type: book
+  id: doi:10.1017/CBO9780511791338
+  location: Cambridge University Press, 2008 (Def. 4.11, (4.13)–(4.14), Example 4.25, Theorem 4.30, as numbered
+    in the authors' 2007 draft)
+  relationship: background
+  note: >-
+    The consistency (symmetry) condition of log-likelihood-ratio laws, the consistency of N(g, g) and its
+    preservation at check nodes. The formalization proves these facts from scratch in the form it needs.
+  author_endorsement: n/a
+- title: Stochastic Orders
+  authors:
+  - M. Shaked
+  - J. G. Shanthikumar
+  type: book
+  id: doi:10.1007/978-0-387-34675-5
+  location: Springer, 2007, §1.A
+  relationship: background
+  note: >-
+    The usual stochastic order and the fact that ordered laws with equal finite expectations of a strictly
+    monotone function are equal, which gives the rigidity step.
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/mo505921-tanh-dominance/tree/25c3c9124f47df41a312f283451699a36b73a2df
+  relationship: adapts
+  note: >-
+    The original public Lean development (same author, Lean v4.36.0, Mathlib fc4f59e, without the module
+    system). This entry copies MO505921.lean and Check.lean into the module system unchanged apart from the
+    header and the namespace (MO505921 → TanhDominance, so that Solution.lean can state the compared theorems
+    under the names MO505921.*), and adds Ioo.lean.
+status:
+  scope: >-
+    The full negative answer: for all gX, gY, gZ > 0 and every realization with Y, Z independent (X arbitrary
+    on the same space), the c.d.f.s of tanh X and tanh Y · tanh Z are not ordered in either direction, whether
+    compared on (−1, 1) (mo505921_Ioo) or on ℝ (mo505921; mo505921_iIndep with joint independence); and the
+    question as asked at the level of laws (no_gX_Ioo). Remark 1 of NOTE.md (the increasing concave order) is
+    proved on paper only and is not claimed here. The solution uses no axioms beyond propext,
+    Classical.choice and Quot.sound; the only sorries are the deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, found the proof, wrote the paper proof, the Lean proof, this
+      Palomar port and this metadata. The source repository was built with lake build on Lean v4.36.0 /
+      Mathlib fc4f59e; this entry was built with lake build and checked with lake comparator (Lean kernel,
+      NanoDa, con-ron) on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: 'about one day of agent time (26–27 Nov 2026), plus about 1 h for this Palomar entry'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (unanswered MathOverflow questions), set
+      the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the standard axioms
+      only, independent AI reviews before any public release) and asked the agents to answer the question; the
+      owner gave no mathematical hints.
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking
+    (lake build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on
+    the Challenge, which uses only Mathlib vocabulary (gaussianReal, HasLaw, IndepFun, iIndepFun, cdf) and
+    quotes the question, and on separate AI reviews (Astra 6.2, Gemini 4 Neon) of the source repository and of
+    this Challenge. The source repository also contains an independent restatement with hand-written
+    densities (TanhDominance/Check.lean here), which is built but not compared.
+fidelity:
+  divergences: >-
+    Mathlib has no stochastic order, so ⪰_st is written out as the pointwise comparison of c.d.f.s, which is
+    the question's own definition. The Gaussian parameters are ℝ≥0 with g ≠ 0 (that is, g > 0). The
+    random-variable theorems assume only that Y and Z are independent (weaker than the question's joint
+    independence; mo505921_iIndep assumes joint independence). no_gX_Ioo takes the law of tanh Y · tanh Z under
+    the product of the two Gaussian laws, which is the law of V for independent Y, Z.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee review of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee review of the source repository and of this Challenge)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Two model reviews of the source repository (recorded in its REVIEW-RESPONSES.md) and two of
+    this Challenge checked the statements against the MathOverflow question; their findings were addressed.
+    No independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+alignment:
+  namespace: MO505921
+  statements:
+  - source: MathOverflow 505921, the question (both directions, on t ∈ (−1, 1))
+    lean: MO505921.mo505921_Ioo
+    module: Challenge
+    status: proved
+    note: Random-variable form; Y, Z independent; c.d.f.s compared on (−1, 1).
+  - source: MathOverflow 505921 (comparison on ℝ)
+    lean: MO505921.mo505921
+    module: Challenge
+    status: proved
+    note: Same as the source repository's MO505921.mo505921.
+  - source: MathOverflow 505921 (joint independence, as in the question)
+    lean: MO505921.mo505921_iIndep
+    module: Challenge
+    status: proved
+    note: Same as the source repository's MO505921.mo505921_iIndep.
+  - source: MathOverflow 505921, the question as asked (given gY, gZ > 0, no gX > 0)
+    lean: MO505921.no_gX_Ioo
+    module: Challenge
+    status: proved
+    note: Law-level form on (−1, 1); the source repository's no_gX compares on ℝ and names the laws lawU, lawV.
+acknowledgements: >-
+  Mathlib (gaussianReal, HasLaw, IndepFun, cdf, Measure.mconv); tituf for the MathOverflow question.

@@ -1,0 +1,16 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MO505921.mo505921_Ioo",
+    "MO505921.mo505921",
+    "MO505921.mo505921_iIndep",
+    "MO505921.no_gX_Ioo"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
