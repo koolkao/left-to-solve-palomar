@@ -28,10 +28,37 @@ sources:
   location: Acta Math. Acad. Sci. Hungar. 12 (1961), 235–244, p. 236
   relationship: independently-proves
   note: >-
-    The bound for the Chebyshev nodes stated on p. 236 is the result proved here. independently-proves:
-    Erdős states the bound; the Lean proof uses its own estimate (|ℓₖ(cos t)| written through two half-angle
-    cotangents, each bounded by min(1, 1/(π d)) and summed), giving the explicit constant 3. [OWNER-DECIDE] confirm
-    against Er61c that its argument differs.
+    p. 236 states the upper bound (2/π) log n + c₂ for the Chebyshev nodes as known and "shown by a
+    simple calculation", without proof or reference; the formalization proves it with c₂ = 3.
+    independently-proves: Er61c gives no argument to formalize. The proof also differs from the standard
+    sharp proof (Ehlich–Zeller 1966: the maximum is at ±1; Rivlin 1974: (1/n)Σcot((2i−1)π/(4n)) <
+    (2/π) log n + 1). Instead it bounds the Lebesgue function at every point: |ℓₖ(cos t)| is written
+    through two half-angle cotangents (the classical reduction to trigonometric interpolation at 2n
+    equispaced angles), each bounded by min(1, 1/(π d)), and summed as a harmonic series.
+  author_endorsement: n/a
+- title: Auswertung der Normen von Interpolationsoperatoren
+  authors:
+  - H. Ehlich
+  - K. Zeller
+  type: paper
+  id: doi:10.1007/BF01429047
+  location: Math. Ann. 164 (1966), 105–112
+  relationship: background
+  note: >-
+    The Lebesgue function of the Chebyshev nodes is largest at ±1. Not used by the formalization, which
+    bounds the Lebesgue function at every point.
+  author_endorsement: n/a
+- title: The Lebesgue constants for polynomial interpolation
+  authors:
+  - T. J. Rivlin
+  type: paper
+  id: doi:10.1007/BFb0063594
+  location: Functional Analysis and its Applications (Madras 1973), Lecture Notes in Math. 399, Springer
+    (1974), 422–437
+  relationship: background
+  note: >-
+    The sharp bound Λₙ(T) < (2/π) log n + 1, from the closed form at x = 1. The formalization proves the
+    weaker constant 3 by a different route.
   author_endorsement: n/a
 - title: Lebesgue functions and Lebesgue constants in polynomial interpolation
   authors:

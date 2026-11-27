@@ -15,7 +15,7 @@ A Palomar-ready Lean project for `Hadamard.HadamardConjecture.variants.first_cas
 
 Lean `v4.36.0`, Mathlib `fc4f59e577feb1a4956671bc04ac18aaaf8cd842` (the `v4.36.0` tag).
 
-The sequence data were regenerated from published tables: the numbers (published in the papers cited in `HadamardFirstCases/Proof.lean`) were extracted from the tables compiled in SageMath (GPL-2.0-or-later) and re-encoded as Lean data, which the kernel checks. No SageMath code is included.
+The sequence data were regenerated from published tables: the numbers (published in the papers cited in `formalization.yaml` and `HadamardFirstCases/Proof.lean`) were extracted from the tables compiled in SageMath (GPL-2.0-or-later) and re-encoded as Lean data, which the kernel checks. No SageMath code is included.
 
 ## Check
 

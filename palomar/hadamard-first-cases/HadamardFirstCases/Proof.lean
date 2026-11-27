@@ -27,14 +27,17 @@ then pass to a real matrix with `|det| = n ^ (n / 2)`.
 * `4k - 1` prime: Paley I (`paleyI_isHad`, `paleyI_hex`), via the quadratic character of `ZMod p`
   and Mathlib's Jacobi sum `jacobiSum_nontrivial_inv`.
 * `2k - 1` prime: Paley II (`paleyII_isHad`, `paleyII_hex`).
-* otherwise: the Goethals–Seidel array over a finite abelian group (`gs_isHad`), fed with four
-  `±1` sequences whose periodic autocorrelations sum to zero, checked by the kernel
-  (`decide +kernel`) from bit-packed data: Williamson quadruples (Hall 1983, London 2013),
-  Djoković's skew supplementary difference sets (1992–2023), T-sequences from base/Turyn(-type)
-  sequences (Cohen et al. 1989, Kharaghani–Tayfeh-Rezaie 2005, Best–Djoković–Kharaghani–Ramp 2013,
-  Sawade 1985, Schneider), Cooper–Wallis products; for `k = 81` the group is `ZMod 9 × ZMod 9`.
-* `k = 101, 149`: Spence's bordered array (Spence 1975) with four sequences of length `k - 1`
-  from relative difference sets (`spence_isHad`).
+* otherwise: the Goethals–Seidel array (Goethals–Seidel 1970) over a finite abelian group
+  (`gs_isHad`), fed with four `±1` sequences whose periodic autocorrelations sum to zero, checked by
+  the kernel (`decide +kernel`) from bit-packed data: Williamson quadruples (Hall 1986, London 2013),
+  Djoković's skew supplementary difference sets (1992a, 1992b, 1992c, 1994, 2008, and 2023 on arXiv,
+  arXiv:2301.02751), T-sequences from base/Turyn(-type) sequences (Turyn 1974, Cohen et al. 1989,
+  Kharaghani–Tayfeh-Rezaie 2005, Best–Djoković–Kharaghani–Ramp 2013), Cooper–Wallis products
+  (Cooper–Wallis 1972); for `k = 81` the group is `ZMod 9 × ZMod 9`.
+* `k = 101, 149`: Spence's bordered array (Spence 1975, J. Combin. Theory Ser. A 19, Theorem 3.3)
+  with four sequences of length `k - 1` from relative difference sets (`spence_isHad`).
+
+Full citations, with the data source for each order, are in `formalization.yaml`.
 
 The sequence data were taken from the tables compiled in SageMath and checked here by the kernel.
 All Lean code is original.
