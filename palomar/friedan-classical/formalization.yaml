@@ -158,7 +158,7 @@ review:
     bwrap sandbox). The source repository's paper proofs and Lean statements were reviewed by Astra 6.2 and
     Gemini 4 Neon (and drafts also by Claude Fable 5.2), release by release (reviews/, REVIEW-RESPONSES.md);
     two further reviews checked this Challenge against the question and MULTI.md (27 Nov 2026; Gemini 4 Neon: faithful; Astra 6.2: types faithful, docstring fixes needed). The fixes were made: Theorem R2 is labelled as its positive part (the failure above 2 log 2 is a paper proof and is not claimed), the K = 0 remark and the Rényi order range were corrected, and the priority wording was qualified ("as far as the authors searched"). No
-    independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+    independent human mathematical review. The owner reviewed this metadata.
 alignment:
   namespace: Friedan138395
   statements:

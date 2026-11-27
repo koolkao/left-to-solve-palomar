@@ -147,7 +147,7 @@ review:
     lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
     bwrap sandbox). Model reviews of the source repository (its reviews/ and REVIEW-RESPONSES.md) and two of
     this Challenge checked the statement against the note and PR #337; their findings were addressed. No
-    independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+    independent human mathematical review. The owner reviewed this metadata.
 alignment:
   namespace: GillibertEqualHalves
   statements:

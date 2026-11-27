@@ -144,7 +144,7 @@ review:
     lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
     bwrap sandbox). Two model reviews of the source repository (recorded in its REVIEW-RESPONSES.md) and two of
     this Challenge checked the statements against the MathOverflow question; their findings were addressed.
-    No independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+    No independent human mathematical review. The owner reviewed this metadata.
 alignment:
   namespace: MO505921
   statements:

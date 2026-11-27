@@ -5,6 +5,9 @@ project:
   name: Feige's inequality for every δ > 0 (sharp constant min(δ/(1+δ), e⁻¹)) and the lower bound in Samuels'
     conjecture, following Ling's proof
   description: >-
+    The first machine-checked proof of Feige's conjecture in its GENERAL-δ form (previous Lean work, LeanPool's
+    Feige/, covers only δ = 1). The mathematics follows Ling's proof (arXiv:2608.18392); the formalization also
+    proves two steps the paper leaves unproved (Claim 3.4 and the minimisation over m in Corollary 1.3).
     Lean 4 proofs of (1) Feige's conjecture in its general form: for independent, nonnegative, integrable
     X₁, …, Xₙ with E[Xᵢ] ≤ μ (μ > 0) and every δ > 0, P(∑ Xᵢ − E[∑ Xᵢ] < δμ) ≥ min(δ/(1+δ), e⁻¹); and
     (2) the lower-bound half of Samuels' conjecture (Ling's Theorem 1.1): for ordered means
@@ -146,7 +149,7 @@ review:
     NEEDED for minor points (Ω : Type fixed universe 0; the docstring should say that the n-uniform bound is
     stated and how unequal means reduce to equal ones); these were fixed, and both found the index
     conventions, the bound qᵢ, the events and the junk-value guards faithful. No
-    independent human mathematical review. [OWNER-DECIDE] The owner has not yet reviewed this metadata.
+    independent human mathematical review. The owner reviewed this metadata.
 alignment:
   namespace: FeigeSamuels
   statements:
