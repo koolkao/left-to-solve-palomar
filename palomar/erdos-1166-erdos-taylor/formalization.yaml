@@ -17,10 +17,10 @@ project:
   - Ming-Chih Kao
 classification:
   arxiv:
-  - math.PR
+  - "math.PR"
   msc2020:
-  - 60G50
-  - 60J55
+  - "60G50"
+  - "60J55"
 sources:
 - title: Some problems concerning the structure of random walk paths
   authors:

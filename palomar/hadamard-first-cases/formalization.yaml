@@ -16,10 +16,10 @@ project:
   - Ming-Chih Kao
 classification:
   arxiv:
-  - math.CO
+  - "math.CO"
   msc2020:
-  - 05B20
-  - 15B34
+  - "05B20"
+  - "15B34"
 sources:
 - title: Existence of Hadamard matrices of all orders 4k ≤ 664 (known constructions and published sequence
     tables)

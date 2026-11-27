@@ -14,11 +14,11 @@ project:
   - Ming-Chih Kao
 classification:
   arxiv:
-  - math.CA
-  - math.NA
+  - "math.CA"
+  - "math.NA"
   msc2020:
-  - 41A05
-  - 41A10
+  - "41A05"
+  - "41A10"
 sources:
 - title: Problems and results on the theory of interpolation. II
   authors:

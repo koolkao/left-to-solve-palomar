@@ -15,11 +15,11 @@ project:
   - Ming-Chih Kao
 classification:
   arxiv:
-  - math.CA
-  - math.NA
+  - "math.CA"
+  - "math.NA"
   msc2020:
-  - 41A05
-  - 41A44
+  - "41A05"
+  - "41A44"
 sources:
 - title: 'Optimal cubic Lagrange interpolation: Extremal node systems with minimal Lebesgue constant'
   authors:

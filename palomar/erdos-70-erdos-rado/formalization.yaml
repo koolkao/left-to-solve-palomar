@@ -16,11 +16,11 @@ project:
   - Ming-Chih Kao
 classification:
   arxiv:
-  - math.LO
-  - math.CO
+  - "math.LO"
+  - "math.CO"
   msc2020:
-  - 03E02
-  - 05D10
+  - "03E02"
+  - "05D10"
 sources:
 - title: A partition calculus in set theory
   authors:

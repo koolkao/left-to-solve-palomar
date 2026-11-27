@@ -15,11 +15,11 @@ project:
   - Ming-Chih Kao
 classification:
   arxiv:
-  - math.CV
-  - math.MG
+  - "math.CV"
+  - "math.MG"
   msc2020:
-  - 30C10
-  - 28A78
+  - "30C10"
+  - "28A78"
 sources:
 - title: Erdős Problem 1044 (Tang's resolution and the fixed-degree remark for n = 1, 2)
   type: web discussion
