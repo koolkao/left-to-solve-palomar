@@ -11,7 +11,7 @@
   **left-to-solve-proofs** (`lefttosolve/complete/`); each entry here is a port of them to Lean v4.36.0 and the
   module system. The two repositories are separate because Palomar checks every `.lean` file of a submitted
   repository for a `module` header, which the archived v4.33.1 files do not have.
-- **Entries ported from the owner's own repositories** (six entries added 27 Nov 2026, four on 28 Nov 2026): answers to
+- **Entries ported from the owner's own repositories** (six entries added 27 Nov 2026, five on 28 Nov 2026): answers to
   MathOverflow questions and to recent conjectures, and one formalization of a recent published proof. Each
   entry ports the Lean development of a public `koolkao/*` repository, named at a full commit in its README and
   `formalization.yaml`, to the module system. Those repositories are recorded as sources and related
@@ -52,6 +52,7 @@ relicensed here. PR #1352 credited that reuse.
 | `mo478827-binomial-monotone` | P((1+g)X + lY > k) is strictly decreasing in p when 2l ≤ 1+g, but not for all g, l ∈ (0,1) (MathOverflow 478827) | `MO478827.theorem1`, `.answer`, `.prop2_not_antitone`, `.fact1_fails`, `.prob_of_indep`, `.theorem1_measure`, `.answer_measure` | `mo478827-binomial-monotone` (`3d17061`) | original |
 | `mo184460-hellinger-tv` | Hellinger ≤ total variation for truncated Gaussians, and the log-concave cosh/sinh inequality behind it (MathOverflow 184460) | `MO184460.answer`, `.answer_strict`, `.chain_interval`, `.thm3`, `.thm3_strict` | `mo184460-hellinger-tv` (`b2b49dc`) | original |
 | `mo503314-two-primes` | The odd-d conjecture of MathOverflow 503314: the product identity forces ⟨r₁⟩ = ⟨r₂⟩ in (ℤ/m)^× | `MO503314.mo503314` | `mo503314-two-primes` (`566defa`, ported from Lean v4.33.1) | original |
+| `gillibert-fair-traversal` | Partial results on Gillibert's Fair Traversal and Geodesic Deletion conjectures: abelian, dihedral, dicyclic and power-map Cayley graphs, products, generalized Petersen graphs GP(m, k) (k² ≡ 1; k² ≡ −1, m even; GP(10, 2)) | `FairTraversal.fair_traversal_*` (8), `.geodesicDeletion_*` (4) | `gillibert-fair-traversal-abelian` (`06c3a87`, v1.7.0, ported from Lean v4.33.1) | original (Theorem 5 independently proves the concurrent PR #14143) |
 
 In these entries `Challenge.lean` states the result itself (importing only Mathlib, with any definitions it
 needs written out and documented), not a formal-conjectures statement.
@@ -79,8 +80,9 @@ development in a library folder, `comparator.json`, `formalization.yaml` (v0.4),
 - Each new Challenge was reviewed for faithfulness to the published statement by two separate model reviews
   (OpenAI Astra 6.2, Google Gemini 4 Neon); their findings were fixed (see each `formalization.yaml`).
 
-- `erdos-521-real-roots` (added 28 Nov 2026) was checked the same way: comparator about 4 min; its Challenge is the
-  formal-conjectures statement copied line by line, plus one added variant.
+- `erdos-521-real-roots` and `gillibert-fair-traversal` (added 28 Nov 2026) were checked the same way: comparator
+  about 4 min and 1.5 min. The Erdős 521 Challenge is the formal-conjectures statement copied line by line, plus one
+  added variant; the Fair Traversal Challenge follows the source repository's independent `Check.lean`.
 
 To check an entry: `scripts/verify-entry.sh <entry>` (Linux with `bwrap`), or with `--no-sandbox`.
 

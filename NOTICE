@@ -9,7 +9,7 @@ Ming-Chih Kao (GitHub: koolkao) submitted to Left to Solve
 published in his own public repositories (github.com/koolkao/mo505921-tanh-dominance,
 friedan-entropy-inequality, feige-lean, gillibert-equal-halves-counterexample,
 kimberling-copula-inequality, mo451543-jensen-slack, mo478827-binomial-monotone,
-mo184460-hellinger-tv, mo503314-two-primes). The merged Left to Solve files themselves are archived in the companion
+mo184460-hellinger-tv, mo503314-two-primes, gillibert-fair-traversal-abelian). The merged Left to Solve files themselves are archived in the companion
 repository left-to-solve-proofs. Ming-Chih Kao licenses his contributions under the Apache License,
 Version 2.0.
 
@@ -70,6 +70,16 @@ Holt–Royle census (palomar/gillibert-equal-halves)
 The adjacency lists in palomar/gillibert-equal-halves/EqualHalves/Proof.lean encode graphs of the census of
 vertex-transitive graphs by D. Holt and G. Royle (doi:10.5281/zenodo.4010122), licensed under Creative
 Commons Attribution 4.0.
+
+Gillibert's Left to Solve statements (palomar/gillibert-fair-traversal)
+---------------------------------------------------------------------------
+The definitions IsVertexTransitive, FairFamily and GeodesicDeletion in
+palomar/gillibert-fair-traversal/Challenge.lean and FairTraversal/Defs.lean, and the copies of the same
+definitions in the ported proof modules FairTraversal/*.lean, restate the Left to Solve statements
+statements/gillibert-fair-traversal.lean (PR #339) and statements/gillibert-geodesic-deletion.lean (PR #334)
+of https://github.com/GuillaumeBAUD-coder/open-math-agents, by Luc Gillibert, which carry no licence. Those
+statement texts are Gillibert's and are reproduced for reference only; they are not covered by the Apache
+License of this repository (as in the source repository koolkao/gillibert-fair-traversal-abelian).
 
 scripts/check-lean-sources.py follows PalomarRegistry/PalomarTemplate's script of the same name
 (Apache-2.0).

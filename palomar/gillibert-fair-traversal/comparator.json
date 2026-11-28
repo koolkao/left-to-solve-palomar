@@ -1,0 +1,24 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "FairTraversal.fair_traversal_of_abelian_labelling",
+    "FairTraversal.fair_traversal_cay",
+    "FairTraversal.fair_traversal_boxProd",
+    "FairTraversal.fair_traversal_dihedralGroup",
+    "FairTraversal.fair_traversal_quaternionGroup",
+    "FairTraversal.fair_traversal_power_extension",
+    "FairTraversal.fair_traversal_dicyclic",
+    "FairTraversal.fair_traversal_gpGraph",
+    "FairTraversal.geodesicDeletion_boxProd",
+    "FairTraversal.geodesicDeletion_of_abelian_labelling",
+    "FairTraversal.geodesicDeletion_cay",
+    "FairTraversal.geodesicDeletion_cay_of_six_le"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

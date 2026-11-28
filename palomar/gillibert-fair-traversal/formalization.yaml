@@ -1,0 +1,221 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Fair Traversal and Geodesic Deletion for Cayley graphs and generalized Petersen graphs (partial results on two conjectures of Gillibert)
+  description: >-
+    Lean 4 proofs of partial results on Gillibert's Fair Traversal Conjecture (every connected vertex-transitive
+    graph with at least two vertices has a nonempty finite multiset of Hamiltonian paths covering every edge equally
+    often) and Geodesic Deletion Conjecture (deleting the vertices of any geodesic of a connected vertex-transitive
+    graph with at least three vertices leaves a connected graph). Fair Traversal is proved for connected Cayley graphs
+    of finite abelian groups, Cartesian products, Cayley graphs of dihedral, dicyclic, generalized dihedral and
+    generalized dicyclic groups and of index-2 power-map extensions Gamma(A, k, z) under condition (O), and for the
+    generalized Petersen graphs GP(m, k) with k^2 = 1 (mod m), or k^2 = -1 (mod m) with m even, or GP(10, 2).
+    Geodesic Deletion is proved for Cartesian products, connected Cayley graphs of finite abelian groups, and abelian
+    Cayley graphs of degree at least six. Both conjectures remain open.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.CO"
+  - "math.GR"
+  msc2020:
+  - "05C45"
+  - "05C25"
+  - "05C38"
+sources:
+- title: Partial results on Gillibert's vertex-transitive graph conjectures, Fair Traversal and Geodesic Deletion, first
+    presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/gillibert-fair-traversal-abelian/tree/06c3a8732759afca38331762b76113135e475ac6
+  location: https://github.com/koolkao/gillibert-fair-traversal-abelian (NOTE.md, the Lean files, Check.lean), commit
+    06c3a8732759afca38331762b76113135e475ac6 (v1.7.0), 28 Nov 2026; concept DOI 10.5281/zenodo.24605477
+  relationship: other
+  note: >-
+    The results, their paper proofs (NOTE.md) and the Lean proofs were first published together in this public
+    repository (v1.0.0 on 27 Nov 2026, Theorems 1-3; later versions added Theorems 4-9). This entry ports its nine Lean
+    modules from Lean v4.33.1 to v4.36.0 and the module system and states the results as in its Check.lean. Known
+    ingredients are credited there (NOTE.md section 12): Weber 1988 (core contained in the Weber set; Lemma 4),
+    Mader 1971 (Lemma 3 in substance), Witte 1982 (Hamiltonian paths in the Cayley graphs of Theorems 7 and 8),
+    Frucht-Graver-Watkins 1971 (vertex-transitive generalized Petersen graphs), Nedela-Skoviera 1995 (Cayley
+    generalized Petersen graphs). The rest is new as far as the author searched, apart from the concurrent work
+    listed under related_formalizations.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: "Geodesic Deletion for finite abelian Cayley graphs (Left to Solve PR #14143, amcolex)"
+  authors:
+  - amcolex (GitHub user)
+  type: other
+  id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/14143
+  location: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/14143 (opened 27 Nov 2026, 23:16 UTC)
+  relationship: independently-proves
+  note: >-
+    For Theorem 5 only (geodesicDeletion_of_abelian_labelling, geodesicDeletion_cay): this PR is the earliest public
+    claim of Geodesic Deletion for all finite abelian Cayley graphs that the author located (a Lean proof by a
+    different method). Theorem 5 here was found and Lean-checked concurrently (first compiled about 23:15 UTC) but
+    published later (source repository v1.2.0), so Theorem 5 is not claimed as first; it is an independent proof.
+    The other theorems of this entry are first presented in the source repository.
+  author_endorsement: not-contacted
+- title: The Fair Traversal Conjecture
+  authors:
+  - L. Gillibert
+  - GPT 6 Astra
+  type: other
+  id: https://github.com/Gillibert/ConjecturesGillibert/blob/main/fair_traversal_conjecture.tex
+  location: https://github.com/Gillibert/ConjecturesGillibert (fair_traversal_conjecture.tex, note dated 17 Nov 2026)
+  relationship: background
+  note: The conjecture (byline as in the note). Only special classes of graphs are proved here.
+  license: unknown
+  author_endorsement: not-contacted
+- title: Left to Solve statements gillibert-fair-traversal (#339) and gillibert-geodesic-deletion (#334)
+  authors:
+  - L. Gillibert
+  type: other
+  id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/339
+  location: "https://github.com/GuillaumeBAUD-coder/open-math-agents (statements/gillibert-fair-traversal.lean, PR #339;
+    statements/gillibert-geodesic-deletion.lean, PR #334)"
+  relationship: background
+  note: >-
+    Gillibert's formal statements. Challenge.lean restates their definitions IsVertexTransitive and the two
+    conclusions (FairFamily, GeodesicDeletion) in the same words, as the source repository's Check.lean does; these
+    statement texts are Gillibert's and are reproduced for reference (NOTICE). The statements themselves (all
+    vertex-transitive graphs) are not claimed.
+  license: unknown
+  author_endorsement: not-contacted
+related_formalizations:
+- id: https://github.com/koolkao/gillibert-fair-traversal-abelian/tree/06c3a8732759afca38331762b76113135e475ac6
+  relationship: adapts
+  note: >-
+    The original public Lean development (same author, Lean v4.33.1, Mathlib 0df444a, without the module system).
+    This entry ports its nine proof modules (FTAbelian, GDProduct, FTProduct, GDAbelian, FTDihedral, FTPower, FTGP,
+    FTGPNeg, FTGP102) to Lean v4.36.0 and the module system, and replaces the groups FTDih.Dih / FTDih.Pw in the
+    statements of Theorems 7 and 8 by their multiplication written out on A x Bool (FairTraversal/Main.lean proves
+    the two agree).
+- id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/14143
+  relationship: independent
+  note: >-
+    amcolex's Left to Solve PR #14143 (27 Nov 2026): a Lean proof of Geodesic Deletion for finite abelian Cayley
+    graphs by a different method, concurrent with and independent of Theorem 5 here; it is the earliest public claim
+    of that case located by the author.
+- id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/13005
+  relationship: independent
+  note: >-
+    MattGaiser's Left to Solve PR #13005 (27 Nov 2026): Geodesic Deletion for complete graphs and elementary abelian
+    2- and 3-groups and a product rule; the product rule is Theorem 2 here, which was public earlier the same day
+    (source repository v1.0.0); #13005 appears to be independent work.
+status:
+  scope: >-
+    The twelve theorems of Challenge.lean (Theorems 1, 2, 3, 5, 6, 7, 8 and 9 of the source repository, Theorem 1 and
+    Theorem 5 also in the form of the Left to Solve statements with a labelling hypothesis added). Not claimed: the
+    two conjectures; the paper-only results of the source repository (Theorem 1', Theorem 5', the sharper form of
+    Theorem 8, Corollary 8' for abstract groups, Propositions 9.4 and 9.5 on the open case k^2 = -1 (mod m) with m odd).
+    No axioms beyond propext, Classical.choice and Quot.sound (GP(10, 2) by ordinary kernel decide, no native_decide);
+    the only sorries are the deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, found the results, wrote the paper proofs, the Lean proofs, this
+      Palomar port and this metadata. Other models contributed in brainstorms and refereeing (Claude Fable: the band
+      construction of Theorem 9 and Propositions 9.4/9.5; Gemini 4 Neon: the proof idea of Theorem 7; Astra 6.2 and
+      Gemini 4 Neon: independent reviews of the releases). The source repository was built with lake build on Lean
+      v4.33.1; this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa, con-ron) on
+      Lean v4.36.0 on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: about two days of agent time (27-28 Nov 2026), plus about 1 h for this port
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (Left to Solve, Gillibert's conjectures), set
+      the working rules (original proofs, no unlicensed reuse, credit known ingredients, machine-checked proofs with
+      the standard axioms only, independent AI reviews before any public release) and asked the agents to work on the
+      conjectures; the owner gave no mathematical hints.
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy and did not write Lean or mathematics. Correctness
+    rests on machine checking (lake build with the standard axioms only; Comparator for this entry). Statement
+    faithfulness rests on the Challenge, which writes every notion out in Mathlib vocabulary and follows the source
+    repository's independent restatement (Check.lean), and on the AI reviews of the source repository.
+fidelity:
+  divergences: >-
+    The conjectures are stated by Gillibert for all connected vertex-transitive graphs; the theorems here add a
+    hypothesis (an abelian or group labelling, a Cartesian product, or a generalized Petersen graph) and keep the
+    conclusions word for word. In the labelled forms #339/#334's vertex-transitivity hypothesis is kept although the
+    labelling implies it. Theorem 8 writes the group Gamma(A, k, z) on A x Bool through its multiplication pwMul and
+    inverse pwInv; the hypotheses k . k . a = a and k . z = z make it a group. In Theorem 2 the binders are Type* (more
+    general than #334's Type) and no finiteness or vertex-transitivity is assumed. Theorem 6 allows infinite abelian
+    groups.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, referee of the source repository's releases)
+  - Gemini 4 Neon (Google model, referee of the source repository's releases)
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the bwrap
+    sandbox). The source repository's releases were reviewed by Astra 6.2 and Gemini 4 Neon (reviews/ and
+    REVIEW-RESPONSES.md there). No independent human mathematical review.
+alignment:
+  namespace: FairTraversal
+  statements:
+  - source: Theorem 1 (#339 form)
+    lean: FairTraversal.fair_traversal_of_abelian_labelling
+    module: Challenge
+    status: proved
+  - source: Theorem 1 (Cay(A, S))
+    lean: FairTraversal.fair_traversal_cay
+    module: Challenge
+    status: proved
+  - source: Theorem 3
+    lean: FairTraversal.fair_traversal_boxProd
+    module: Challenge
+    status: proved
+  - source: Theorem 7 (dihedral groups)
+    lean: FairTraversal.fair_traversal_dihedralGroup
+    module: Challenge
+    status: proved
+  - source: Theorem 7 (dicyclic groups, Corollary 7')
+    lean: FairTraversal.fair_traversal_quaternionGroup
+    module: Challenge
+    status: proved
+  - source: Theorem 8
+    lean: FairTraversal.fair_traversal_power_extension
+    module: Challenge
+    status: proved
+  - source: Theorem 7 (generalized dihedral and dicyclic groups, via Theorem 8 with k = -1)
+    lean: FairTraversal.fair_traversal_dicyclic
+    module: Challenge
+    status: proved
+  - source: Theorem 9
+    lean: FairTraversal.fair_traversal_gpGraph
+    module: Challenge
+    status: proved
+  - source: Theorem 2
+    lean: FairTraversal.geodesicDeletion_boxProd
+    module: Challenge
+    status: proved
+  - source: Theorem 5 (#334 form)
+    lean: FairTraversal.geodesicDeletion_of_abelian_labelling
+    module: Challenge
+    status: proved
+  - source: Theorem 5 (Cay(A, S))
+    lean: FairTraversal.geodesicDeletion_cay
+    module: Challenge
+    status: proved
+  - source: Theorem 6
+    lean: FairTraversal.geodesicDeletion_cay_of_six_le
+    module: Challenge
+    status: proved
+acknowledgements: >-
+  Mathlib (simple graphs, walks, DihedralGroup, QuaternionGroup); Luc Gillibert for the conjectures and their Left to
+  Solve statements.
