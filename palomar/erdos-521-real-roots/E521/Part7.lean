@@ -777,7 +777,7 @@ end S_P13
 -- ===== F1 =====
 section S_F1
 
-/-! **Erdős 521 is false**: almost surely `R_n / log n` does not tend to `2/π` (original). -/
+/-! **Erdős 521 is false**: it is not true that almost surely `R_n / log n` tends to `2/π` (original). -/
 
 open Finset MeasureTheory Filter Topology
 

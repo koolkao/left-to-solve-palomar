@@ -99,8 +99,9 @@ Star Fleet Math.
 theorem erdos_521 : ¬ Claim := by
   sorry
 
-/-- The same failure when $R_n$ counts the real roots of $f_n$ with multiplicity: almost surely,
-`(number of real roots of f_n, with multiplicity) / log n` does not tend to $2/\pi$. -/
+/-- The same failure when $R_n$ counts the real roots of $f_n$ with multiplicity: it is not true that,
+almost surely, `(number of real roots of f_n, with multiplicity) / log n` tends to $2/\pi$ (almost-sure
+convergence fails; this does not claim divergence almost surely). -/
 theorem erdos_521_with_multiplicity :
     ¬ ∀ᵐ ω ∂rademacherMeasure,
       Tendsto (fun n : ℕ ↦ ((littlewoodPolynomial ω n).roots.card : ℝ) / Real.log (n : ℝ))

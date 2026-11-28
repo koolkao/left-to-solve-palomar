@@ -2,7 +2,7 @@
 # formalization.yaml v0.4.
 version: v0.4
 project:
-  name: Erdős Problem 521 is false (random ±1 polynomials, R_n / log n does not tend to 2/π almost surely)
+  name: Erdős Problem 521 is false (random ±1 polynomials, R_n / log n does not converge to 2/π almost surely)
   description: >-
     Lean 4 proof that for the random Littlewood polynomial f_n(z) = sum_{k <= n} eps_k z^k with independent
     uniform signs eps_k, it is not true that almost surely R_n / log n -> 2/pi, where R_n is the number of
@@ -33,7 +33,7 @@ sources:
   note: >-
     The problem (Erdős; the expectation and convergence in probability go back to Erdős and Offord 1956). The
     almost-sure statement was already known to fail before this proof; formal-conjectures marks the problem
-    solved and links an independent Lean disproof (see related_formalizations).
+    solved and links Star Fleet Math's Lean disproof (see the Star Fleet Math source below).
   author_endorsement: n/a
 - title: On the number of real roots of a random algebraic equation
   authors:
@@ -54,19 +54,35 @@ sources:
     with the changes listed under fidelity.divergences.
   license: Apache-2.0
   author_endorsement: not-contacted
-- title: Original Lean disproof of Erdős 521, merged on Left to Solve
+- title: Lean disproof of Erdős Problem 521 (Star Fleet Math, starfleet/erdos-521)
+  authors:
+  - Star Fleet Math
+  type: other
+  id: https://github.com/williamjblair/lean-proofs/blob/4f915a323443bfb1709a6805a013812016dca88a/starfleet/erdos-521/Research/LateFourthFinal.lean
+  location: https://github.com/williamjblair/lean-proofs/tree/4f915a323443bfb1709a6805a013812016dca88a/starfleet/erdos-521
+  relationship: independently-proves
+  note: >-
+    The earlier result: that almost-sure convergence of R_n / log n to 2/pi fails was established before this
+    proof, and formal-conjectures links this Lean disproof as the formal proof of Erdos521.erdos_521. This entry
+    proves the same result independently. Its overall strategy is the same (a cone event for the top coefficients,
+    then Descartes' rule of signs); only the top-level reduction of that development was read, and no code, lemma
+    statements or proofs were taken from it. The result is not claimed as original here; the proof is an
+    independent second one.
+  license: MIT
+  author_endorsement: not-contacted
+- title: "Left to Solve PR #12504 (provenance of this independent proof)"
   authors:
   - Ming-Chih Kao
-  type: original-proof
+  type: other
   id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/12504
   location: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/12504 (proofs/erdos-521.lean, merged 28 Nov 2026)
   relationship: other
   note: >-
-    The proof was written from scratch (about 8.5k lines) and checked by the Left to Solve CI (Lean v4.33.1,
-    Mathlib 0df444a) against the site's statement (statements/erdos-521.lean, roots of f_n over C that are real,
-    counted with multiplicity). This entry ports it to Lean v4.36.0 and the module system and connects it to the
-    formal-conjectures statement. The proof route was brainstormed with other models (Claude Fable, Gemini) before
-    formalization.
+    Provenance: this independent proof (about 8.5k lines, written from scratch) was first merged here and checked
+    by the Left to Solve CI (Lean v4.33.1, Mathlib 0df444a) against the site's statement (statements/erdos-521.lean,
+    roots of f_n over C that are real, counted with multiplicity). This entry ports it to Lean v4.36.0 and the
+    module system and connects it to the formal-conjectures statement. The proof route was brainstormed with other
+    models (Claude Fable, Gemini) before formalization.
   license: Apache-2.0
   author_endorsement: n/a
 related_formalizations:

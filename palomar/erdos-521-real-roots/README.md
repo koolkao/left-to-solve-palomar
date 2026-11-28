@@ -1,9 +1,9 @@
-# Erdős Problem 521 is false: almost surely R_n / log n does not tend to 2/π
+# Erdős Problem 521 is false: R_n / log n does not converge to 2/π almost surely
 
 A Palomar-ready Lean project for `Erdos521.erdos_521` from
 [formal-conjectures](https://github.com/google-deepmind/formal-conjectures) (commit `9097e2f`): for the random
 Littlewood polynomial f_n = ε₀ + ε₁ z + ⋯ + ε_n zⁿ with independent uniform signs, it is **not** true that almost
-surely R_n / log n → 2/π, where R_n is the number of distinct real roots. A variant counting the real roots with
+surely R_n / log n → 2/π (almost-sure convergence fails; the statements do not claim divergence almost surely), where R_n is the number of distinct real roots. A variant counting the real roots with
 multiplicity (`Erdos521.erdos_521_with_multiplicity`, the reading of the Left to Solve statement the proof was
 written for) is proved as well.
 

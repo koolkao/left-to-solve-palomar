@@ -11,8 +11,8 @@ public import E521.Part7
 # Erdős 521 in formal-conjectures vocabulary
 
 `E521.erdos521_false_le` (in `E521/Part7.lean`) says: for any root count `Rc n ω` at most the number
-of real roots of `fR n ω` with multiplicity, `Rc n ω / log n` does not tend to `2/π` almost surely
-under `μS`. Here `littlewoodPolynomial ω n = fR n ω` and `rademacherMeasure = μS`, and both the
+of real roots of `fR n ω` with multiplicity, it is not true that `Rc n ω / log n` tends to `2/π`
+almost surely under `μS`. Here `littlewoodPolynomial ω n = fR n ω` and `rademacherMeasure = μS`, and both the
 distinct count `realRootCount` and the count with multiplicity are at most `(fR n ω).roots.card`.
 -/
 
