@@ -1,0 +1,148 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Erdős Problem 521 is false (random ±1 polynomials, R_n / log n does not tend to 2/π almost surely)
+  description: >-
+    Lean 4 proof that for the random Littlewood polynomial f_n(z) = sum_{k <= n} eps_k z^k with independent
+    uniform signs eps_k, it is not true that almost surely R_n / log n -> 2/pi, where R_n is the number of
+    distinct real roots of f_n (the formal-conjectures statement Erdos521.erdos_521), and the same with R_n
+    counted with multiplicity. For odd n = 2K - 1 the proof conditions on a cone event for the top coefficients
+    (a two-dimensional walk staying in a quadrant, probability of order 1/K), bounds the real roots on that event
+    by Descartes' rule of signs applied to f times a square of 1 + X + ... + X^N, estimates the sign-change
+    probabilities of the resulting coefficient sums by Fourier inversion, and concludes with a second-moment
+    (Kochen-Stone) argument that R_n < 0.63 log n + 2 infinitely often with positive probability.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - "math.PR"
+  - "math.CA"
+  msc2020:
+  - "60G50"
+  - "26C10"
+  - "30C15"
+sources:
+- title: Erdős Problem 521
+  type: web discussion
+  location: https://www.erdosproblems.com/521
+  relationship: background
+  note: >-
+    The problem (Erdős; the expectation and convergence in probability go back to Erdős and Offord 1956). The
+    almost-sure statement was already known to fail before this proof; formal-conjectures marks the problem
+    solved and links an independent Lean disproof (see related_formalizations).
+  author_endorsement: n/a
+- title: On the number of real roots of a random algebraic equation
+  authors:
+  - P. Erdős
+  - A. C. Offord
+  type: paper
+  location: Proc. London Math. Soc. (3) 6 (1956), 139-160
+  relationship: background
+  note: The (2/pi + o(1)) log n count of real roots for most ±1 polynomials, which the problem asks to sharpen.
+  author_endorsement: n/a
+- title: formal-conjectures statement Erdos521.erdos_521
+  type: other
+  id: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/ErdosProblems/521.lean
+  location: https://github.com/google-deepmind/formal-conjectures/blob/9097e2f90e66d2f6244209cb1c07f7120d17ec53/FormalConjectures/ErdosProblems/521.lean
+  relationship: background
+  note: >-
+    Source of the Lean statement (Apache-2.0). Challenge.lean copies this statement and the definitions it uses,
+    with the changes listed under fidelity.divergences.
+  license: Apache-2.0
+  author_endorsement: not-contacted
+- title: Original Lean disproof of Erdős 521, merged on Left to Solve
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/12504
+  location: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/12504 (proofs/erdos-521.lean, merged 28 Nov 2026)
+  relationship: other
+  note: >-
+    The proof was written from scratch (about 8.5k lines) and checked by the Left to Solve CI (Lean v4.33.1,
+    Mathlib 0df444a) against the site's statement (statements/erdos-521.lean, roots of f_n over C that are real,
+    counted with multiplicity). This entry ports it to Lean v4.36.0 and the module system and connects it to the
+    formal-conjectures statement. The proof route was brainstormed with other models (Claude Fable, Gemini) before
+    formalization.
+  license: Apache-2.0
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/williamjblair/lean-proofs/blob/4f915a323443bfb1709a6805a013812016dca88a/starfleet/erdos-521/Research/LateFourthFinal.lean
+  relationship: independent
+  note: >-
+    Star Fleet Math's earlier Lean disproof of the same statement (linked by formal-conjectures as the formal
+    proof). Its overall strategy is the same (a cone event for the top coefficients, then Descartes' rule of
+    signs). Only its top-level reduction was read; no code, lemma statements or proofs were taken from it. This
+    entry is an independent second formalization, not the first.
+status:
+  scope: >-
+    Exactly the formal-conjectures statement Erdos521.erdos_521 at commit 9097e2f, plus the variant
+    Erdos521.erdos_521_with_multiplicity (real roots counted with multiplicity), stated in the same vocabulary.
+    The solution uses no axioms beyond propext, Classical.choice and Quot.sound; the only sorries are the
+    deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: >-
+      Claude Code agents, directed by the owner, wrote the proof, the Lean v4.36.0 port and this metadata; the
+      statement and its definitions are copied from formal-conjectures. The owner chose the problems. The original
+      proof was checked by the Left to Solve CI (Lean v4.33.1, Mathlib 0df444a); the port was built locally with
+      lake build and checked with lake comparator (Lean v4.36.0) on macOS with its bwrap sandbox disabled, since
+      bwrap is Linux-only.
+    cost:
+      wall_time: 'about one day of agent time (27-28 Nov 2026), plus about 1 h for this port'
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: >-
+      Goal-level instructions only: the owner chose the problem source (Left to Solve), set the working rules
+      (original proofs only, no unlicensed reuse, credit prior work, exact CI check before every submission) and
+      asked the agents to prove the targets; the owner gave no mathematical hints for this proof. Agents brainstormed
+      proof routes with other models (Claude Fable; Gemini 4 Neon) before formalizing.
+  spend_usd: subscription-based
+  notes: >-
+    The owner directed the work at the level of goals and policy and did not write Lean. Correctness rests on
+    machine checking: the Left to Solve CI (kernel check, standard axioms only) and, for this entry, Comparator.
+    Statement faithfulness rests on the formal-conjectures statement, copied into Challenge.lean and compared with
+    the source line by line.
+fidelity:
+  divergences: >-
+    None in erdos_521: Challenge.lean copies the definitions and the statement verbatim; it adds the module header
+    and public sections of the Lean module system, imports Mathlib instead of FormalConjecturesUtil, and omits the
+    formal-conjectures attributes, the linter option and the two API lemmas fairCoin_apply and
+    fairCoin_isProbabilityMeasure. erdos_521_with_multiplicity is added (not in formal-conjectures); it counts
+    (littlewoodPolynomial ω n).roots.card, the real roots with multiplicity. Lean/Mathlib differ from
+    formal-conjectures (v4.36.0 / fc4f59e instead of v4.33.1 / 0df444a).
+review:
+  status: self-assessed
+  reviewers:
+  - none
+  notes: >-
+    lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the bwrap
+    sandbox). The Challenge was compared line by line with the formal-conjectures source. No independent human
+    mathematical review.
+alignment:
+  namespace: Erdos521
+  statements:
+  - source: Erdős Problem 521 (as stated in formal-conjectures)
+    lean: Erdos521.erdos_521
+    module: Challenge
+    status: proved
+    note: Same declaration name and statement as formal-conjectures at 9097e2f (the statement is the negation ¬ Claim).
+  - source: Erdős Problem 521, real roots counted with multiplicity (the Left to Solve reading)
+    lean: Erdos521.erdos_521_with_multiplicity
+    module: Challenge
+    status: proved
+    note: Added variant.
+acknowledgements: >-
+  Mathlib; formal-conjectures (Google DeepMind, Apache-2.0) for the statement and definitions; Left to Solve
+  (GuillaumeBAUD-coder/open-math-agents) for the CI that first checked the proof; Star Fleet Math for the earlier
+  formalization.

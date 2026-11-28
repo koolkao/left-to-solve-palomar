@@ -4,7 +4,7 @@
 `fc4f59e577feb1a4956671bc04ac18aaaf8cd842`, module system), one per result, by Ming-Chih Kao (GitHub
 `koolkao`, Stanford University). There are two groups.
 
-- **Left to Solve proofs** (seven entries): proofs of statements of
+- **Left to Solve proofs** (eight entries): proofs of statements of
   [formal-conjectures](https://github.com/google-deepmind/formal-conjectures) (commit `9097e2f`) first merged on
   [Left to Solve](https://github.com/GuillaumeBAUD-coder/open-math-agents). The merged files themselves, exactly
   as checked by Left to Solve (Lean v4.33.1), are archived in the companion repository
@@ -36,6 +36,7 @@ relicensed here. PR #1352 credited that reuse.
 | `erdos-1129-free-nodes-not-unique` | `Erdos1129.erdos_1129.variants.free_nodes_not_unique` | #1047 |
 | `erdos-1130-erdos-sqrt` | `Erdos1130.erdos_1130.variants.erdos_sqrt` | #981 |
 | `erdos-1044-fixed-degree-of-le-two` | `Erdos1044.erdos_1044.variants.fixed_degree_of_le_two` | #3188 |
+| `erdos-521-real-roots` | `Erdos521.erdos_521` (+ `Erdos521.erdos_521_with_multiplicity`, added) | #12504 (ported from v4.33.1; split into 7 modules) |
 
 ### Entries ported from `koolkao/*` repositories
 
@@ -77,6 +78,9 @@ development in a library folder, `comparator.json`, `formalization.yaml` (v0.4),
   Mathlib).
 - Each new Challenge was reviewed for faithfulness to the published statement by two separate model reviews
   (OpenAI Astra 6.2, Google Gemini 4 Neon); their findings were fixed (see each `formalization.yaml`).
+
+- `erdos-521-real-roots` (added 28 Nov 2026) was checked the same way: comparator about 4 min; its Challenge is the
+  formal-conjectures statement copied line by line, plus one added variant.
 
 To check an entry: `scripts/verify-entry.sh <entry>` (Linux with `bwrap`), or with `--no-sandbox`.
 
