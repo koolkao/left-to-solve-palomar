@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MO184460.answer",
+    "MO184460.answer_strict",
+    "MO184460.chain_interval",
+    "MO184460.thm3",
+    "MO184460.thm3_strict"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

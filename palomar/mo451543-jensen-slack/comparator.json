@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MO451543.pow_four_in_class",
+    "MO451543.not_comparison_pow_four",
+    "MO451543.comparison_iff_of_convex",
+    "MO451543.comparison_iff_of_continuous",
+    "MO451543.indepComparison_iff_of_convex",
+    "MO451543.indepComparison_iff_of_continuous"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

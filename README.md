@@ -11,7 +11,7 @@
   **left-to-solve-proofs** (`lefttosolve/complete/`); each entry here is a port of them to Lean v4.36.0 and the
   module system. The two repositories are separate because Palomar checks every `.lean` file of a submitted
   repository for a `module` header, which the archived v4.33.1 files do not have.
-- **Entries ported from the owner's own repositories** (six entries, added 27 Nov 2026): answers to
+- **Entries ported from the owner's own repositories** (six entries added 27 Nov 2026, three on 28 Nov 2026): answers to
   MathOverflow questions and to recent conjectures, and one formalization of a recent published proof. Each
   entry ports the Lean development of a public `koolkao/*` repository, named at a full commit in its README and
   `formalization.yaml`, to the module system. Those repositories are recorded as sources and related
@@ -47,6 +47,9 @@ relicensed here. PR #1352 credited that reuse.
 | `feige-general-delta` | Feige's inequality for every δ > 0 and the lower bound of Samuels' conjecture, following Ling (arXiv:2608.18392) | `FeigeSamuels.feige_general_delta`, `.samuels_lower` | `feige-lean` (`7da24ab`) | source-based (`formalizes` Ling) |
 | `gillibert-equal-halves` | Gillibert's Equal Halves conjecture is false (a vertex-transitive graph on 28 vertices) | `GillibertEqualHalves.not_equal_halves`, `.exists_counterexample_28` | `gillibert-equal-halves-counterexample` (`72a8411`) | original |
 | `kimberling-copula` | Kimberling's inequality for Archimedean copulas (MathOverflow 195959) | `MO195959.kimberling_inequality` | `kimberling-copula-inequality` (`18d5fd4`) | original |
+| `mo451543-jensen-slack` | Only quadratics compare the two Jensen slacks; x⁴ refutes the asker's conjecture (MathOverflow 451543) | `MO451543.pow_four_in_class`, `.not_comparison_pow_four`, `.comparison_iff_of_convex`, `.comparison_iff_of_continuous`, `.indepComparison_iff_of_convex`, `.indepComparison_iff_of_continuous` | `mo451543-jensen-slack` (`8be6d34`) | original |
+| `mo478827-binomial-monotone` | P((1+g)X + lY > k) is strictly decreasing in p when 2l ≤ 1+g, but not for all g, l ∈ (0,1) (MathOverflow 478827) | `MO478827.theorem1`, `.answer`, `.prop2_not_antitone`, `.fact1_fails`, `.prob_of_indep`, `.theorem1_measure`, `.answer_measure` | `mo478827-binomial-monotone` (`3d17061`) | original |
+| `mo184460-hellinger-tv` | Hellinger ≤ total variation for truncated Gaussians, and the log-concave cosh/sinh inequality behind it (MathOverflow 184460) | `MO184460.answer`, `.answer_strict`, `.chain_interval`, `.thm3`, `.thm3_strict` | `mo184460-hellinger-tv` (`b2b49dc`) | original |
 
 In these entries `Challenge.lean` states the result itself (importing only Mathlib, with any definitions it
 needs written out and documented), not a formal-conjectures statement.

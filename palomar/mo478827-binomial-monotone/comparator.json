@@ -1,0 +1,19 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "MO478827.theorem1",
+    "MO478827.answer",
+    "MO478827.prop2_not_antitone",
+    "MO478827.fact1_fails",
+    "MO478827.prob_of_indep",
+    "MO478827.theorem1_measure",
+    "MO478827.answer_measure"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}

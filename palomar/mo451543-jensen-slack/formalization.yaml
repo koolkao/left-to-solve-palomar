@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Only quadratics compare the two Jensen slacks (MathOverflow 451543)
+  description: 'Lean 4 proof that for finitely supported couplings (X, Y) with E[Y | X] = X and mu(Y) = E[X | Y],
+    a convex (or continuous) f : R -> R satisfies E[f(X) - f(mu(Y))] <= E[f(Y) - f(X)] for every coupling iff f
+    is a quadratic a t^2 + b t + c with a >= 0 (Theorem 1); the same characterisation holds for the smaller class
+    Y = X + Z with Z independent of X and E Z = 0 (Theorem 2); and x^4, which is convex with convex second derivative,
+    is a counterexample to the conjecture of the asker of MathOverflow question 451543.'
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.PR
+  - math.CA
+  msc2020:
+  - 26A51
+  - 60E15
+  - 39B22
+sources:
+- title: Answer to MathOverflow 451543 (only quadratics compare the two Jensen slacks), first presented with this
+    formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/mo451543-jensen-slack/tree/8be6d3435985e8b331e45e9e666a0c61c8cbf172
+  location: https://github.com/koolkao/mo451543-jensen-slack (NOTE.md, MO451543.lean, Check.lean), commit 8be6d3435985e8b331e45e9e666a0c61c8cbf172,
+    27 Nov 2026 (v1.0.0; v1.1.0 adds a Gaussian follow-up not compared here)
+  relationship: other
+  note: The result, its paper proof (NOTE.md) and the Lean proof were first published together in this public repository
+    (Zenodo 10.5281/zenodo.24605473, v1.0.0). This Palomar entry ports MO451543.lean to the module system (JensenSlack/Proof.lean).
+    As far as the authors searched, Theorems 1 and 2 and the x^4 counterexample are new; the quadratic case and
+    the |x| counterexample are the asker's; the independent-noise family behind Theorem 2 was proposed in brainstorms
+    by AI models (NOTE.md section 7).
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: Comparing the slackness of Jensen's inequality for some coupled random variables
+  authors:
+  - Guy Blanc (MathOverflow user 509354)
+  type: web discussion
+  id: https://mathoverflow.net/questions/451543
+  location: https://mathoverflow.net/questions/451543 (asked 27 Jul 2023)
+  relationship: background
+  note: The question answered here. The Challenge docstring quotes it (CC BY-SA 4.0).
+  license: CC-BY-SA-4.0
+  author_endorsement: not-contacted
+- title: On the optimality of conditional expectation as a Bregman predictor
+  authors:
+  - A. Banerjee
+  - X. Guo
+  - H. Wang
+  type: article
+  id: doi:10.1109/TIT.2005.850145
+  location: IEEE Trans. Inform. Theory 51(7) (2005)
+  relationship: background
+  note: The Bregman Pythagorean identity behind the heuristic for the question; the formal proof does not use it.
+  author_endorsement: n/a
+- title: Sided and symmetrized Bregman centroids
+  authors:
+  - F. Nielsen
+  - R. Nock
+  type: article
+  id: doi:10.1109/TIT.2009.2018176
+  location: IEEE Trans. Inform. Theory 55(6) (2009)
+  relationship: background
+  note: States as known that a symmetric Bregman divergence must come from a quadratic (folklore), a related but
+    different characterisation.
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/mo451543-jensen-slack/tree/8be6d3435985e8b331e45e9e666a0c61c8cbf172
+  relationship: adapts
+  note: The original public Lean development (same author, Lean v4.36.0, Mathlib fc4f59e, without the module system).
+    This entry copies MO451543.lean into the module system unchanged apart from the header and the namespace (MO451543
+    -> JensenSlack, so that Solution.lean can state the compared theorems under their original names MO451543.*).
+    The Gaussian follow-up (Gauss451543.lean) is not included.
+status:
+  scope: Theorem 1 for convex and for continuous f (all finitely supported couplings), Theorem 2 for convex and
+    for continuous f (independent additive noise), and the x^4 counterexample to the asker's conjecture. The differentiable
+    form of Theorem 1, the measure-theoretic (non-finite) setting and the Gaussian follow-up of the source repository
+    (v1.1) are not claimed here. The solution uses no axioms beyond propext, Classical.choice and Quot.sound; the
+    only sorries are the deliberate ones in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: Claude Code agents, directed by the owner, found the proof, wrote the paper proof, the Lean proof,
+      this Palomar port and this metadata. The source repository was built with lake build on Lean v4.36.0 / Mathlib
+      fc4f59e; this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa, con-ron)
+      on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: about half a day of agent time (27 Nov 2026), plus about 1 h for this Palomar entry
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'Goal-level instructions only: the owner chose the problem source (unanswered MathOverflow
+      questions), set the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the standard
+      axioms only, independent AI reviews before any public release) and asked the agents to answer the question;
+      the owner gave no mathematical hints.'
+  spend_usd: subscription-based
+  notes: The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking (lake
+    build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the Challenge,
+    which uses only Mathlib vocabulary with every notion written out and quotes the question, and on separate AI
+    reviews of the source repository. The source repository also contains an independent restatement (Check.lean),
+    which this Challenge follows.
+fidelity:
+  divergences: The question is about general random variables; the formalization treats finitely supported couplings,
+    given as lists of atoms with weights (atoms may repeat), with E[Y | X] = X imposed fibrewise and mu as the fibrewise
+    conditional mean. For the "only if" direction finite couplings suffice, so the characterisation is not weakened;
+    the "if" direction for general couplings is a paper statement only. Theorem 1 and 2 assume f convex (as in the
+    question) or continuous.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee review of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee review of the source repository and of this Challenge)
+  - Fable 5.2 (Anthropic model, referee of the mathematics)
+  notes: lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Model reviews of the source repository are recorded in its reviews/ folder and REVIEW-RESPONSES.md;
+    their findings were addressed. No independent human mathematical review. Two separate read-only model reviews
+    of this Challenge and Solution against the quoted question and the source repository's independent restatement
+    (Check.lean), by Astra 6.2 and Gemini 4 Neon on 28 Nov 2026, found it faithful (verdict CORRECT, minor remarks
+    only; a docstring omission was fixed). The owner's metadata answers of 27 Nov 2026 (goal-level direction, no
+    mathematical hints, no human review) apply; that was not a mathematical review.
+alignment:
+  namespace: MO451543
+  statements:
+  - source: x^4 is in the asker's class (convex, f'' = 12x^2 convex)
+    lean: MO451543.pow_four_in_class
+    module: Challenge
+    status: proved
+    note: Same as the source repository's pow_four_in_class.
+  - source: The asker's conjecture fails for x^4 (NOTE.md section 2)
+    lean: MO451543.not_comparison_pow_four
+    module: Challenge
+    status: proved
+    note: Three-atom coupling.
+  - source: Theorem 1, convex f
+    lean: MO451543.comparison_iff_of_convex
+    module: Challenge
+    status: proved
+    note: Same as the source repository's comparison_iff_of_convex, with Comparison unfolded.
+  - source: Theorem 1, continuous f
+    lean: MO451543.comparison_iff_of_continuous
+    module: Challenge
+    status: proved
+    note: Same as the source, unfolded.
+  - source: Theorem 2, convex f
+    lean: MO451543.indepComparison_iff_of_convex
+    module: Challenge
+    status: proved
+    note: Same as the source, unfolded.
+  - source: Theorem 2, continuous f
+    lean: MO451543.indepComparison_iff_of_continuous
+    module: Challenge
+    status: proved
+    note: Same as the source, unfolded.
+acknowledgements: Mathlib (ConvexOn, interval integrals); Guy Blanc for the MathOverflow question.

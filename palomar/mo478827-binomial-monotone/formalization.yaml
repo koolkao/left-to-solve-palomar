@@ -1,0 +1,171 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: P((1+g)X + lY > k) is strictly decreasing in p when 2l <= 1+g (MathOverflow 478827)
+  description: Lean 4 proof that for independent X ~ Bin(k, 1-p) and Y ~ Bin(k, p), k >= 1, 0 < g < 1 and 0 < l
+    <= (1+g)/2, f_k(p) = P((1+g)X + lY > k) is strictly decreasing in p on [0, 1], which answers MathOverflow question
+    478827 (g, l in (0,1), g >= l) positively, both for the explicit binomial sum and for Mathlib's binomial measure;
+    and that strict (even weak) decrease fails for k = 10, g = 1/7, l = 99/100, so the general claim (Fact 1 of
+    Arigapudi, Heller and Schreiber, arXiv:2107.08423) does not hold for all g, l in (0,1).
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.PR
+  - econ.TH
+  msc2020:
+  - 60E15
+  - 60C05
+  - 91A22
+sources:
+- title: Answer to MathOverflow 478827 (strict monotonicity of P((1+g)X + lY > k) in p), first presented with this
+    formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/mo478827-binomial-monotone/tree/3d17061d300988d21b3b1f23cf4bf91b6129dc62
+  location: https://github.com/koolkao/mo478827-binomial-monotone (NOTE.md, MO478827.lean, Check.lean), commit 3d17061d300988d21b3b1f23cf4bf91b6129dc62,
+    27 Nov 2026
+  relationship: other
+  note: The result, its paper proof (NOTE.md) and the Lean proof were first published together in this public repository
+    (Zenodo 10.5281/zenodo.24612941, v1.0.0). This Palomar entry ports MO478827.lean and Check.lean to the module
+    system. As far as the authors searched, Theorem 1 (the first proof of this monotonicity found), its extension
+    from l <= g to 2l <= 1+g, Lemma C and Proposition 2 are new; the derivative reduction is the asker's; the proof
+    route follows a brainstorm sketch by an AI model (Fable). The journal version of Arigapudi and Heller (Games
+    Econ. Behav. 2025) was not read.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: Probability of sum of i.i.d. random variables being positive
+  authors:
+  - EGT (MathOverflow user 151054)
+  type: web discussion
+  id: https://mathoverflow.net/questions/478827
+  location: https://mathoverflow.net/questions/478827 (asked 14 Sep 2024)
+  relationship: background
+  note: The question answered here. The Challenge docstring quotes it (CC BY-SA 4.0).
+  license: CC-BY-SA-4.0
+  author_endorsement: not-contacted
+- title: Sampling dynamics and stable mixing in hawk-dove games
+  authors:
+  - S. Arigapudi
+  - Y. Heller
+  - A. Schreiber
+  type: preprint
+  id: arXiv:2107.08423
+  location: https://arxiv.org/abs/2107.08423 (v4), eq. (3.2) and Fact 1
+  relationship: background
+  note: The function f_k and the general claim (Fact 1) that the question asks about; Proposition 2 shows that Fact
+    1 as stated there does not hold for all g, l in (0,1).
+  author_endorsement: not-contacted
+- title: Sampling dynamics and stable mixing in hawk-dove games (journal version)
+  authors:
+  - S. Arigapudi
+  - Y. Heller
+  type: article
+  id: doi:10.1016/j.geb.2025.03.003
+  location: Games Econ. Behav. 151 (2025) 148-161
+  relationship: background
+  note: Not read; it may restate, restrict or prove Fact 1 differently.
+  author_endorsement: not-contacted
+related_formalizations:
+- id: https://github.com/koolkao/mo478827-binomial-monotone/tree/3d17061d300988d21b3b1f23cf4bf91b6129dc62
+  relationship: adapts
+  note: 'The original public Lean development (same author, Lean v4.36.0, Mathlib fc4f59e, without the module system).
+    This entry copies MO478827.lean and Check.lean into the module system unchanged apart from the header, the dropped
+    #print axioms report and the namespaces (MO478827 -> BinomialMonotone, MO478827Check -> BinomialMonotoneCheck).'
+status:
+  scope: 'Theorem 1 (2l <= 1+g) and the question as asked (l <= g), for the explicit binomial sum and for Mathlib''s
+    binomial measure; the identification of the product measure with the joint law of independent X, Y (prob_of_indep);
+    Proposition 2 and the failure of the unrestricted claim. Not claimed: the sign of f_10'' on a grid and the numerical
+    scans of the source repository. No axioms beyond propext, Classical.choice and Quot.sound; the only sorries
+    are the deliberate ones in Challenge.lean.'
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: Claude Code agents, directed by the owner, found the proof, wrote the paper proof, the Lean proof,
+      this Palomar port and this metadata. The source repository was built with lake build on Lean v4.36.0 / Mathlib
+      fc4f59e; this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa, con-ron)
+      on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: about half a day of agent time (27 Nov 2026), plus about 1 h for this Palomar entry
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'Goal-level instructions only: the owner chose the problem source (unanswered MathOverflow
+      questions), set the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the standard
+      axioms only, independent AI reviews before any public release) and asked the agents to answer the question;
+      the owner gave no mathematical hints.'
+  spend_usd: subscription-based
+  notes: The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking (lake
+    build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the Challenge,
+    which uses only Mathlib vocabulary with every notion written out and quotes the question, and on separate AI
+    reviews of the source repository. The source repository also contains an independent restatement (Check.lean),
+    which this Challenge follows.
+fidelity:
+  divergences: p ranges over the real interval [0, 1] (StrictAntiOn on Set.Icc 0 1) in the explicit forms, and over
+    unitInterval in the measure forms; the measure forms use the product of the two binomial laws, which is the
+    joint law of independent X, Y by prob_of_indep. The binomial probability C(k,x)(1-p)^x p^(k-x) is written with
+    p as 1 - (1 - p).
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee review of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee review of the source repository and of this Challenge)
+  - Fable 5.2 (Anthropic model, referee of the mathematics and of the Lean statements)
+  notes: lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Model reviews of the source repository are recorded in its reviews/ folder and REVIEW-RESPONSES.md;
+    their findings were addressed. No independent human mathematical review. Two separate read-only model reviews
+    of this Challenge and Solution against the quoted question and the source repository's independent restatement
+    (Check.lean), by Astra 6.2 and Gemini 4 Neon on 28 Nov 2026, found it faithful (verdict CORRECT, minor remarks
+    only; a docstring omission was fixed). The owner's metadata answers of 27 Nov 2026 (goal-level direction, no
+    mathematical hints, no human review) apply; that was not a mathematical review.
+alignment:
+  namespace: MO478827
+  statements:
+  - source: Theorem 1 (2l <= 1+g)
+    lean: MO478827.theorem1
+    module: Challenge
+    status: proved
+    note: Explicit binomial sum.
+  - source: MathOverflow 478827 as asked (g, l in (0,1), g >= l)
+    lean: MO478827.answer
+    module: Challenge
+    status: proved
+    note: Explicit binomial sum.
+  - source: Proposition 2 (k = 10, g = 1/7, l = 99/100)
+    lean: MO478827.prop2_not_antitone
+    module: Challenge
+    status: proved
+    note: Not even weakly decreasing.
+  - source: Fact 1 of arXiv:2107.08423 fails in general
+    lean: MO478827.fact1_fails
+    module: Challenge
+    status: proved
+    note: For all k >= 1 and g, l in (0,1).
+  - source: 'Independence: P((1+g)X + lY > k) equals the product-measure probability'
+    lean: MO478827.prob_of_indep
+    module: Challenge
+    status: proved
+    note: Any probability space.
+  - source: Theorem 1, measure form
+    lean: MO478827.theorem1_measure
+    module: Challenge
+    status: proved
+    note: Mathlib binomial measure.
+  - source: The question, measure form
+    lean: MO478827.answer_measure
+    module: Challenge
+    status: proved
+    note: Mathlib binomial measure.
+acknowledgements: Mathlib (ProbabilityTheory.binomial, Bernstein polynomials, HasLaw, IndepFun); EGT for the MathOverflow
+  question.

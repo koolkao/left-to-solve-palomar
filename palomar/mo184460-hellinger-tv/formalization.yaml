@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: Hellinger distance <= total variation for truncated Gaussians (MathOverflow 184460)
+  description: 'Lean 4 proof that for P = N(-mu, 1) and Q = N(mu, 1) truncated to an interval [a, b] (a < b), or
+    to any interval of positive length, d_H^2(P,Q) <= d_H(P,Q) <= d_TV(P,Q) with d_TV = (1/2)||P - Q||_1 and d_H^2
+    = (1/2)||sqrt P - sqrt Q||_2^2, strictly d_H < d_TV for mu != 0, which answers MathOverflow question 184460
+    positively; and the inequality behind it: for a log-concave f >= 0 on R with f cosh integrable and integral
+    of f sinh zero, (int f cosh)(int f cosh - int f) <= (int f |sinh|)^2, strictly for strictly log-concave f.'
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.PR
+  - math.ST
+  - cs.IT
+  msc2020:
+  - 60E15
+  - 62B10
+  - 26D15
+sources:
+- title: Answer to MathOverflow 184460 (Hellinger <= total variation for truncated Gaussians), first presented with
+    this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/mo184460-hellinger-tv/tree/b2b49dcf336bcab5835d78cab9686f7ba9ee4b79
+  location: https://github.com/koolkao/mo184460-hellinger-tv (NOTE.md, MO184460.lean, Check.lean), commit b2b49dcf336bcab5835d78cab9686f7ba9ee4b79,
+    27 Nov 2026
+  relationship: other
+  note: The result, its paper proof (NOTE.md) and the Lean proof were first published together in this public repository
+    (Zenodo 10.5281/zenodo.24598301, v1.0.0). This Palomar entry ports MO184460.lean and Check.lean to the module
+    system. As far as the authors searched, Theorem 1 and the hyperbolic form of Theorem 3 are new; the comparison
+    lemma adapts Lemma 6 of Melbourne, Roysdon, Tang and Tkocz (credited below); the untruncated case reduces to
+    an elementary inequality that may be folklore.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: Total variation and Hellinger distance inequality between truncated Gaussians
+  authors:
+  - Alexander (MathOverflow user 39824)
+  type: web discussion
+  id: https://mathoverflow.net/questions/184460
+  location: https://mathoverflow.net/questions/184460 (asked 15 Oct 2014)
+  relationship: background
+  note: The question answered here. The Challenge docstring quotes it (CC BY-SA 3.0).
+  license: CC-BY-SA-3.0
+  author_endorsement: not-contacted
+- title: From simplex slicing to sharp reverse Hölder inequalities
+  authors:
+  - J. Melbourne
+  - M. Roysdon
+  - C. Tang
+  - T. Tkocz
+  type: article
+  id: doi:10.1112/jlms.70461
+  location: J. London Math. Soc. 113(3) (2026), Lemma 6 and Theorem 1 (arXiv:2505.00944)
+  relationship: background
+  note: The comparison lemma (NOTE.md, Lemma C) adapts their Lemma 6, with the test system {1, sinh} in place of
+    {1, x}; the epsilon -> 0 limit of Theorem 3 is their Theorem 1 at p = 1.
+  author_endorsement: n/a
+- title: On pairs of f-divergences and their joint range
+  authors:
+  - P. Harremoës
+  - I. Vajda
+  type: article
+  id: doi:10.1109/TIT.2011.2137353
+  location: IEEE Trans. Inform. Theory 57(6) (2011) 3230-3235
+  relationship: background
+  note: The joint range of two f-divergences, including (H^2, TV); Le Cam's bound H^2 <= TV is sharp over all pairs.
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/mo184460-hellinger-tv/tree/b2b49dcf336bcab5835d78cab9686f7ba9ee4b79
+  relationship: adapts
+  note: 'The original public Lean development (same author, Lean v4.36.0, Mathlib fc4f59e, without the module system).
+    This entry copies MO184460.lean and Check.lean into the module system unchanged apart from the header, the dropped
+    #print axioms report and the namespaces (MO184460 -> HellingerTV, MO184460Check -> HellingerTVCheck).'
+status:
+  scope: 'Theorem 1 for [a, b] with the question''s explicit densities (answer, answer_strict), for any interval
+    of positive length with Mathlib''s gaussianPDFReal (chain_interval), and Theorem 3 in homogeneous form (thm3,
+    thm3_strict). Not claimed: Theorem 2 (the measure-level H^2 <= TV^2 for a log-concave likelihood ratio) and
+    the equality characterisations, proved on paper only. No axioms beyond propext, Classical.choice and Quot.sound;
+    the only sorries are the deliberate ones in Challenge.lean.'
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: Claude Code agents, directed by the owner, found the proof, wrote the paper proof, the Lean proof,
+      this Palomar port and this metadata. The source repository was built with lake build on Lean v4.36.0 / Mathlib
+      fc4f59e; this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa, con-ron)
+      on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: about half a day of agent time (27 Nov 2026), plus about 1 h for this Palomar entry
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'Goal-level instructions only: the owner chose the problem source (unanswered MathOverflow
+      questions), set the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the standard
+      axioms only, independent AI reviews before any public release) and asked the agents to answer the question;
+      the owner gave no mathematical hints.'
+  spend_usd: subscription-based
+  notes: The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking (lake
+    build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the Challenge,
+    which uses only Mathlib vocabulary with every notion written out and quotes the question, and on separate AI
+    reviews of the source repository. The source repository also contains an independent restatement (Check.lean),
+    which this Challenge follows.
+fidelity:
+  divergences: The densities are given by equations for P and Q; d_TV and d_H are written as integrals over R (Bochner
+    integrals; Check.lean of the source shows the integrands are integrable and the truncated densities are probability
+    densities for a < b). The question tacitly has a < b. Log-concavity is written as the indicator of an interval
+    times exp of a concave function.
+review:
+  status: self-assessed
+  reviewers:
+  - Astra 6.2 (OpenAI model, read-only referee review of the source repository and of this Challenge)
+  - Gemini 4 Neon (Google model, read-only referee review of the source repository and of this Challenge)
+  - Fable 5.2 (Anthropic model, referee of the mathematics and of the Lean statements)
+  notes: lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Model reviews of the source repository are recorded in its reviews/ folder and REVIEW-RESPONSES.md;
+    their findings were addressed. No independent human mathematical review. Two separate read-only model reviews
+    of this Challenge and Solution against the quoted question and the source repository's independent restatement
+    (Check.lean), by Astra 6.2 and Gemini 4 Neon on 28 Nov 2026, found it faithful (verdict CORRECT, minor remarks
+    only; a docstring omission was fixed). The owner's metadata answers of 27 Nov 2026 (goal-level direction, no
+    mathematical hints, no human review) apply; that was not a mathematical review.
+alignment:
+  namespace: MO184460
+  statements:
+  - source: MathOverflow 184460 as asked ([a, b], a < b)
+    lean: MO184460.answer
+    module: Challenge
+    status: proved
+    note: d_H^2 <= d_H <= d_TV.
+  - source: Strict form for mu != 0
+    lean: MO184460.answer_strict
+    module: Challenge
+    status: proved
+    note: d_H < d_TV.
+  - source: Any interval of positive length
+    lean: MO184460.chain_interval
+    module: Challenge
+    status: proved
+    note: Mathlib gaussianPDFReal densities.
+  - source: Theorem 3 of NOTE.md (homogeneous form)
+    lean: MO184460.thm3
+    module: Challenge
+    status: proved
+    note: Log-concave f.
+  - source: Theorem 3, strict
+    lean: MO184460.thm3_strict
+    module: Challenge
+    status: proved
+    note: Strictly log-concave f, int f > 0.
+acknowledgements: Mathlib (gaussianPDFReal, Bochner integration, ConcaveOn); Alexander for the MathOverflow question.
