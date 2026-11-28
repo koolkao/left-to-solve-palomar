@@ -53,9 +53,9 @@ sources:
   type: other
   id: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/14143
   location: https://github.com/GuillaumeBAUD-coder/open-math-agents/pull/14143 (opened 27 Nov 2026, 23:16 UTC)
-  relationship: independently-proves
+  relationship: other
   note: >-
-    For Theorem 5 only (geodesicDeletion_of_abelian_labelling, geodesicDeletion_cay): this PR is the earliest public
+    other (concurrent earlier public claim of one theorem): for Theorem 5 only (geodesicDeletion_of_abelian_labelling, geodesicDeletion_cay): this PR is the earliest public
     claim of Geodesic Deletion for all finite abelian Cayley graphs that the author located (a Lean proof by a
     different method). Theorem 5 here was found and Lean-checked concurrently (first compiled about 23:15 UTC) but
     published later (source repository v1.2.0), so Theorem 5 is not claimed as first; it is an independent proof.
