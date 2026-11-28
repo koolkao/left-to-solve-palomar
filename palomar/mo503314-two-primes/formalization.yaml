@@ -1,0 +1,140 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+version: v0.4
+project:
+  name: The odd-d conjecture of MathOverflow 503314 on products over powers of a root of unity
+  description: Lean 4 proof that for coprime m, d with d odd, and integers r1, r2 of multiplicative order exactly
+    d modulo m with gcd(r_i - 1, m) = 1, if prod_{u=1}^{d-1} (xi^k - xi^{k r1^u})(xi^k - xi^{-k r1^u}) = prod_{u=1}^{d-1}
+    (xi^k - xi^{k r2^u})(xi^k - xi^{-k r2^u}) for all integers k, where xi = exp(2 pi i/m), then r1^c = r2 mod m
+    for some c, that is, r1 and r2 generate the same subgroup of (Z/m)^x. This proves the conjecture of MathOverflow
+    question 503314 for every odd d and every m; the cases d an odd prime (Ikeda 1980) and (Z/m)^x cyclic (Colantonio
+    and Lauret) were known. The identity comes from the spectra of lens spaces.
+  authors:
+  - Ming-Chih Kao
+  license: Apache-2.0
+  responsible_maintainers:
+  - Ming-Chih Kao
+classification:
+  arxiv:
+  - math.NT
+  - math.SP
+  msc2020:
+  - 11R18
+  - 11L03
+  - 58J53
+sources:
+- title: Proof of the odd-d conjecture of MathOverflow 503314, first presented with this formalization
+  authors:
+  - Ming-Chih Kao
+  type: original-proof
+  id: https://github.com/koolkao/mo503314-two-primes/tree/566defa273f1d35900318d07e35f92f6c8fad04a
+  location: https://github.com/koolkao/mo503314-two-primes (NOTE.md Part I, lean/), commit 566defa273f1d35900318d07e35f92f6c8fad04a,
+    28 Nov 2026 (v1.0.0; Zenodo 10.5281/zenodo.24618807)
+  relationship: other
+  note: The result, its paper proof (NOTE.md, Part I) and the Lean proof were first published together in this public
+    repository (v0.1.0 with the two-prime case on 28 Nov 2026, v1.0.0 with the full Lean proof). This Palomar entry
+    ports the Lean proof from Lean v4.33.1 to v4.36.0 and the module system (TwoPrimes/Proof.lean). As far as the
+    authors searched, the conjecture for every odd d is new; Ikeda's 1983 paper (J. Math. Soc. Japan 35) has not
+    been read. The formal proof differs from the paper in three routes (DFT injectivity relative to a set of primes
+    instead of Gauss sums of imprimitive characters; Lemma 3 at the full modulus; an explicit periodic correction
+    term), described in the source README. The analytic input L(1, psi) != 0 is Mathlib's.
+  license: Apache-2.0
+  author_endorsement: n/a
+- title: Identity involving primitive roots of unity
+  authors:
+  - emiliocba (MathOverflow user)
+  type: web discussion
+  id: https://mathoverflow.net/questions/503314
+  location: https://mathoverflow.net/questions/503314 (asked 31 Oct 2025)
+  relationship: background
+  note: The question and the conjecture answered here (the conjecture, the even-d counterexamples and the link with
+    lens-space spectra are the asker's). The Challenge docstring paraphrases it (CC BY-SA 4.0).
+  license: CC-BY-SA-4.0
+  author_endorsement: not-contacted
+- title: On the spectrum of a Riemannian manifold of positive constant curvature II
+  authors:
+  - A. Ikeda
+  type: article
+  id: doi:10.18910/10475
+  location: Osaka J. Math. 17 (1980) 691-702, Theorem 3.7
+  relationship: background
+  note: The case d an odd prime (via Franz's lemma); the proof uses his idea of removing the factors 1 - xi^a with
+    a not prime to m.
+  author_endorsement: n/a
+- title: The fundamental group of a spherical space form is not audible
+  authors:
+  - M. Colantonio
+  - E. A. Lauret
+  type: preprint
+  id: arXiv:2602.12939
+  location: https://arxiv.org/abs/2602.12939 v2, Remark 2.6 and Corollary 1.8 (Question 5.3)
+  relationship: background
+  note: The cyclic case m = p^k; their Question 5.3 (isospectral spherical space forms) is the geometric problem
+    behind the MO question and is not claimed here.
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/koolkao/mo503314-two-primes/tree/566defa273f1d35900318d07e35f92f6c8fad04a
+  relationship: adapts
+  note: The original public Lean development (same author, Lean v4.33.1, Mathlib 0df444a, without the module system).
+    This entry ports lean/MO503314Full.lean (the concatenation of its modules) to Lean v4.36.0 / Mathlib fc4f59e
+    with three small proof repairs listed in the file header, and renames the namespace MO503314 -> TwoPrimes.
+status:
+  scope: The conjecture of MathOverflow 503314 for every odd d and every m >= 1, exactly as in the source repository's
+    Statement.lean.txt / Check.lean. Theorem A (the separate two-prime proof of the appendix) and the even-d search
+    are not claimed. No axioms beyond propext, Classical.choice and Quot.sound; the only sorry is the deliberate
+    one in Challenge.lean.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: Claude Code agents, directed by the owner, found the proof, wrote the paper proof, the Lean proof,
+      this Palomar port and this metadata. The source repository was built with lake build on Lean v4.36.0 / Mathlib
+      fc4f59e; this entry was built with lake build and checked with lake comparator (Lean kernel, NanoDa, con-ron)
+      on macOS with its bwrap sandbox disabled, since bwrap is Linux-only.
+    cost:
+      wall_time: about one day of agent time (27-28 Nov 2026), plus about 1 h for this port
+      spend_usd: subscription-based
+      hardware: local machine
+    prompting_notes: 'Goal-level instructions only: the owner chose the problem source (unanswered MathOverflow
+      questions), set the working rules (original proofs, no unlicensed reuse, machine-checked proofs with the standard
+      axioms only, independent AI reviews before any public release) and asked the agents to answer the question;
+      the owner gave no mathematical hints.'
+  spend_usd: subscription-based
+  notes: The owner directed the work at the level of goals and policy (which questions, originality and licensing
+    rules, publication rules) and did not write Lean or mathematics. Correctness rests on machine checking (lake
+    build with the standard axioms only; Comparator for this entry). Statement faithfulness rests on the Challenge,
+    which uses only Mathlib vocabulary with every notion written out and quotes the question, and on separate AI
+    reviews of the source repository. The source repository also contains an independent restatement (Check.lean),
+    which this Challenge follows.
+fidelity:
+  divergences: xi^a is written cexp (2 * pi * I * a / m) with the real pi (open Real); the exponents k r^u are integers
+    cast to C. The product runs over u in Finset.Icc 1 (d - 1). The conclusion is stated in ZMod m. m > 0 and gcd(m,
+    d) = 1 are hypotheses as in the question; gcd(r2 - 1, m) = 1 is assumed as in the question although the proof
+    may not need it.
+review:
+  status: self-assessed
+  reviewers:
+  - Fable 5.2 (Anthropic model, referee of the paper proof)
+  - Gemini 4 Neon (Google model, referee of the paper proof)
+  - Astra 6.2 (OpenAI model, referee of the paper proof and of this Challenge)
+  notes: lake comparator accepted Solution against Challenge locally (Lean kernel, NanoDa and con-ron, without the
+    bwrap sandbox). Three model referees found the paper proof CORRECT (recorded in the source repository's reviews/
+    and REVIEW-RESPONSES.md). The Challenge copies the source repository's independent statement (Statement.lean.txt);
+    a separate read-only model review of this Challenge (Astra 6.2, 28 Nov 2026) found it faithful to the conjecture
+    (verdict CORRECT; it also checked that the hypotheses are satisfiable, e.g. m = 7, d = 3, r1 = r2 = 2). No independent
+    human mathematical review.
+alignment:
+  namespace: MO503314
+  statements:
+  - source: MathOverflow 503314, the conjecture for odd d
+    lean: MO503314.mo503314
+    module: Challenge
+    status: proved
+    note: Same statement as the source repository's mo503314 / Check.lean.
+acknowledgements: Mathlib (Dirichlet characters, L(1, psi) != 0, ZMod, additive characters); emiliocba for the MathOverflow
+  question; Fedor Petrov for the reformulation on MathOverflow.

@@ -9,7 +9,7 @@ Ming-Chih Kao (GitHub: koolkao) submitted to Left to Solve
 published in his own public repositories (github.com/koolkao/mo505921-tanh-dominance,
 friedan-entropy-inequality, feige-lean, gillibert-equal-halves-counterexample,
 kimberling-copula-inequality, mo451543-jensen-slack, mo478827-binomial-monotone,
-mo184460-hellinger-tv). The merged Left to Solve files themselves are archived in the companion
+mo184460-hellinger-tv, mo503314-two-primes). The merged Left to Solve files themselves are archived in the companion
 repository left-to-solve-proofs. Ming-Chih Kao licenses his contributions under the Apache License,
 Version 2.0.
 
@@ -36,7 +36,8 @@ Attribution-ShareAlike: palomar/mo505921-tanh-dominance (question 505921 by titu
 palomar/friedan-classical and palomar/friedan-quantum (question 138395 by Daniel Friedan, CC BY-SA 3.0),
 palomar/kimberling-copula (question 195959 by Clark Kimberling, CC BY-SA 3.0),
 palomar/mo451543-jensen-slack (question 451543 by Guy Blanc, CC BY-SA 4.0), palomar/mo478827-binomial-monotone
-(question 478827 by EGT, CC BY-SA 4.0), palomar/mo184460-hellinger-tv (question 184460 by Alexander, CC BY-SA 3.0). The quotations remain under
+(question 478827 by EGT, CC BY-SA 4.0), palomar/mo184460-hellinger-tv (question 184460 by Alexander, CC BY-SA 3.0), palomar/mo503314-two-primes
+(question 503314 by emiliocba, CC BY-SA 4.0). The quotations remain under
 those licences.
 
 LeanPool (palomar/feige-general-delta)
