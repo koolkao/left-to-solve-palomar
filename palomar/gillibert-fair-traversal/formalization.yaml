@@ -81,10 +81,11 @@ sources:
     statements/gillibert-geodesic-deletion.lean, PR #334)"
   relationship: background
   note: >-
-    Gillibert's formal statements. Challenge.lean restates their definitions IsVertexTransitive and the two
-    conclusions (FairFamily, GeodesicDeletion) in the same words, as the source repository's Check.lean does; these
-    statement texts are Gillibert's and are reproduced for reference (NOTICE). The statements themselves (all
-    vertex-transitive graphs) are not claimed.
+    Gillibert's formal statements (no licence). Challenge.lean does not copy them: its definitions
+    (IsVertexTransitive, HasFairTraversal, HasGeodesicDeletion) were written for this entry, and
+    FairTraversal/Main.lean proves them equivalent to the statements' definitions, which the ported proof modules
+    keep as copies (reproduced for reference only and excluded from the Apache License, see NOTICE). The statements
+    themselves (all vertex-transitive graphs) are not claimed.
   license: unknown
   author_endorsement: not-contacted
 related_formalizations:
@@ -150,8 +151,9 @@ automation:
 fidelity:
   divergences: >-
     The conjectures are stated by Gillibert for all connected vertex-transitive graphs; the theorems here add a
-    hypothesis (an abelian or group labelling, a Cartesian product, or a generalized Petersen graph) and keep the
-    conclusions word for word. In the labelled forms #339/#334's vertex-transitivity hypothesis is kept although the
+    hypothesis (an abelian or group labelling, a Cartesian product, or a generalized Petersen graph). The
+    conclusions HasFairTraversal and HasGeodesicDeletion are written independently and are equivalent to the
+    conclusions of #339/#334 (FairTraversal/Main.lean: hasFairTraversal_iff, hasGeodesicDeletion_iff). In the labelled forms #339/#334's vertex-transitivity hypothesis is kept although the
     labelling implies it. Theorem 8 writes the group Gamma(A, k, z) on A x Bool through its multiplication pwMul and
     inverse pwInv; the hypotheses k . k . a = a and k . z = z make it a group. In Theorem 2 the binders are Type* (more
     general than #334's Type) and no finiteness or vertex-transitivity is assumed. Theorem 6 allows infinite abelian

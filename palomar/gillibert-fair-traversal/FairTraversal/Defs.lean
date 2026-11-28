@@ -19,25 +19,32 @@ namespace FairTraversal
 
 open SimpleGraph
 
-/-- Vertex-transitivity, as in the Left to Solve statements #339 and #334: every vertex is mapped to
-every other vertex by a graph automorphism. -/
+/-- Vertex-transitivity (the standard definition): for all vertices `u, v` some graph automorphism
+maps `u` to `v`. -/
 def IsVertexTransitive {V : Type*} (G : SimpleGraph V) : Prop :=
   ∀ u v : V, ∃ φ : G ≃g G, φ u = v
 
-/-- The conclusion of the Fair Traversal Conjecture (Left to Solve #339) for a fixed graph `G`: there
-are positive integers `r, k` and Hamiltonian paths `P_1, …, P_r` (not necessarily distinct) such that
-every edge lies on exactly `k` of them. -/
-def FairFamily {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) : Prop :=
-  ∃ (r k : ℕ), 0 < r ∧ 0 < k ∧
-    ∃ (a b : Fin r → V) (P : ∀ i, G.Walk (a i) (b i)),
-      (∀ i, (P i).IsHamiltonian) ∧
-      ∀ e ∈ G.edgeSet, (Finset.univ.filter fun i => e ∈ (P i).edges).card = k
+/-- A fair family of walks: `r` walks `P i`, the `i`-th from `(ends i).1` to `(ends i).2`, each of them
+Hamiltonian, such that each edge of `G` is an edge of exactly `k` of them. -/
+def IsFairFamily {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) {r : ℕ}
+    (ends : Fin r → V × V) (P : ∀ i, G.Walk (ends i).1 (ends i).2) (k : ℕ) : Prop :=
+  (∀ i, (P i).IsHamiltonian) ∧
+    ∀ e ∈ G.edgeSet, (Finset.univ.filter fun i => e ∈ (P i).edges).card = k
 
-/-- The conclusion of the Geodesic Deletion Conjecture (Left to Solve #334) for a fixed graph `G`:
-deleting the vertices of any geodesic path leaves a connected induced subgraph. -/
-def GeodesicDeletion {V : Type*} (G : SimpleGraph V) : Prop :=
-  ∀ (u v : V) (p : G.Walk u v), p.IsPath → p.length = G.dist u v →
-    (G.induce {x | x ∉ p.support}).Connected
+/-- Fair Traversal holds for `G`: some nonempty finite family of Hamiltonian paths (repetitions allowed)
+covers every edge the same positive number of times. -/
+def HasFairTraversal {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) : Prop :=
+  ∃ (r : ℕ) (ends : Fin r → V × V) (P : ∀ i, G.Walk (ends i).1 (ends i).2) (k : ℕ),
+    0 < r ∧ 0 < k ∧ IsFairFamily G ends P k
+
+/-- A geodesic path: a path whose length is the distance between its ends. -/
+def IsGeodesicPath {V : Type*} {G : SimpleGraph V} {u v : V} (p : G.Walk u v) : Prop :=
+  p.IsPath ∧ p.length = G.dist u v
+
+/-- Geodesic Deletion holds for `G`: for every geodesic path `p`, the subgraph induced on the vertices
+not on `p` is connected. -/
+def HasGeodesicDeletion {V : Type*} (G : SimpleGraph V) : Prop :=
+  ∀ (u v : V) (p : G.Walk u v), IsGeodesicPath p → (G.induce {x | x ∈ p.support}ᶜ).Connected
 
 /-- An abelian labelling: the vertices can be labelled by a finite abelian group `A` so that
 `u ~ v` iff the label difference lies in a fixed set `S` (that is, `G` is a Cayley graph of `A`). -/

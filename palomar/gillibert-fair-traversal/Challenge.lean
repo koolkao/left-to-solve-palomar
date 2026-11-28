@@ -13,11 +13,11 @@ public import Mathlib
 <https://github.com/Gillibert/ConjecturesGillibert/blob/main/fair_traversal_conjecture.tex>; Left to Solve
 statement `statements/gillibert-fair-traversal.lean` by Gillibert, PR #339). Every connected
 vertex-transitive graph with at least two vertices has a nonempty finite multiset of Hamiltonian paths in
-which every edge occurs equally often (`FairFamily` below is that conclusion for one graph).
+which every edge occurs equally often (`HasFairTraversal` below is that conclusion for one graph).
 
 **Geodesic Deletion Conjecture** (Gillibert; Left to Solve statement `statements/gillibert-geodesic-deletion.lean`,
 PR #334). In every connected vertex-transitive graph with at least three vertices, deleting the vertices of
-any geodesic path leaves a connected graph (`GeodesicDeletion` below is that conclusion for one graph).
+any geodesic path leaves a connected graph (`HasGeodesicDeletion` below is that conclusion for one graph).
 
 Both conjectures are open; they are **not** claimed here. The theorems below prove them for classes of graphs,
 following the source repository (Ming-Chih Kao, 2026,
@@ -35,8 +35,9 @@ whose `Check.lean` restates its results independently; the statements here follo
   Cayley graph of a finite abelian group with at least three vertices (Theorem 5); every connected Cayley
   graph of an abelian group with at least six generators, finite or not (Theorem 6).
 
-Vocabulary: `IsVertexTransitive`, the conclusion `FairFamily` and the conclusion `GeodesicDeletion` are
-the definitions of the Left to Solve statements (#339, #334), restated. A labelling of `G` by a group `Γ` is a
+Vocabulary: `IsVertexTransitive` (the standard definition), `HasFairTraversal` and `HasGeodesicDeletion` are
+written for this file; they are equivalent to the hypothesis and the conclusions of Gillibert's Left to Solve
+statements (#339, #334), which are not copied here. A labelling of `G` by a group `Γ` is a
 bijection `e : V ≃ Γ` and a set `S` with `u ~ v ↔ (e u)⁻¹ * e v ∈ S` (written additively, `e v - e u ∈ S`,
 for abelian groups); `Γ(A, k, z)` is written on `A × Bool` with its multiplication `pwMul` and inverse `pwInv`
 spelled out. The vertex-transitivity hypothesis of #339/#334 is kept in the labelled forms, although a group
@@ -49,25 +50,32 @@ namespace FairTraversal
 
 open SimpleGraph
 
-/-- Vertex-transitivity, as in the Left to Solve statements #339 and #334: every vertex is mapped to
-every other vertex by a graph automorphism. -/
+/-- Vertex-transitivity (the standard definition): for all vertices `u, v` some graph automorphism
+maps `u` to `v`. -/
 def IsVertexTransitive {V : Type*} (G : SimpleGraph V) : Prop :=
   ∀ u v : V, ∃ φ : G ≃g G, φ u = v
 
-/-- The conclusion of the Fair Traversal Conjecture (Left to Solve #339) for a fixed graph `G`: there
-are positive integers `r, k` and Hamiltonian paths `P_1, …, P_r` (not necessarily distinct) such that
-every edge lies on exactly `k` of them. -/
-def FairFamily {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) : Prop :=
-  ∃ (r k : ℕ), 0 < r ∧ 0 < k ∧
-    ∃ (a b : Fin r → V) (P : ∀ i, G.Walk (a i) (b i)),
-      (∀ i, (P i).IsHamiltonian) ∧
-      ∀ e ∈ G.edgeSet, (Finset.univ.filter fun i => e ∈ (P i).edges).card = k
+/-- A fair family of walks: `r` walks `P i`, the `i`-th from `(ends i).1` to `(ends i).2`, each of them
+Hamiltonian, such that each edge of `G` is an edge of exactly `k` of them. -/
+def IsFairFamily {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) {r : ℕ}
+    (ends : Fin r → V × V) (P : ∀ i, G.Walk (ends i).1 (ends i).2) (k : ℕ) : Prop :=
+  (∀ i, (P i).IsHamiltonian) ∧
+    ∀ e ∈ G.edgeSet, (Finset.univ.filter fun i => e ∈ (P i).edges).card = k
 
-/-- The conclusion of the Geodesic Deletion Conjecture (Left to Solve #334) for a fixed graph `G`:
-deleting the vertices of any geodesic path leaves a connected induced subgraph. -/
-def GeodesicDeletion {V : Type*} (G : SimpleGraph V) : Prop :=
-  ∀ (u v : V) (p : G.Walk u v), p.IsPath → p.length = G.dist u v →
-    (G.induce {x | x ∉ p.support}).Connected
+/-- Fair Traversal holds for `G`: some nonempty finite family of Hamiltonian paths (repetitions allowed)
+covers every edge the same positive number of times. -/
+def HasFairTraversal {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) : Prop :=
+  ∃ (r : ℕ) (ends : Fin r → V × V) (P : ∀ i, G.Walk (ends i).1 (ends i).2) (k : ℕ),
+    0 < r ∧ 0 < k ∧ IsFairFamily G ends P k
+
+/-- A geodesic path: a path whose length is the distance between its ends. -/
+def IsGeodesicPath {V : Type*} {G : SimpleGraph V} {u v : V} (p : G.Walk u v) : Prop :=
+  p.IsPath ∧ p.length = G.dist u v
+
+/-- Geodesic Deletion holds for `G`: for every geodesic path `p`, the subgraph induced on the vertices
+not on `p` is connected. -/
+def HasGeodesicDeletion {V : Type*} (G : SimpleGraph V) : Prop :=
+  ∀ (u v : V) (p : G.Walk u v), IsGeodesicPath p → (G.induce {x | x ∈ p.support}ᶜ).Connected
 
 /-- An abelian labelling: the vertices can be labelled by a finite abelian group `A` so that
 `u ~ v` iff the label difference lies in a fixed set `S` (that is, `G` is a Cayley graph of `A`). -/
@@ -121,7 +129,7 @@ is kept, although an abelian labelling already implies it. -/
 theorem fair_traversal_of_abelian_labelling :
     ∀ {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V),
       G.Connected → IsVertexTransitive G → 2 ≤ Fintype.card V →
-      HasAbelianLabelling G → FairFamily G := by
+      HasAbelianLabelling G → HasFairTraversal G := by
   sorry
 
 /-- **Theorem 1 in the paper's form**: for a finite abelian group `A` with `|A| ≥ 2` and `S ⊆ A` with
@@ -129,7 +137,7 @@ theorem fair_traversal_of_abelian_labelling :
 theorem fair_traversal_cay (A : Type) [AddCommGroup A] [Fintype A] [DecidableEq A] (S : Finset A)
     (h0 : (0 : A) ∉ S) (hneg : ∀ s ∈ S, -s ∈ S)
     (hgen : AddSubgroup.closure (S : Set A) = ⊤) (hn : 2 ≤ Fintype.card A) :
-    FairFamily (cay A S h0 hneg) := by
+    HasFairTraversal (cay A S h0 hneg) := by
   sorry
 
 /-- **Theorem 3 (Cartesian products)**: if `G` and `H` are finite vertex-transitive graphs with at least
@@ -138,7 +146,7 @@ theorem fair_traversal_boxProd :
     ∀ {V W : Type} [Fintype V] [DecidableEq V] [Fintype W] [DecidableEq W]
       (G : SimpleGraph V) (H : SimpleGraph W),
       IsVertexTransitive G → IsVertexTransitive H → 2 ≤ Fintype.card V → 2 ≤ Fintype.card W →
-      FairFamily G → FairFamily H → FairFamily (G □ H) := by
+      HasFairTraversal G → HasFairTraversal H → HasFairTraversal (G □ H) := by
   sorry
 
 /-- **Theorem 7 for the dihedral groups** (Mathlib's `DihedralGroup n`, order `2n`), in the form of #339:
@@ -147,7 +155,7 @@ theorem fair_traversal_dihedralGroup (n : ℕ) [NeZero n] :
     ∀ {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V),
       G.Connected → IsVertexTransitive G → 2 ≤ Fintype.card V →
       (∃ (e : V ≃ DihedralGroup n) (S : Finset (DihedralGroup n)),
-        ∀ u v, G.Adj u v ↔ (e u)⁻¹ * e v ∈ S) → FairFamily G := by
+        ∀ u v, G.Adj u v ↔ (e u)⁻¹ * e v ∈ S) → HasFairTraversal G := by
   sorry
 
 /-- **Theorem 7 for the dicyclic groups** (Mathlib's `QuaternionGroup n`, order `4n`), in the form of #339. -/
@@ -155,7 +163,7 @@ theorem fair_traversal_quaternionGroup (n : ℕ) [NeZero n] :
     ∀ {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V),
       G.Connected → IsVertexTransitive G → 2 ≤ Fintype.card V →
       (∃ (e : V ≃ QuaternionGroup n) (S : Finset (QuaternionGroup n)),
-        ∀ u v, G.Adj u v ↔ (e u)⁻¹ * e v ∈ S) → FairFamily G := by
+        ∀ u v, G.Adj u v ↔ (e u)⁻¹ * e v ∈ S) → HasFairTraversal G := by
   sorry
 
 /-- **Theorem 8 (index-2 extensions by a power map)**, in the form of #339: a labelling `e : V ≃ A × Bool`
@@ -169,7 +177,7 @@ theorem fair_traversal_power_extension :
         (∀ a : A, k • k • a = a) ∧ k • z = z ∧
         (∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ∀ a : A, Odd (addOrderOf a) → k • a = ε • a) ∧
         ∃ (e : V ≃ A × Bool) (S : Finset (A × Bool)),
-          ∀ u v, G.Adj u v ↔ pwMul k z (pwInv k z (e u)) (e v) ∈ S) → FairFamily G := by
+          ∀ u v, G.Adj u v ↔ pwMul k z (pwInv k z (e u)) (e v) ∈ S) → HasFairTraversal G := by
   sorry
 
 /-- **Theorem 7 for the generalized dihedral and generalized dicyclic groups** (the case `k = -1` of
@@ -180,7 +188,7 @@ theorem fair_traversal_dicyclic :
       G.Connected → IsVertexTransitive G → 2 ≤ Fintype.card V →
       (∃ (A : Type) (_ : AddCommGroup A) (_ : Fintype A) (_ : DecidableEq A) (z : A), z + z = 0 ∧
         ∃ (e : V ≃ A × Bool) (S : Finset (A × Bool)),
-          ∀ u v, G.Adj u v ↔ pwMul (-1) z (pwInv (-1) z (e u)) (e v) ∈ S) → FairFamily G := by
+          ∀ u v, G.Adj u v ↔ pwMul (-1) z (pwInv (-1) z (e u)) (e v) ∈ S) → HasFairTraversal G := by
   sorry
 
 /-- **Theorem 9 (generalized Petersen graphs)**: `GP(m, k)` with `m ≥ 3` has a fair family of Hamiltonian
@@ -189,14 +197,14 @@ These are all the vertex-transitive generalized Petersen graphs except `k² ≡ 
 theorem fair_traversal_gpGraph (m : ℕ) [NeZero m] (k : ℤ) (hm : 3 ≤ m)
     (H : (m : ℤ) ∣ k * k - 1 ∨ (Even m ∧ (m : ℤ) ∣ k * k + 1) ∨
       (m = 10 ∧ (((k : ℤ) : ZMod m) = 2 ∨ ((k : ℤ) : ZMod m) = -2))) :
-    FairFamily (gpGraph m k) := by
+    HasFairTraversal (gpGraph m k) := by
   sorry
 
 /-- **Theorem 2 (Geodesic Deletion and Cartesian products)**: if `G₁` and `G₂` are connected and `G₂`
 satisfies the conclusion of #334, then so does `G₁ □ G₂`. -/
 theorem geodesicDeletion_boxProd {α β : Type*} (G₁ : SimpleGraph α) (G₂ : SimpleGraph β)
-    (h₁ : G₁.Connected) (h₂ : G₂.Connected) (hgd : GeodesicDeletion G₂) :
-    GeodesicDeletion (G₁ □ G₂) := by
+    (h₁ : G₁.Connected) (h₂ : G₂.Connected) (hgd : HasGeodesicDeletion G₂) :
+    HasGeodesicDeletion (G₁ □ G₂) := by
   sorry
 
 /-- **Theorem 5 (Geodesic Deletion for abelian Cayley graphs), in the form of #334**: all of #334's
@@ -204,7 +212,7 @@ hypotheses kept, an abelian labelling added. -/
 theorem geodesicDeletion_of_abelian_labelling :
     ∀ {V : Type} [Fintype V] (G : SimpleGraph V),
       G.Connected → IsVertexTransitive G → 3 ≤ Fintype.card V →
-      HasAbelianLabelling G → GeodesicDeletion G := by
+      HasAbelianLabelling G → HasGeodesicDeletion G := by
   sorry
 
 /-- **Theorem 5 in the paper's form**: every connected `Cay(A, S)` of a finite abelian group with
@@ -212,7 +220,7 @@ theorem geodesicDeletion_of_abelian_labelling :
 theorem geodesicDeletion_cay (A : Type) [AddCommGroup A] [Fintype A] [DecidableEq A] (S : Finset A)
     (h0 : (0 : A) ∉ S) (hneg : ∀ s ∈ S, -s ∈ S) (hc : (cay A S h0 hneg).Connected)
     (hn : 3 ≤ Fintype.card A) :
-    GeodesicDeletion (cay A S h0 hneg) := by
+    HasGeodesicDeletion (cay A S h0 hneg) := by
   sorry
 
 /-- **Theorem 6 (degree at least 6)**: every connected `Cay(A, S)` of an abelian group (finite or not)
@@ -220,7 +228,7 @@ with `|S| ≥ 6` satisfies the conclusion of #334. -/
 theorem geodesicDeletion_cay_of_six_le (A : Type) [AddCommGroup A] [DecidableEq A] (S : Finset A)
     (h0 : (0 : A) ∉ S) (hneg : ∀ s ∈ S, -s ∈ S) (hc : (cay A S h0 hneg).Connected)
     (h6 : 6 ≤ S.card) :
-    GeodesicDeletion (cay A S h0 hneg) := by
+    HasGeodesicDeletion (cay A S h0 hneg) := by
   sorry
 
 end FairTraversal

@@ -73,13 +73,16 @@ Commons Attribution 4.0.
 
 Gillibert's Left to Solve statements (palomar/gillibert-fair-traversal)
 ---------------------------------------------------------------------------
-The definitions IsVertexTransitive, FairFamily and GeodesicDeletion in
-palomar/gillibert-fair-traversal/Challenge.lean and FairTraversal/Defs.lean, and the copies of the same
-definitions in the ported proof modules FairTraversal/*.lean, restate the Left to Solve statements
-statements/gillibert-fair-traversal.lean (PR #339) and statements/gillibert-geodesic-deletion.lean (PR #334)
-of https://github.com/GuillaumeBAUD-coder/open-math-agents, by Luc Gillibert, which carry no licence. Those
-statement texts are Gillibert's and are reproduced for reference only; they are not covered by the Apache
-License of this repository (as in the source repository koolkao/gillibert-fair-traversal-abelian).
+Challenge.lean and FairTraversal/Defs.lean of palomar/gillibert-fair-traversal do not reproduce Gillibert's
+Left to Solve statements (statements/gillibert-fair-traversal.lean, PR #339, and
+statements/gillibert-geodesic-deletion.lean, PR #334, of open-math-agents, which carry no licence): their
+definitions (IsVertexTransitive, IsFairFamily, HasFairTraversal, IsGeodesicPath, HasGeodesicDeletion) were
+written for this entry and are covered by the Apache License like the rest of this repository. The ported proof
+modules palomar/gillibert-fair-traversal/FairTraversal/{FTAbelian,GDProduct,FTProduct,GDAbelian,FTDihedral,
+FTPower,FTGP,FTGPNeg,FTGP102}.lean keep, as in the source repository koolkao/gillibert-fair-traversal-abelian,
+copies of those statements' definitions and statement text; those copied parts are Gillibert's, reproduced for
+reference only, and are not covered by the Apache License. FairTraversal/Main.lean proves the Challenge's
+definitions equivalent to them.
 
 scripts/check-lean-sources.py follows PalomarRegistry/PalomarTemplate's script of the same name
 (Apache-2.0).

@@ -47,4 +47,29 @@ lemma pw_mem {V A : Type} [AddCommGroup A] [DecidableEq A] (k : ℤ) (z : A) (e 
       ((e.trans (pwEquiv A k z)) u)⁻¹ * (e.trans (pwEquiv A k z)) v ∈ S.map (pwEquiv A k z).toEmbedding := by
   rw [Equiv.trans_apply, Equiv.trans_apply, pwEquiv_mul, Finset.mem_map_equiv, Equiv.symm_apply_apply]
 
+/-- `HasFairTraversal` in the form used by the proof modules (`FTProduct.FTConcl` and the conclusions of
+`FTAbelian`, `FTDih`, `FTGP`, `FTGP102`). -/
+lemma hasFairTraversal_iff {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) :
+    HasFairTraversal G ↔ ∃ (r k : ℕ), 0 < r ∧ 0 < k ∧
+      ∃ (a b : Fin r → V) (P : ∀ i, G.Walk (a i) (b i)),
+        (∀ i, (P i).IsHamiltonian) ∧
+        ∀ e ∈ G.edgeSet, (Finset.univ.filter fun i => e ∈ (P i).edges).card = k := by
+  constructor
+  · rintro ⟨r, ends, P, k, hr, hk, hP, hc⟩
+    exact ⟨r, k, hr, hk, fun i => (ends i).1, fun i => (ends i).2, P, hP, hc⟩
+  · rintro ⟨r, k, hr, hk, a, b, P, hP, hc⟩
+    exact ⟨r, fun i => (a i, b i), P, k, hr, hk, hP, hc⟩
+
+/-- `HasGeodesicDeletion` is `GDProduct.GDPlus`. -/
+lemma hasGeodesicDeletion_iff {V : Type*} (G : SimpleGraph V) :
+    HasGeodesicDeletion G ↔ GDProduct.GDPlus G := by
+  unfold HasGeodesicDeletion IsGeodesicPath GDProduct.GDPlus
+  constructor
+  · intro h u v p hp hl
+    have := h u v p ⟨hp, hl⟩
+    convert this using 2
+  · intro h u v p ⟨hp, hl⟩
+    have := h u v p hp hl
+    convert this using 2
+
 end FairTraversal

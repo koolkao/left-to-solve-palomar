@@ -24,7 +24,7 @@ with and independent of Theorem 5; PR #13005 by MattGaiser: a product rule, the 
 earlier).
 
 - `Challenge.lean`: the twelve compared statements, with the definitions they use written out (vertex-transitivity
-  and the two conclusions as in the Left to Solve statements, abelian labellings, `Cay(A, S)`, `GP(m, k)`, the
+  and the two conclusions, written for this entry and equivalent to those of the Left to Solve statements, abelian labellings, `Cay(A, S)`, `GP(m, k)`, the
   group law of Γ(A, k, z) on `A × Bool`). It imports only Mathlib; its `sorry`s are deliberate. The statements follow
   the source repository's independent check file `Check.lean`.
 - `Solution.lean`: proves them from the proof development.
@@ -32,8 +32,9 @@ earlier).
 - `FairTraversal/FTAbelian.lean`, `GDProduct.lean`, `FTProduct.lean`, `GDAbelian.lean`, `FTDihedral.lean`,
   `FTPower.lean`, `FTGP.lean`, `FTGPNeg.lean`, `FTGP102.lean`: the nine proof modules of the source repository
   (Lean v4.33.1), ported to Lean v4.36.0 and the module system (see each header).
-- `FairTraversal/Main.lean`: `gpGraph_eq` (from `Check.lean`) and the identification of `A × Bool` with the group
-  `FTDih.Pw A k z`.
+- `FairTraversal/Main.lean`: `gpGraph_eq` (from `Check.lean`), the identification of `A × Bool` with the group
+  `FTDih.Pw A k z`, and the equivalence of the Challenge's `HasFairTraversal`/`HasGeodesicDeletion` with the
+  proof modules' forms of the two conclusions.
 - `comparator.json`, `formalization.yaml`: Palomar metadata.
 
 Lean `v4.36.0`, Mathlib `fc4f59e577feb1a4956671bc04ac18aaaf8cd842` (the `v4.36.0` tag).
@@ -47,8 +48,9 @@ lake comparator --config comparator.json     # needs bwrap (Linux); see the temp
 ```
 
 Licence: Apache-2.0 (the repository's root `LICENSE`), with the attributions in its `NOTICE`. The conjectures and
-their Left to Solve statements are Gillibert's; the definitions restating them are reproduced for reference (see
-`NOTICE`).
+their Left to Solve statements are Gillibert's. `Challenge.lean` does not copy those statements (its definitions
+were written for this entry); the ported proof modules keep copies of their definitions, reproduced for reference
+only and excluded from the licence (see `NOTICE`).
 
 Submit through the [Palomar submission form](https://submit.palomar-registry.org/): the
 `left-to-solve-palomar` repository at a full commit SHA, project path `palomar/gillibert-fair-traversal`,
